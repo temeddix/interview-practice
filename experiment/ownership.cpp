@@ -4,11 +4,11 @@
 class MyClass {
  private:
   int* data;      // Pointer to dynamically allocated resource
-  bool is_valid;  // Indicates if the instance is valid (not moved-from)
+  bool is_owned;  // Indicates if the instance is valid (not moved-from)
 
  public:
   // Constructor
-  MyClass(int value) : data(new int(value)), is_valid(true) {
+  MyClass(int value) : data(new int(value)), is_owned(true) {
     std::cout << "Constructor: " << *data << std::endl;
   }
 
@@ -18,19 +18,19 @@ class MyClass {
 
   // Enable moving
   MyClass(MyClass&& other) noexcept
-      : data(other.data), is_valid(other.is_valid) {
+      : data(other.data), is_owned(other.is_owned) {
     other.data = nullptr;    // Leave other in a valid but unspecified state
-    other.is_valid = false;  // Mark other as moved-from
+    other.is_owned = false;  // Mark other as moved-from
     std::cout << "Move Constructor called." << std::endl;
   }
   MyClass& operator=(MyClass&& other) noexcept {
     if (this != &other) {
       delete data;        // Free existing resource
       data = other.data;  // Transfer ownership
-      is_valid = other.is_valid;
+      is_owned = other.is_owned;
 
       other.data = nullptr;    // Leave other in a valid but unspecified state
-      other.is_valid = false;  // Mark other as moved-from
+      other.is_owned = false;  // Mark other as moved-from
       std::cout << "Move Assignment Operator called." << std::endl;
     }
     return *this;
@@ -38,7 +38,7 @@ class MyClass {
 
   // Destructor
   ~MyClass() {
-    if (is_valid) {
+    if (is_owned) {
       delete data;  // Only delete if valid
       std::cout << "Destructor called." << std::endl;
     }
@@ -46,7 +46,7 @@ class MyClass {
 
   // Function to access data safely
   void print() const {
-    if (!is_valid) {
+    if (!is_owned) {
       std::cout << "Error: Attempt to use moved-from object." << std::endl;
       return;
     }
