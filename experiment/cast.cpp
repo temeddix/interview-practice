@@ -16,8 +16,7 @@ int main() {
       (Unrelated*)&derived;  // Compiles, but leads to undefined behavior
 
   //   // C-style cast (will cause a compile-time error)
-  //   Unrelated ptr3 =
-  //       Unrelated(derived);  // Compiles, but leads to undefined behavior
+  //   Unrelated ptr3 = Unrelated(derived);  // Error: no matching function
 
   return 0;
 }
