@@ -1,9 +1,9 @@
-#include <cstdio>
+#include <iostream>
 
 int main() {
   int a, b;
-  scanf("%d %d", &a, &b);
+  std::cin >> a >> b;
   int sum = a + b;
-  printf("%d", sum);
+  std::cout << sum << std::endl;
   return 0;
 }

@@ -4,13 +4,14 @@
 int main() {
   std::string word_s;
   std::cin >> word_s;
-  int word_len = word_s.length();
-  for (int i = static_cast<int>('a'); i <= static_cast<int>('z'); i++) {
-    char letter = static_cast<char>(i);
+  for (int i = 'a'; i <= 'z'; i++) {
+    char letter = i;
     int first_index = -1;
-    for (int j = 0; j < word_len; j++) {
-      if (word_s[j] == letter) {
-        first_index = j;
+    int current_index = -1;
+    for (auto each_letter : word_s) {
+      current_index += 1;
+      if (each_letter == letter) {
+        first_index = current_index;
         break;
       }
     }

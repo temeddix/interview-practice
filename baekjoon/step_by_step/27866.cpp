@@ -1,10 +1,11 @@
-#include <cstdio>
+#include <array>
+#include <iostream>
 
 int main() {
-  char word[1000];
-  scanf("%s", word);
+  std::array<char, 1000> word;
+  std::cin >> word.data();
   int index;
-  scanf("%d", &index);
-  printf("%c", word[index - 1]);
+  std::cin >> index;
+  std::cout << word[index - 1] << std::endl;
   return 0;
 }
