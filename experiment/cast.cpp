@@ -7,6 +7,12 @@ class Unrelated {};  // An unrelated class
 int main() {
   Derived derived;
 
+  // Convert char to int
+  char my_char = '5';
+  int char_to_int = int(my_char);
+  std::cout << "char to int: " << char_to_int << std::endl;
+  // Outputs: 5
+
   //   // Static cast (will cause a compile-time error)
   //   Unrelated* ptr =
   //       static_cast<Unrelated*>(&derived);  // Error: invalid static_cast
