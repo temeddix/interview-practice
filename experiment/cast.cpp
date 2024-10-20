@@ -9,7 +9,7 @@ int main() {
 
   // Convert char to int
   char my_char = '5';
-  int char_to_int = int(my_char);
+  int char_to_int = static_cast<int>(my_char);
   std::cout << "char to int: " << char_to_int << std::endl;
   // Outputs: 5
 
