@@ -51,6 +51,7 @@
     "xutility": "cpp",
     "array": "cpp",
     "algorithm": "cpp",
-    "optional": "cpp"
+    "optional": "cpp",
+    "vector": "cpp"
   }
 }
