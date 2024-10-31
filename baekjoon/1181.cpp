@@ -4,10 +4,6 @@
 #include <vector>
 
 bool compare_words(const std::string& word_a, const std::string& word_b) {
-  std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
-
   int a_length = word_a.length();
   int b_length = word_b.length();
   if (a_length != b_length) {
