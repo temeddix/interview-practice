@@ -7,7 +7,7 @@ struct Point {
   int y;
 };
 
-bool compare_points(const Point& pt_a, const Point& pt_b) {
+bool compare_points(Point pt_a, Point pt_b) {
   if (pt_a.x != pt_b.x) {
     return pt_a.x < pt_b.x;
   } else {
