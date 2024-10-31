@@ -53,5 +53,6 @@
     "algorithm": "cpp",
     "optional": "cpp",
     "vector": "cpp"
-  }
+  },
+  "editor.tabSize": 2
 }
