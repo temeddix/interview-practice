@@ -52,7 +52,11 @@
     "array": "cpp",
     "algorithm": "cpp",
     "optional": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "set": "cpp",
+    "unordered_set": "cpp",
+    "map": "cpp",
+    "unordered_map": "cpp"
   },
   "editor.tabSize": 2,
   "C_Cpp.default.compilerPath": "/usr/bin/clang++",
