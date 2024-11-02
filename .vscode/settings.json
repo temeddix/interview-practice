@@ -1,4 +1,5 @@
 {
+  "editor.tabSize": 2,
   "files.associations": {
     "atomic": "cpp",
     "bit": "cpp",
@@ -53,6 +54,5 @@
     "algorithm": "cpp",
     "optional": "cpp",
     "vector": "cpp"
-  },
-  "editor.tabSize": 2
+  }
 }
