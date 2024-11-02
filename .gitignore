@@ -1,3 +1,6 @@
+# Custom
+.vscode/tasks.json
+
 # Prerequisites
 *.d
 
