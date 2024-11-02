@@ -1,6 +1,4 @@
 {
-  "editor.tabSize": 2,
-  "C_Cpp.clang_format_fallbackStyle": "Google",
   "files.associations": {
     "atomic": "cpp",
     "bit": "cpp",
@@ -55,5 +53,9 @@
     "algorithm": "cpp",
     "optional": "cpp",
     "vector": "cpp"
-  }
+  },
+  "editor.tabSize": 2,
+  "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+  "C_Cpp.default.cppStandard": "gnu++17",
+  "C_Cpp.clang_format_style": "Google"
 }
