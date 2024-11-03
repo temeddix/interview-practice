@@ -59,7 +59,11 @@
     "unordered_map": "cpp",
     "xhash": "cpp",
     "list": "cpp",
-    "xtree": "cpp"
+    "xtree": "cpp",
+    "deque": "cpp",
+    "queue": "cpp",
+    "ranges": "cpp",
+    "span": "cpp"
   },
   "editor.tabSize": 2,
   "C_Cpp.default.compilerPath": "/usr/bin/clang++",
