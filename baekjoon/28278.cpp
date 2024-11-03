@@ -46,18 +46,32 @@ int main() {
   for (int i = 0; i < count; i++) {
     int command;
     std::cin >> command;
-    if (command == 1) {
-      int value;
-      std::cin >> value;
-      int_stack.add(value);
-    } else if (command == 2) {
-      std::cout << int_stack.pop() << '\n';
-    } else if (command == 3) {
-      std::cout << int_stack.length() << '\n';
-    } else if (command == 4) {
-      std::cout << (int_stack.is_empty() ? 1 : 0) << '\n';
-    } else {
-      std::cout << int_stack.get_last() << '\n';
+    switch (command) {
+      case 1: {
+        int value;
+        std::cin >> value;
+        int_stack.add(value);
+        break;
+      }
+      case 2: {
+        std::cout << int_stack.pop() << '\n';
+        break;
+      }
+      case 3: {
+        std::cout << int_stack.length() << '\n';
+        break;
+      }
+      case 4: {
+        std::cout << (int_stack.is_empty() ? 1 : 0) << '\n';
+        break;
+      }
+      case 5: {
+        std::cout << int_stack.get_last() << '\n';
+        break;
+      }
+      default: {
+        break;
+      }
     }
   }
 
