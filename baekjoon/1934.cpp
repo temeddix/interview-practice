@@ -1,28 +1,22 @@
 #include <iostream>
 
+int get_gcd(int a, int b) {
+  while (b != 0) {
+    int temp = b;
+    b = a % b;
+    a = temp;
+  }
+  return a;
+}
+
+int get_lcm(int a, int b) { return (a * b) / get_gcd(a, b); }
+
 void get_result() {
   int number_a, number_b;
   std::cin >> number_a >> number_b;
 
-  if (number_b % number_a == 0) {
-    std::cout << number_b << std::endl;
-    return;
-  } else if (number_a % number_b == 0) {
-    std::cout << number_a << std::endl;
-    return;
-  }
-
-  int sum_a = number_a;
-  int sum_b = number_b;
-  while (sum_a != sum_b) {
-    if (sum_a < sum_b) {
-      sum_a += number_a;
-    } else {
-      sum_b += number_b;
-    }
-  }
-
-  std::cout << sum_b << std::endl;
+  int lcm = get_lcm(number_a, number_b);
+  std::cout << lcm << std::endl;
 }
 
 int main() {
