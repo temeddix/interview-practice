@@ -57,7 +57,9 @@
     "unordered_set": "cpp",
     "map": "cpp",
     "unordered_map": "cpp",
-    "xhash": "cpp"
+    "xhash": "cpp",
+    "list": "cpp",
+    "xtree": "cpp"
   },
   "editor.tabSize": 2,
   "C_Cpp.default.compilerPath": "/usr/bin/clang++",
