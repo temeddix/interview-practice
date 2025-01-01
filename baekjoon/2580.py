@@ -7,13 +7,15 @@ ALL_NUMBERS = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
 class SudokuSolver:
     def __init__(self, grid: list[list[int]]):
         self._grid = grid
+        self._empty_cells = self._find_empty_cells()
 
-    def _find_empty_cell(self) -> tuple[int, int] | None:
+    def _find_empty_cells(self) -> list[tuple[int, int]]:
+        empty_cells: list[tuple[int, int]] = []
         for row in range(9):
             for column in range(9):
                 if self._grid[row][column] == 0:
-                    return row, column
-        return None
+                    empty_cells.append((row, column))
+        return empty_cells
 
     def _is_valid(self, number: int, row: int, column: int) -> bool:
         # Check if the number is inside the row.
@@ -34,9 +36,9 @@ class SudokuSolver:
         return True
 
     def solve(self):
-        empty_cell = self._find_empty_cell()
-        if empty_cell is None:
+        if not self._empty_cells:
             return True
+        empty_cell = self._empty_cells.pop(0)
         row, column = empty_cell
 
         for number in ALL_NUMBERS:
@@ -47,13 +49,14 @@ class SudokuSolver:
                 # Backtrack.
                 self._grid[row][column] = 0
 
+        self._empty_cells.insert(0, (row, column))
         return False
 
 
 def main():
     grid_data: list[list[int]] = []
     for _ in range(9):
-        line: str = sys.stdin.readline().strip()
+        line = str(sys.stdin.readline()).strip()
         grid_data.append([int(t) for t in line.split(" ")])
     solver = SudokuSolver(grid_data)
     solver.solve()
