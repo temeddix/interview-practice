@@ -1,6 +1,6 @@
 import sys
 
-ALL_NUMBERS = set(range(1, 10))
+ALL_NUMBERS = list(range(1, 10))
 
 
 class SudokuSolver:
