@@ -1,6 +1,3 @@
-*
-!*/
-!/.gitignore
-!/vscode/settings.json
-!/README.md
-!*.cpp
+**/*.exe
+**/*.lock
+/.vscode/*
