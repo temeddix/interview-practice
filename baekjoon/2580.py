@@ -22,7 +22,7 @@ class SudokuSolver:
         # Check if the number is inside the column.
         if number in (self._grid[i][column] for i in range(9)):
             return False
-        # Check if the number in inside theh block.
+        # Check if the number in inside the block.
         block_row, block_column = row // 3 * 3, column // 3 * 3
         locs = product(
             range(block_row, block_row + 3),
