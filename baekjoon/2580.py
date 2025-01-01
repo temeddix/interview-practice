@@ -31,7 +31,7 @@ class SudokuSolver:
                     return False
         return True
 
-    def search(self, empty_cell_index: int):
+    def search(self, empty_cell_index: int = 0):
         if len(self._empty_cells) <= empty_cell_index:
             return True
         empty_cell = self._empty_cells[empty_cell_index]
@@ -54,7 +54,7 @@ def main():
         line = str(sys.stdin.readline()).strip()
         grid_data.append([int(t) for t in line.split(" ")])
     solver = SudokuSolver(grid_data)
-    solver.search(0)
+    solver.search()
     for row in grid_data:
         print(" ".join(str(n) for n in row))
 
