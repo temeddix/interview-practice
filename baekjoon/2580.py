@@ -1,7 +1,6 @@
 import sys
-from itertools import product
 
-ALL_NUMBERS = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
+ALL_NUMBERS = set(range(1, 10))
 
 
 class SudokuSolver:
@@ -22,34 +21,30 @@ class SudokuSolver:
         if number in self._grid[row]:
             return False
         # Check if the number is inside the column.
-        if number in (self._grid[i][column] for i in range(9)):
+        if number in (self._grid[r][column] for r in range(9)):
             return False
         # Check if the number in inside the block.
         block_row, block_column = row // 3 * 3, column // 3 * 3
-        locs = product(
-            range(block_row, block_row + 3),
-            range(block_column, block_column + 3),
-        )
-        for row, column in locs:
-            if self._grid[row][column] == number:
-                return False
+        for r in range(block_row, block_row + 3):
+            for c in range(block_column, block_column + 3):
+                if self._grid[r][c] == number:
+                    return False
         return True
 
-    def solve(self):
-        if not self._empty_cells:
+    def search(self, empty_cell_index: int):
+        if len(self._empty_cells) <= empty_cell_index:
             return True
-        empty_cell = self._empty_cells.pop(0)
+        empty_cell = self._empty_cells[empty_cell_index]
         row, column = empty_cell
 
         for number in ALL_NUMBERS:
             if self._is_valid(number, row, column):
                 self._grid[row][column] = number
-                if self.solve():
+                if self.search(empty_cell_index + 1):
                     return True
                 # Backtrack.
                 self._grid[row][column] = 0
 
-        self._empty_cells.insert(0, (row, column))
         return False
 
 
@@ -59,7 +54,7 @@ def main():
         line = str(sys.stdin.readline()).strip()
         grid_data.append([int(t) for t in line.split(" ")])
     solver = SudokuSolver(grid_data)
-    solver.solve()
+    solver.search(0)
     for row in grid_data:
         print(" ".join(str(n) for n in row))
 
