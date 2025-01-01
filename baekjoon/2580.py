@@ -32,10 +32,9 @@ class SudokuSolver:
         return True
 
     def search(self, empty_cell_index: int = 0):
-        if len(self._empty_cells) <= empty_cell_index:
+        if len(self._empty_cells) == empty_cell_index:
             return True
-        empty_cell = self._empty_cells[empty_cell_index]
-        row, column = empty_cell
+        row, column = self._empty_cells[empty_cell_index]
 
         for number in ALL_NUMBERS:
             if self._is_valid(number, row, column):
