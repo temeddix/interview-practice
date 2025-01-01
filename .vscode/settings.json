@@ -66,7 +66,7 @@
     "span": "cpp",
     "numeric": "cpp"
   },
-  "editor.tabSize": 2,
+  "editor.tabSize": 4,
   "C_Cpp.default.compilerPath": "/usr/bin/clang++",
   "C_Cpp.default.cppStandard": "gnu++17",
   "C_Cpp.clang_format_style": "Google"
