@@ -1,63 +1,53 @@
 import sys
 from itertools import product
-from typing import Generator
 
 ALL_NUMBERS = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 
-class NumberGroup:
-    def __init__(self, grid_data: list[list[int]], locs: list[tuple[int, int]]):
-        self._grid_data = grid_data
-        self._locs = locs
-        self._numbers = [self._grid_data[r][c] for r, c in self._locs]
+class SudokuSolver:
+    def __init__(self, grid: list[list[int]]):
+        self._grid = grid
 
-    def try_filling(self) -> bool:
-        unused_numbers = ALL_NUMBERS.copy()
-        zero_index: tuple[int, int] | None = None
-        for row_index, column_index in self._locs:
-            number = self._grid_data[row_index][column_index]
-            if number == 0:
-                zero_index = row_index, column_index
-                continue
-            unused_numbers.remove(number)
-        if len(unused_numbers) != 1:
+    def _find_empty_cell(self) -> tuple[int, int] | None:
+        for row in range(9):
+            for column in range(9):
+                if self._grid[row][column] == 0:
+                    return row, column
+        return None
+
+    def _is_valid(self, number: int, row: int, column: int) -> bool:
+        # Check if the number is inside the row.
+        if number in self._grid[row]:
             return False
-        unused_number = unused_numbers.pop()
-        if zero_index is None:
-            raise NotImplementedError
-        row_index, column_index = zero_index
-        self._grid_data[row_index][column_index] = unused_number
+        # Check if the number is inside the column.
+        if number in (self._grid[i][column] for i in range(9)):
+            return False
+        # Check if the number in inside theh block.
+        block_row, block_column = row // 3 * 3, column // 3 * 3
+        locs = product(
+            range(block_row, block_row + 3),
+            range(block_column, block_column + 3),
+        )
+        for row, column in locs:
+            if self._grid[row][column] == number:
+                return False
         return True
 
+    def solve(self):
+        empty_cell = self._find_empty_cell()
+        if empty_cell is None:
+            return True
+        row, column = empty_cell
 
-class Grid:
-    def __init__(self, data: list[list[int]]):
-        self._data = data
+        for number in ALL_NUMBERS:
+            if self._is_valid(number, row, column):
+                self._grid[row][column] = number
+                if self.solve():
+                    return True
+                # Backtrack.
+                self._grid[row][column] = 0
 
-    def rows(self) -> Generator[NumberGroup, None, None]:
-        for row_index in range(9):
-            yield NumberGroup(self._data, [(row_index, n) for n in range(9)])
-
-    def columns(self) -> Generator[NumberGroup, None, None]:
-        for column_index in range(9):
-            yield NumberGroup(self._data, [(n, column_index) for n in range(9)])
-
-    def blocks(self) -> Generator[NumberGroup, None, None]:
-        for i in range(3):
-            for j in range(3):
-                start_row = i * 3
-                start_column = j * 3
-                locs = product(
-                    range(start_row, start_row + 3),
-                    range(start_column, start_column + 3),
-                )
-                yield NumberGroup(self._data, list(locs))
-
-    def count_zeros(self) -> int:
-        zero_count = 0
-        for row in self._data:
-            zero_count += row.count(0)
-        return zero_count
+        return False
 
 
 def main():
@@ -65,21 +55,8 @@ def main():
     for _ in range(9):
         line: str = sys.stdin.readline().strip()
         grid_data.append([int(t) for t in line.split(" ")])
-    grid = Grid(grid_data)
-    zero_count = grid.count_zeros()
-    while zero_count > 0:
-        for group in grid.rows():
-            success = group.try_filling()
-            if success:
-                zero_count -= 1
-        for group in grid.columns():
-            success = group.try_filling()
-            if success:
-                zero_count -= 1
-        for group in grid.blocks():
-            success = group.try_filling()
-            if success:
-                zero_count -= 1
+    solver = SudokuSolver(grid_data)
+    solver.solve()
     for row in grid_data:
         print(" ".join(str(n) for n in row))
 
