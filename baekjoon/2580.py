@@ -31,7 +31,7 @@ class SudokuSolver:
                     return False
         return True
 
-    def search(self, empty_cell_index: int = 0):
+    def search(self, empty_cell_index: int = 0) -> bool:
         if len(self._empty_cells) == empty_cell_index:
             return True
         row, column = self._empty_cells[empty_cell_index]
