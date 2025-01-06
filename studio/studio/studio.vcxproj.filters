@@ -18,5 +18,8 @@
     <ClCompile Include="studio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="custom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
