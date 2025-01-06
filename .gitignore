@@ -2,3 +2,5 @@
 **/*.lock
 .vs
 .venv
+Debug
+Release
