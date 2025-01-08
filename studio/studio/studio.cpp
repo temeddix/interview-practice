@@ -5,7 +5,10 @@
 
 #include <iostream>
 
-int main() { test_printing("Hello World!"); }
+int main() {
+  baekjoon::problem_9663();
+  return 0;
+}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
