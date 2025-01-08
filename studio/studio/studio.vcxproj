@@ -130,6 +130,9 @@
     <ClCompile Include="custom.cpp" />
     <ClCompile Include="studio.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="studio.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

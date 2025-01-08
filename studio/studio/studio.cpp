@@ -2,8 +2,7 @@
 // Program execution begins and ends there.
 
 #include <iostream>
-
-void log(const char *message);
+#include "studio.h"
 
 int main() { log("Hello World!"); }
 
