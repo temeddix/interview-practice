@@ -4,6 +4,8 @@
 
 namespace problems {
 
+namespace {
+
 void count_possibilities(int row, int board_size, std::vector<int> &columns,
                          int &possibilities) {
   if (row == board_size) {
@@ -25,6 +27,8 @@ void count_possibilities(int row, int board_size, std::vector<int> &columns,
   }
 }
 
+}  // namespace
+
 void boj_9663() {
   std::ios::sync_with_stdio(false);
   std::cin.tie(NULL);
@@ -40,4 +44,4 @@ void boj_9663() {
   std::cout << possibilities << std::endl;
 }
 
-}  // namespace baekjoon
+}  // namespace problems
