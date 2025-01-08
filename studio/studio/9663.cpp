@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-namespace baekjoon {
+namespace problems {
 
 void count_possibilities(int row, int board_size, std::vector<int> &columns,
                          int &possibilities) {
@@ -25,7 +25,7 @@ void count_possibilities(int row, int board_size, std::vector<int> &columns,
   }
 }
 
-void problem_9663() {
+void baekjoon_9663() {
   std::ios::sync_with_stdio(false);
   std::cin.tie(NULL);
   std::cout.tie(NULL);

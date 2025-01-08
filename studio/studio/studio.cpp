@@ -6,7 +6,7 @@
 #include <iostream>
 
 int main() {
-  baekjoon::problem_9663();
+  problems::baekjoon_9663();
   return 0;
 }
 

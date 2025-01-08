@@ -2,8 +2,8 @@
 
 void test_printing(const char *message);
 
-namespace baekjoon {
+namespace problems {
 
-void problem_9663();
+void baekjoon_9663();
 
 }
