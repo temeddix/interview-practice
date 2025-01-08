@@ -4,8 +4,8 @@
 
 namespace baekjoon {
 
-void count_possibilities(int row, int board_size, std::vector<int>& columns,
-                         int& possibilities) {
+void count_possibilities(int row, int board_size, std::vector<int> &columns,
+                         int &possibilities) {
   if (row == board_size) {
     possibilities++;
     return;
