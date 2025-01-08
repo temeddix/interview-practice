@@ -25,7 +25,7 @@ void count_possibilities(int row, int board_size, std::vector<int> &columns,
   }
 }
 
-void baekjoon_9663() {
+void boj_9663() {
   std::ios::sync_with_stdio(false);
   std::cin.tie(NULL);
   std::cout.tie(NULL);

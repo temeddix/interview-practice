@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\baekjoon">
+    <Filter Include="Source Files\problems">
       <UniqueIdentifier>{b03404db-7130-422b-a0ce-37255e2a4e19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -24,8 +24,8 @@
     <ClCompile Include="custom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="9663.cpp">
-      <Filter>Source Files\baekjoon</Filter>
+    <ClCompile Include="boj_9663.cpp">
+      <Filter>Source Files\problems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

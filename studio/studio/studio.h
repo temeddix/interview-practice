@@ -4,6 +4,6 @@ void test_printing(const char *message);
 
 namespace problems {
 
-void baekjoon_9663();
+void boj_9663();
 
 }
