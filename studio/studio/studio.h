@@ -6,4 +6,4 @@ namespace problems {
 
 void boj_9663();
 
-}
+}  // namespace problems
