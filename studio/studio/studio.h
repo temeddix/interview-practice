@@ -1,3 +1,3 @@
 #pragma once
 
-void log(const char *message);
+void test_printing(const char *message);

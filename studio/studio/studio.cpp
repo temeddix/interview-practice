@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-int main() { log("Hello World!"); }
+int main() { test_printing("Hello World!"); }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
