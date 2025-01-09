@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 
+namespace problems {
+
 namespace {
 
 void count_possibilities(int row, int board_size, std::vector<int> &columns,
@@ -26,8 +28,6 @@ void count_possibilities(int row, int board_size, std::vector<int> &columns,
 }
 
 }  // namespace
-
-namespace problems {
 
 void boj_9663() {
   std::ios::sync_with_stdio(false);
