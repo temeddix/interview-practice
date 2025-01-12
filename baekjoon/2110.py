@@ -1,11 +1,4 @@
 import sys
-from dataclasses import dataclass
-
-
-@dataclass
-class Bounds:
-    left: int  # Inclusive
-    right: int  # Inclusive
 
 
 def get_max_router(houses: list[int], placing_dist: int) -> int:
@@ -21,17 +14,18 @@ def get_max_router(houses: list[int], placing_dist: int) -> int:
 
 def get_max_placing_dist(houses: list[int], needed_router: int) -> int:
     # Bisect right
-    bounds = Bounds(1, houses[-1] - houses[0] + 1)
+    left = 1
+    right = houses[-1] - houses[0] + 1
 
     placing_dist = 1
-    while bounds.left <= bounds.right:
-        mid = (bounds.left + bounds.right) // 2
+    while left <= right:
+        mid = (left + right) // 2
         max_router = get_max_router(houses, mid)
         if max_router < needed_router:
             placing_dist = mid - 1
-            bounds.right = mid - 1
+            right = mid - 1
         else:
-            bounds.left = mid + 1
+            left = mid + 1
 
     return placing_dist
 
