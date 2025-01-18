@@ -1,17 +1,7 @@
 import sys
-from dataclasses import dataclass
 
-
-@dataclass
-class Matrix:
-    row: int
-    column: int
-
-
-@dataclass
-class Calculation:
-    cost: int
-    matrix: Matrix
+Matrix = tuple[int, int]
+Calculation = tuple[int, Matrix]
 
 
 def get_minimum_cost(matrices: list[Matrix]) -> int:
@@ -21,7 +11,7 @@ def get_minimum_cost(matrices: list[Matrix]) -> int:
         [None for _ in range(count)] for _ in range(count)
     ]
     for k in range(count):
-        costs[k][k] = Calculation(cost=0, matrix=matrices[k])
+        costs[k][k] = (0, matrices[k])
     for interval in range(1, count):
         for i in range(count - interval):
             j = i + interval
@@ -31,22 +21,18 @@ def get_minimum_cost(matrices: list[Matrix]) -> int:
                 after_part = costs[mid][j]
                 if before_part is None or after_part is None:
                     raise NotImplementedError
-                extra_cost = (
-                    before_part.matrix.row
-                    * before_part.matrix.column
-                    * after_part.matrix.column
-                )
-                calculation = Calculation(
-                    cost=before_part.cost + after_part.cost + extra_cost,
-                    matrix=Matrix(before_part.matrix.row, after_part.matrix.column),
+                extra_cost = before_part[1][0] * before_part[1][1] * after_part[1][1]
+                calculation = (
+                    before_part[0] + after_part[0] + extra_cost,
+                    (before_part[1][0], after_part[1][1]),
                 )
                 candidates.append(calculation)
-            costs[i][j] = min(candidates, key=lambda c: c.cost)
+            costs[i][j] = min(candidates, key=lambda c: c[0])
 
-    result_matrix = costs[0][count - 1]
-    if result_matrix is None:
+    result_calculation = costs[0][count - 1]
+    if result_calculation is None:
         raise NotImplementedError
-    return result_matrix.cost
+    return result_calculation[0]
 
 
 def main():
@@ -54,7 +40,7 @@ def main():
     matrices: list[Matrix] = []
     for _ in range(matrix_count):
         row, column = (int(s) for s in sys.stdin.readline().split())
-        matrix = Matrix(row=row, column=column)
+        matrix = (row, column)
         matrices.append(matrix)
     minimum_cost = get_minimum_cost(matrices)
     print(minimum_cost)
