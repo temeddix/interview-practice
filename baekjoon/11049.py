@@ -4,7 +4,7 @@ Matrix = tuple[
     int,  # Row
     int,  # Column
 ]
-Calculation = tuple[
+Cell = tuple[
     int,  # Cost
     Matrix,
 ]
@@ -13,7 +13,7 @@ Calculation = tuple[
 def get_minimum_cost(matrices: list[Matrix]) -> int:
     count = len(matrices)
 
-    costs: list[list[Calculation | None]] = [
+    costs: list[list[Cell | None]] = [
         [None for _ in range(count)] for _ in range(count)
     ]
     for k in range(count):
@@ -21,7 +21,7 @@ def get_minimum_cost(matrices: list[Matrix]) -> int:
     for interval in range(1, count):
         for i in range(count - interval):
             j = i + interval
-            candidates: list[Calculation] = []
+            candidates: list[Cell] = []
             for mid in range(i + 1, j + 1):
                 before_part = costs[i][mid - 1]
                 after_part = costs[mid][j]
