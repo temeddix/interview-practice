@@ -1,7 +1,13 @@
 import sys
 
-Matrix = tuple[int, int]
-Calculation = tuple[int, Matrix]
+Matrix = tuple[
+    int,  # Row
+    int,  # Column
+]
+Calculation = tuple[
+    int,  # Cost
+    Matrix,
+]
 
 
 def get_minimum_cost(matrices: list[Matrix]) -> int:
