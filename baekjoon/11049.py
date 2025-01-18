@@ -13,8 +13,8 @@ DpCell = tuple[
 def get_minimum_cost(matrices: list[Matrix]) -> int:
     count = len(matrices)
 
-    dp_cells: list[list[DpCell | None]] = [
-        [None for _ in range(count)] for _ in range(count)
+    dp_cells: list[list[DpCell]] = [
+        [(0, (0, 0)) for _ in range(count)] for _ in range(count)
     ]
     for k in range(count):
         dp_cells[k][k] = (0, matrices[k])
@@ -25,19 +25,13 @@ def get_minimum_cost(matrices: list[Matrix]) -> int:
             for mid in range(i + 1, j + 1):
                 before_part = dp_cells[i][mid - 1]
                 after_part = dp_cells[mid][j]
-                if before_part is None or after_part is None:
-                    raise NotImplementedError
                 extra_cost = before_part[1][0] * before_part[1][1] * after_part[1][1]
-                calculation = (
-                    before_part[0] + after_part[0] + extra_cost,
-                    (before_part[1][0], after_part[1][1]),
-                )
+                total_cost = before_part[0] + after_part[0] + extra_cost
+                calculation = (total_cost, (before_part[1][0], after_part[1][1]))
                 candidates.append(calculation)
             dp_cells[i][j] = min(candidates, key=lambda c: c[0])
 
     result_calculation = dp_cells[0][count - 1]
-    if result_calculation is None:
-        raise NotImplementedError
     return result_calculation[0]
 
 
