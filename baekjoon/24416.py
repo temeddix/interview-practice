@@ -12,7 +12,7 @@ base_reach_count = BaseReachCount(recursive=0, dynamic=0)
 
 
 def fib_recursive(n: int) -> int:
-    if n == 1 or n == 2:
+    if n in (1, 2):
         base_reach_count.recursive += 1
         return 1
     else:
