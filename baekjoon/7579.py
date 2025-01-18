@@ -1,7 +1,5 @@
 from bisect import bisect_left
 
-MAX_COST = 100 * 100
-
 AppInfo = tuple[
     int,  # Occupying memory(m)
     int,  # Startup cost(c)
@@ -15,21 +13,13 @@ MemoryAct = tuple[
 
 def find_min_cost(needed_memory: int, app_infos: list[AppInfo]) -> int:
     # Index represents the startup cost spent
-    extra_memories = [-1 for _ in range(MAX_COST + 1)]
-    extra_memories[0] = 0
+    max_cost = sum(a[1] for a in app_infos)
+    extra_memories = [0 for _ in range(max_cost + 1)]
 
     for app_info in app_infos:
-        for i in range(MAX_COST + 1):
-            prev_cost = MAX_COST - i
-            prev_extra_memory = extra_memories[prev_cost]
-            real_cost = prev_cost
-            while prev_extra_memory == -1:
-                real_cost -= 1
-                prev_extra_memory = extra_memories[real_cost]
-            cost = prev_cost + app_info[1]
-            extra_memory = prev_extra_memory + app_info[0]
-            if cost > MAX_COST:
-                continue
+        for cost in range(max_cost, app_info[1] - 1, -1):
+            prev_cost = cost - app_info[1]
+            extra_memory = extra_memories[prev_cost] + app_info[0]
             extra_memories[cost] = max(extra_memories[cost], extra_memory)
 
     return bisect_left(extra_memories, needed_memory)
