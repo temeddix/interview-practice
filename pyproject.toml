@@ -3,7 +3,7 @@ name = "interview-practice"
 version = "0.1.0"
 description = "Practicing for coding interviews"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 
 [tool.pyright]
 typeCheckingMode = "strict"
