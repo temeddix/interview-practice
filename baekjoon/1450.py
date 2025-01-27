@@ -16,12 +16,7 @@ def count_possible_sums(items: list[int], capacity: int) -> list[int]:
 
 
 MIN_ITEMS_TO_SPLIT = 2
-
-
-SumOption = tuple[
-    int,  # Sum value
-    int,  # Option count
-]
+INFINITY = 1_000_000_007
 
 
 def count_options(items: list[int], capacity: int) -> int:
@@ -34,31 +29,19 @@ def count_options(items: list[int], capacity: int) -> int:
 
     possible_sums_a = count_possible_sums(items_a, capacity)
     possible_sums_b = count_possible_sums(items_b, capacity)
-    possible_sums_a.sort()
+    possible_sums_a.sort(reverse=True)
     possible_sums_b.sort()
+    possible_sums_b.append(INFINITY)
 
-    sum_options_a: list[SumOption] = []
-    for sum_value in possible_sums_a:
-        if sum_options_a and sum_options_a[-1][0] == sum_value:
-            last_option = sum_options_a[-1]
-            sum_options_a.pop()
-            sum_options_a.append((last_option[0], last_option[1] + 1))
-        else:
-            sum_options_a.append((sum_value, 1))
-    sum_options_b: list[SumOption] = []
-    for sum_value in possible_sums_b:
-        if sum_options_b and sum_options_b[-1][0] == sum_value:
-            last_option = sum_options_b[-1]
-            sum_options_b.pop()
-            sum_options_b.append((last_option[0], last_option[1] + 1))
-        else:
-            sum_options_b.append((sum_value, 1))
-
+    cursor = 0
     options = 0
-    for sum_option_a in sum_options_a:
-        for sum_option_b in sum_options_b:
-            if sum_option_a[0] + sum_option_b[0] <= capacity:
-                options += sum_option_a[1] * sum_option_b[1]
+    for sum_a in possible_sums_a:
+        while True:
+            if sum_a + possible_sums_b[cursor] <= capacity:
+                cursor += 1
+            else:
+                break
+        options += cursor
 
     return options
 
