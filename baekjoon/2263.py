@@ -17,17 +17,17 @@ SplittedTree = tuple[
 
 def do_preorder_traversal(
     nodes: list[Node],
-    parent: int,
-    collected: list[int] | None = None,
+    root: int,
 ) -> list[int]:
-    if collected is None:
-        collected = []
+    collected: list[int] = []
+    stack: list[int] = [root]
 
-    collected.append(parent)
-    for child in nodes[parent]:
-        if child is None:
-            continue
-        do_preorder_traversal(nodes, child, collected)
+    while stack:
+        parent = stack.pop()
+        collected.append(parent)
+        for child in reversed(nodes[parent]):
+            if child is not None:
+                stack.append(child)
 
     return collected
 
