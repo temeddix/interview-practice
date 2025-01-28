@@ -4,7 +4,6 @@ Node = tuple[
     int | None,  # Left child
     int | None,  # Right child
 ]
-
 TreeExpression = tuple[
     list[int],  # Sorted by inorder traversal
     list[int],  # Sorted by postorder traversal
