@@ -61,9 +61,9 @@ def main():
                 nodes.append(Node(node_b, 1))
             edge = Edge(node_a, node_b)
             union_nodes(nodes, edge)
-            fred_root = find_root(nodes, node_a)
-            _, connected = nodes[fred_root]
-            stdout.write(f"{connected}\n")
+            root_of_pair = find_root(nodes, node_a)
+            _, this_tree_size = nodes[root_of_pair]
+            stdout.write(f"{this_tree_size}\n")
 
 
 main()
