@@ -21,12 +21,12 @@ def get_min_cycle_cost(node_count: int, costs: list[list[int]]) -> int:
     all_visited = (1 << node_count) - 1  # 2 to the power of node count minus 1
     dp_list = [[INFINITY] * (all_visited + 1) for _ in range(node_count)]
 
-    for second_node in range(1, node_count):
-        cost = costs[0][second_node]
+    for first_node in range(1, node_count):
+        cost = costs[0][first_node]
         if cost == INVALID_COST:
             continue
-        new_visited = 1 << second_node | 1
-        dp_list[second_node][new_visited] = cost
+        new_visited = 1 << first_node | 1
+        dp_list[first_node][new_visited] = cost
 
     for visited in range(all_visited + 1):
         for current_node in range(1, node_count):
