@@ -22,7 +22,11 @@ class Output(NamedTuple):
 
 
 def perform_operation(bitmask: int, operation: str) -> Output:
-    if operation.startswith("add"):
+    if operation.startswith("check"):
+        number = extract_number(operation)
+        checked = bool(bitmask & (1 << number))
+        output = Output(bitmask, checked)
+    elif operation.startswith("add"):
         number = extract_number(operation)
         bitmask = bitmask | (1 << number)
         output = Output(bitmask, None)
@@ -30,10 +34,6 @@ def perform_operation(bitmask: int, operation: str) -> Output:
         number = extract_number(operation)
         bitmask = bitmask & ~(1 << number)
         output = Output(bitmask, None)
-    elif operation.startswith("check"):
-        number = extract_number(operation)
-        checked = bool(bitmask & (1 << number))
-        output = Output(bitmask, checked)
     elif operation.startswith("toggle"):
         number = extract_number(operation)
         bitmask = bitmask ^ (1 << number)
