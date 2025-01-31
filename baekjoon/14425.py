@@ -1,5 +1,8 @@
+from dataclasses import dataclass
 from sys import stdin
-from typing import NamedTuple
+
+# Using `set` here is not appropriate
+# because the problem was about using the trie data structure.
 
 
 def main():
@@ -16,8 +19,9 @@ def main():
     print(contained_count)
 
 
-class Node(NamedTuple):
-    terminal: list[bool]
+@dataclass
+class Node:
+    terminal: bool
     children: list["Node | None"]  # Always size of 26
 
 
@@ -26,30 +30,30 @@ class Trie:
         self.root = self._create_node()
 
     def _create_node(self):
-        return Node([], [None] * 26)
+        return Node(False, [None] * 26)
 
     def insert(self, word: str):
         current = self.root
         for i in word:
             encoded = ord(i) - ord("a")
-            children = current[1]
+            children = current.children
             child = children[encoded]
             if child is None:
                 child = self._create_node()
                 children[encoded] = child
             current = child
-        current.terminal.append(True)
+        current.terminal = True
 
     def contains(self, word: str) -> bool:
         current = self.root
         for i in word:
             encoded = ord(i) - ord("a")
-            children = current[1]
+            children = current.children
             child = children[encoded]
             if child is None:
                 return False
             current = child
-        return bool(current.terminal)
+        return current.terminal
 
 
 main()
