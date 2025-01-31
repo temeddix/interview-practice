@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from sys import stdin
 
 # Using `set` here is not appropriate
@@ -19,18 +18,15 @@ def main():
     print(contained_count)
 
 
-@dataclass
 class Node:
-    terminal: bool
-    children: list["Node | None"]  # Always size of 26
+    def __init__(self):
+        self.terminal = False
+        self.children: list[Node | None] = [None for _ in range(26)]
 
 
 class Trie:
     def __init__(self):
-        self.root = self._create_node()
-
-    def _create_node(self):
-        return Node(False, [None] * 26)
+        self.root = Node()
 
     def insert(self, word: str):
         current = self.root
@@ -39,7 +35,7 @@ class Trie:
             children = current.children
             child = children[encoded]
             if child is None:
-                child = self._create_node()
+                child = Node()
                 children[encoded] = child
             current = child
         current.terminal = True
