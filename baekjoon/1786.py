@@ -47,15 +47,27 @@ def get_lps_table(pattern: str) -> list[int]:
     lps_table = [0] * pattern_len  # LPS table
     last_lps = 0  # Length of previous longest prefix suffix
 
-    # Build the LPS table.
-    for index_p in range(1, pattern_len):
-        while last_lps > 0 and pattern[index_p] != pattern[last_lps]:
-            # Fallback to previous LPS.
-            last_lps = lps_table[last_lps - 1]
-
+    # Index 0 in LPS table is always 0.
+    # Therefore start iterating from index 1.
+    index_p = 1
+    while index_p < len(pattern):
         if pattern[index_p] == pattern[last_lps]:
+            # If the letter matches,
+            # lengthen the prefix-suffix pair.
             last_lps += 1
             lps_table[index_p] = last_lps
+            index_p += 1
+        elif last_lps != 0:
+            # If the letter doesn't match and
+            # there was a prefix-suffix pair,
+            # shorten the prefix-suffix pair length to retry matching.
+            # Stay on the current index.
+            last_lps = lps_table[last_lps - 1]
+        else:
+            # The letter doesn't match
+            # and there's no existing prefix-suffix pair.
+            lps_table[index_p] = 0
+            index_p += 1
 
     return lps_table
 
