@@ -1,38 +1,53 @@
 from sys import stdin, stdout
+from typing import NamedTuple
 
 
 def main():
     operation_count = int(input())
-    number_set = [False for _ in range(SET_SIZE)]
+    bitmask = 0
     for _ in range(operation_count):
         operation = stdin.readline().strip()
-        result = perform_operation(number_set, operation)
-        if result is not None:
-            stdout.write("1\n" if result else "0\n")
+        bitmask, checked = perform_operation(bitmask, operation)
+        if checked is not None:
+            stdout.write("1\n" if checked else "0\n")
 
 
-SET_SIZE = 20
+MAX_BITMASK = (1 << 20) - 1
+MIN_BITMASK = 0
 
 
-def perform_operation(number_set: list[bool], operation: str) -> bool | None:
+class Output(NamedTuple):
+    bitmask: int
+    checked: bool | None
+
+
+def perform_operation(bitmask: int, operation: str) -> Output:
     if operation.startswith("add"):
         number = extract_number(operation)
-        number_set[number] = True
+        bitmask = bitmask | (1 << number)
+        output = Output(bitmask, None)
     elif operation.startswith("remove"):
         number = extract_number(operation)
-        number_set[number] = False
+        bitmask = bitmask & ~(1 << number)
+        output = Output(bitmask, None)
     elif operation.startswith("check"):
         number = extract_number(operation)
-        return number_set[number]
+        checked = bool(bitmask & (1 << number))
+        output = Output(bitmask, checked)
     elif operation.startswith("toggle"):
         number = extract_number(operation)
-        number_set[number] = not number_set[number]
+        bitmask = bitmask ^ (1 << number)
+        output = Output(bitmask, None)
     elif operation.startswith("all"):
-        for i in range(len(number_set)):
-            number_set[i] = True
+        bitmask = MAX_BITMASK
+        output = Output(bitmask, None)
     elif operation.startswith("empty"):
-        for i in range(len(number_set)):
-            number_set[i] = False
+        bitmask = MIN_BITMASK
+        output = Output(bitmask, None)
+    else:
+        raise ValueError
+
+    return output
 
 
 def extract_number(operation: str):
