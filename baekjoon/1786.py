@@ -39,19 +39,24 @@ class Shift(NamedTuple):
 
 
 def get_kmp_list(pattern: str) -> list[Shift]:
-    kmp_list: list[Shift] = []
-    kmp_list.append(Shift(1, 0))
+    pattern_len = len(pattern)
+    lps = [0] * pattern_len  # LPS table
+    j = 0  # Length of previous longest prefix suffix
 
-    for i in range(1, len(pattern) + 1):
-        base_shift = i + 1
-        start_letter = 0
-        for j in range(i - 1, 0, -1):
-            from_front = pattern[0:j]
-            from_back = pattern[i - j : i]
-            if from_front == from_back:
-                base_shift = i - j
-                start_letter = j
-                break
+    # Build the LPS table
+    for i in range(1, pattern_len):
+        while j > 0 and pattern[i] != pattern[j]:
+            j = lps[j - 1]  # Fallback to previous LPS
+
+        if pattern[i] == pattern[j]:
+            j += 1
+            lps[i] = j
+
+    # Convert LPS table to Shift table
+    kmp_list = [Shift(1, 0)]  # First entry always shifts 1
+    for i in range(1, pattern_len + 1):
+        base_shift = i - lps[i - 1]
+        start_letter = lps[i - 1]
         kmp_list.append(Shift(base_shift, start_letter))
 
     return kmp_list
