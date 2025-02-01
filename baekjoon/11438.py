@@ -111,18 +111,19 @@ def find_lca(
             node_b = ancestor_table[node_b][depth_power]
             depth_b -= 2**depth_power
 
-    # Just matching the depth could have made two equal.
+    # Just matching the depth could have made two equal
     # if one node was an ancestor of the other.
     if node_a == node_b:
         return node_a
 
     # Find the ancestors of each right below the common one.
+    # Get the common ancestor right after that.
     depth_power = floor(log2(depth_a))
     while node_a != node_b:
         ancestor_a = ancestor_table[node_a][depth_power]
         ancestor_b = ancestor_table[node_b][depth_power]
         if ancestor_a == ancestor_b:
-            # Should not be common.
+            # Should not be common in the loop.
             depth_power -= 1
             if depth_power < 0:
                 break
@@ -130,8 +131,9 @@ def find_lca(
                 continue
         node_a = ancestor_a
         node_b = ancestor_b
+    lca = tree_nodes[node_a][0]
 
-    return tree_nodes[node_a][0]
+    return lca
 
 
 main()
