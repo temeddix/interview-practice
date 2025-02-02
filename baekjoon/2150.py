@@ -1,8 +1,9 @@
-from sys import stdin, stdout
+from sys import setrecursionlimit, stdin, stdout
 from typing import NamedTuple
 
 
 def main():
+    setrecursionlimit(RECURSION_LIMIT)
     node_count, edge_count = (int(s) for s in input().split())
     nodes = [Node([]) for _ in range(node_count)]
     for _ in range(edge_count):
@@ -10,18 +11,18 @@ def main():
         node_a -= 1
         node_b -= 1
         nodes[node_a][0].append(node_b)
-    node_groups = collect_scc(nodes)
+    node_groups = collect_scc_groups(nodes)
     print(len(node_groups))
     for node_group in node_groups:
-        stdout.write(" ".join(str(i + 1) for i in node_group[0]) + " -1\n")
+        stdout.write(" ".join(str(i + 1) for i in node_group) + " -1\n")
+
+
+RECURSION_LIMIT = 10**5
+UNVISITED = -1
 
 
 class Node(NamedTuple):
     next_nodes: list[int]
-
-
-class NodeGroup(NamedTuple):
-    nodes: list[int]
 
 
 class Job(NamedTuple):
@@ -29,106 +30,71 @@ class Job(NamedTuple):
     node: int
 
 
-def choose_start_node(grouped: list[bool]) -> int | None:
-    for node, value in enumerate(grouped):
-        if not value:
-            return node
-    return None
+class State(NamedTuple):
+    nodes: list[Node]
+    scc_groups: list[list[int]]
+    stack: list[int]
+    on_stack: list[bool]
+    discoveries: list[int]
+    discovery_counter: list[int]  # Single-sized cell.
 
 
-def collect_scc(nodes: list[Node]) -> list[NodeGroup]:
-    # SCC stands for "strongly connected components".
+def collect_scc_groups(nodes: list[Node]) -> list[list[int]]:
     node_count = len(nodes)
-    parent_nodes: list[int] = [i for i in range(node_count)]
-    grouped = [False for _ in range(node_count)]
+    discoveries = [UNVISITED for _ in range(node_count)]
 
-    # Collect SCC groups.
-    while True:
-        # This works like a recursive function call.
-        dfs_jobs: list[Job] = []
+    state = State(
+        nodes=nodes,
+        stack=[],
+        on_stack=[False for _ in range(node_count)],
+        discoveries=discoveries,
+        scc_groups=[],
+        discovery_counter=[0],
+    )
 
-        # Remember where in which order were visited.
-        visited = [False for _ in nodes]
-        node_stack: list[int] = []
+    for i in range(node_count):
+        if discoveries[i] == UNVISITED:
+            dfs(i, state)
 
-        # Choose the first node that hasn't been visited yet.
-        start_node = choose_start_node(grouped)
-        if start_node is None:
-            break
-
-        dfs_jobs.append(Job(True, start_node))
-        dfs_jobs.append(Job(False, start_node))
-
-        while dfs_jobs:
-            cleanup, node = dfs_jobs.pop()
-            if cleanup:
-                # This simulates the cleanup process
-                # after typical recursion function call.
-                visited[node] = False
-                node_stack.pop()
-                continue
-            # Remember that we visited this node.
-            visited_before = visited[node]
-            visited[node] = True
-            node_stack.append(node)
-            # If we've visited this node before,
-            # we've found a cycle.
-            if visited_before:
-                for i, footprint in enumerate(reversed(node_stack)):
-                    if i == 0:
-                        continue
-                    grouped[footprint] = True
-                    parent_nodes[footprint] = node
-                    if footprint == node:
-                        break
-                continue
-            # Prepare to visit next nodes.
-            for next_node in nodes[node][0]:
-                dfs_jobs.append(Job(True, next_node))
-                dfs_jobs.append(Job(False, next_node))
-
-        # Always mark the start node as grouped.
-        grouped[start_node] = True
-
-    node_groups = convert_to_groups(parent_nodes)
-    return node_groups
+    sort_scc_groups(state.scc_groups)
+    return state.scc_groups
 
 
-def get_root_node(parent_nodes: list[int], node: int) -> int:
-    current = node
+def dfs(curr: int, state: State) -> int:
+    nodes, scc_groups, stack, on_stack, discoveries, discovery_counter = state
 
-    trail = [current]
-    while True:
-        parent = parent_nodes[current]
-        if parent == current:
-            break
-        current = parent
-        trail.append(current)
-    root = current
+    discovery = discovery_counter[0]
+    discoveries[curr] = discovery
+    discovery_counter[0] += 1
+    stack.append(curr)
+    on_stack[curr] = True
 
-    for footprint in trail:
-        parent_nodes[footprint] = root
+    parent = discoveries[curr]
+    for next in nodes[curr][0]:
+        if discoveries[next] == UNVISITED:
+            parent = min(parent, dfs(next, state))
+        elif on_stack[next]:
+            # Visiting, but not processed yet.
+            parent = min(parent, discoveries[next])
 
-    return root
+    if parent == discoveries[curr]:
+        # Parent is the same as self.
+        scc_group: list[int] = []
+        while True:
+            node = stack.pop()
+            on_stack[node] = False
+            scc_group.append(node)
+            if curr == node:
+                break
+        scc_groups.append(scc_group)
+
+    return parent
 
 
-def convert_to_groups(parent_nodes: list[int]) -> list[NodeGroup]:
-    node_count = len(parent_nodes)
-
-    groups: dict[int, NodeGroup] = {}
-    for node in range(node_count):
-        root_node = get_root_node(parent_nodes, node)
-        group = groups.get(root_node)
-        if group is None:
-            group = NodeGroup([])
-            groups[root_node] = group
-        group[0].append(node)
-
-    list_groups = list(groups.values())
-    list_groups.sort(key=lambda g: g[0][0])
-    for group in list_groups[0]:
-        group.sort()
-    return list_groups
+def sort_scc_groups(scc_groups: list[list[int]]):
+    for scc_group in scc_groups:
+        scc_group.sort()
+    scc_groups.sort(key=lambda g: g[0])
 
 
 main()
