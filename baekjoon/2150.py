@@ -25,11 +25,6 @@ class Node(NamedTuple):
     next_nodes: list[int]
 
 
-class Job(NamedTuple):
-    cleanup: bool
-    node: int
-
-
 class State(NamedTuple):
     nodes: list[Node]
     scc_groups: list[list[int]]
