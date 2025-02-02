@@ -70,26 +70,26 @@ def search_next(curr: int, state: State) -> int:
     stack.append(curr)
     on_stack[curr] = True
 
-    parent = discoveries[curr]
+    low_link = discoveries[curr]
     for next in nodes[curr][0]:
         if discoveries[next] == UNVISITED:
-            parent = min(parent, search_next(next, state))
+            low_link = min(low_link, search_next(next, state))
         elif on_stack[next]:
             # Visiting, but not processed yet.
-            parent = min(parent, discoveries[next])
+            low_link = min(low_link, discoveries[next])
 
-    if parent == discoveries[curr]:
-        # Parent is the same as self.
+    if low_link == discoveries[curr]:
+        # Current node is the representative of the SCC group.
         scc_group: list[int] = []
         while True:
-            node = stack.pop()
-            on_stack[node] = False
-            scc_group.append(node)
-            if curr == node:
+            popped = stack.pop()
+            on_stack[popped] = False
+            scc_group.append(popped)
+            if popped == curr:
                 break
         scc_groups.append(scc_group)
 
-    return parent
+    return low_link
 
 
 def sort_scc_groups(scc_groups: list[list[int]]):
