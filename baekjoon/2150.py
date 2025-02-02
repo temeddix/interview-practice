@@ -52,15 +52,16 @@ def collect_scc_groups(nodes: list[Node]) -> list[list[int]]:
         discovery_counter=[0],
     )
 
-    for i in range(node_count):
-        if discoveries[i] == UNVISITED:
-            dfs(i, state)
+    for start in range(node_count):
+        if discoveries[start] == UNVISITED:
+            search_next(start, state)
 
     sort_scc_groups(state.scc_groups)
     return state.scc_groups
 
 
-def dfs(curr: int, state: State) -> int:
+def search_next(curr: int, state: State) -> int:
+    # Uses DFS and Tarjan algorithm.
     nodes, scc_groups, stack, on_stack, discoveries, discovery_counter = state
 
     discovery = discovery_counter[0]
@@ -72,7 +73,7 @@ def dfs(curr: int, state: State) -> int:
     parent = discoveries[curr]
     for next in nodes[curr][0]:
         if discoveries[next] == UNVISITED:
-            parent = min(parent, dfs(next, state))
+            parent = min(parent, search_next(next, state))
         elif on_stack[next]:
             # Visiting, but not processed yet.
             parent = min(parent, discoveries[next])
