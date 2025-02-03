@@ -1,5 +1,8 @@
 from typing import NamedTuple
 
+# Using bubble sort here is not appropriate
+# because the problem asked us to utilize segment tree.
+
 
 def main():
     _ = int(input())
@@ -46,7 +49,7 @@ def fill_segment_tree(originals: list[Original]) -> int:
     number_count = len(originals)
     swap_count = 0
 
-    tree = SegmentTree([0 for _ in range(number_count)])
+    tree = SegmentTree(number_count)
     for original in originals:
         unsorted_indices = original[0]
         for unsorted_index in unsorted_indices:
@@ -57,12 +60,10 @@ def fill_segment_tree(originals: list[Original]) -> int:
 
 
 class SegmentTree:
-    def __init__(self, values: list[int]):
-        self._value_count = len(values)
-        self._values = values
-        self._sums = [0 for _ in range(self._value_count * 4)]
-
-        self._build(NodeRange(0, Range(0, self._value_count)))
+    def __init__(self, value_count: int):
+        self._value_count = value_count
+        self._values = [0 for _ in range(value_count)]
+        self._sums = [0 for _ in range(value_count * 4)]
 
     def _get_children(self, node_range: NodeRange) -> tuple[NodeRange, NodeRange]:
         node, (start, end) = node_range
@@ -70,17 +71,6 @@ class SegmentTree:
         left_node_range = NodeRange(node * 2 + 1, Range(start, mid))
         right_node_range = NodeRange(node * 2 + 2, Range(mid, end))
         return left_node_range, right_node_range
-
-    def _build(self, node_range: NodeRange):
-        node, value_range = node_range
-        start, end = value_range
-        if start == end - 1:
-            self._sums[node] = self._values[start]
-            return
-        left_node_range, right_node_range = self._get_children(node_range)
-        self._build(left_node_range)
-        self._build(right_node_range)
-        self._sums[node] = self._sums[node * 2 + 1] + self._sums[node * 2 + 2]
 
     def replace(self, index: int, value: int):
         prev_value = self._values[index]
