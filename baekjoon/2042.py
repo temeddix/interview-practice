@@ -44,11 +44,6 @@ class SegmentTree:
         mid = (start + end) // 2
         return Range(start, mid), Range(mid, end)
 
-    def _has_range_intersection(self, range_a: Range, range_b: Range):
-        start = max(range_a[0], range_b[0])
-        end = min(range_a[1], range_b[1])
-        return start < end
-
     def _build(self, node_range: NodeRange):
         node, value_range = node_range
         start, end = value_range
