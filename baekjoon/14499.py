@@ -24,6 +24,8 @@ class Spot(NamedTuple):
 
 
 class Dice:
+    __slots__ = ("top", "north", "east", "south", "west", "bottom")
+
     def __init__(self):
         self.top = 0
         self.north = 0
