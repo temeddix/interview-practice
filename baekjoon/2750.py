@@ -14,7 +14,7 @@ def main():
 
 def sort_numbers(numbers: list[int]):
     # Change this part to use other sorting algorithm.
-    return do_insertion_sort(numbers)
+    return do_bubble_sort(numbers)
 
 
 def do_insertion_sort(numbers: list[int]):
@@ -29,6 +29,20 @@ def do_insertion_sort(numbers: list[int]):
             numbers[j + 1] = numbers[j]
             j -= 1
         numbers[j + 1] = key
+
+
+def do_bubble_sort(numbers: list[int]):
+    # Time complexity O(n^2), stable.
+
+    number_count = len(numbers)
+
+    for i in range(number_count - 1, 0, -1):
+        for j in range(0, i):
+            next = numbers[j + 1]
+            curr = numbers[j]
+            if curr > next:
+                numbers[j + 1] = curr
+                numbers[j] = next
 
 
 main()
