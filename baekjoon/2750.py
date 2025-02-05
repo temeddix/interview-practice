@@ -18,6 +18,8 @@ def sort_numbers(numbers: list[int]):
 
 
 def do_insertion_sort(numbers: list[int]):
+    # Time complexty O(n^2), stable.
+
     number_count = len(numbers)
 
     for i in range(1, number_count):
