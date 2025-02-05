@@ -1,0 +1,132 @@
+from sys import stdin, stdout
+from typing import NamedTuple
+
+
+def main():
+    number_count = int(input())
+    numbers: list[int] = []
+    for _ in range(number_count):
+        number = int(stdin.readline().strip())
+        numbers.append(number)
+    sort_numbers(numbers)
+    for number in numbers:
+        stdout.write(f"{number}\n")
+
+
+def sort_numbers(numbers: list[int]):
+    # Change this part to use other sorting algorithm.
+    return do_merge_sort(numbers)
+
+
+def do_insertion_sort(numbers: list[int]):
+    # Time complexity O(n^2), Omega(n).
+    # This method is stable.
+
+    number_count = len(numbers)
+
+    for i in range(1, number_count):
+        key = numbers[i]
+        j = i - 1
+        while j >= 0 and numbers[j] > key:
+            numbers[j + 1] = numbers[j]
+            j -= 1
+        numbers[j + 1] = key
+
+
+def do_bubble_sort(numbers: list[int]):
+    # Time complexity O(n^2), Omega(n).
+    # This method is stable.
+
+    number_count = len(numbers)
+
+    for i in range(number_count - 1, 0, -1):
+        for j in range(0, i):
+            next = numbers[j + 1]
+            curr = numbers[j]
+            if curr > next:
+                numbers[j + 1] = curr
+                numbers[j] = next
+
+
+def do_merge_sort(numbers: list[int]):
+    # Time complexity O(n log n), Omega(n log n).
+    # This method is stable.
+
+    # Extra space is needed when using merge sort.
+    temp: list[int] = [0 for _ in numbers]
+
+    class IndexRange(NamedTuple):
+        start: int  # Inclusive
+        end: int  # Exclusive
+
+    class Job(NamedTuple):
+        is_head: bool
+        index_range: IndexRange
+
+    # Use iterative DFS.
+    # Writing this way is harder but worth learning.
+    dfs_stack: list[Job] = []
+    full_range = IndexRange(0, len(numbers))
+    dfs_stack.append(Job(False, full_range))
+    dfs_stack.append(Job(True, full_range))
+
+    while dfs_stack:
+        is_head, index_range = dfs_stack.pop()
+
+        start, end = index_range
+        mid = (start + end) // 2
+
+        # Divide and conquer.
+        if is_head:
+            # Expect range with size of at least 1.
+            if end - start <= 1:
+                continue
+
+            # Divide the range.
+            left_range = IndexRange(start, mid)
+            right_range = IndexRange(mid, end)
+
+            # Add recursive jobs.
+            for next_range in (left_range, right_range):
+                dfs_stack.append(Job(False, next_range))
+                dfs_stack.append(Job(True, next_range))
+
+        # Next recursion logically runs here.
+
+        # Merge left and right.
+        else:
+            # Prepare cursors.
+            cur = start
+            left_cur = start
+            right_cur = mid
+
+            # Merge left and right ranges.
+            while left_cur < mid and right_cur < end:
+                left_number = numbers[left_cur]
+                right_number = numbers[right_cur]
+                if left_number <= right_number:
+                    temp[cur] = left_number
+                    left_cur += 1
+                else:
+                    temp[cur] = right_number
+                    right_cur += 1
+                cur += 1
+
+            # Copy remaining left values.
+            while left_cur < mid:
+                temp[cur] = numbers[left_cur]
+                left_cur += 1
+                cur += 1
+
+            # Copy remaining right values.
+            while right_cur < end:
+                temp[cur] = numbers[right_cur]
+                right_cur += 1
+                cur += 1
+
+            # Copy temporary values back to the original list.
+            for index in range(start, end):
+                numbers[index] = temp[index]
+
+
+main()
