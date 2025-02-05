@@ -137,6 +137,8 @@ def do_quick_sort(numbers: list[int]):
     # Time complexity O(n^2), Omega(n log n).
     # This method is unstable.
 
+    number_count = len(numbers)
+
     class IndexRange(NamedTuple):
         start: int  # Inclusive
         end: int  # Exclusive
@@ -154,8 +156,14 @@ def do_quick_sort(numbers: list[int]):
         if end - start <= 1:
             continue
 
-        # Choose the pivot.
-        pivot = numbers[start]
+        # Choose the pivot and move it to the start position
+        mid = (start + end) // 2
+        pivot_index_cands = [start, start + 3, mid - 7, mid, mid + 7, end - 4, end - 1]
+        pivot_index_cands = [i for i in pivot_index_cands if 0 <= i < number_count]
+        pivot_candidates = [numbers[i] for i in pivot_index_cands]
+        pivot = sorted(pivot_candidates)[len(pivot_candidates) // 2]
+        pivot_index = pivot_index_cands[pivot_candidates.index(pivot)]
+        numbers[start], numbers[pivot_index] = numbers[pivot_index], numbers[start]
 
         # Put cursor at the left and the right end.
         left_cur = start + 1
