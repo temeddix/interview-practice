@@ -194,6 +194,9 @@ def do_quick_sort(numbers: list[int]):
 
 
 def do_heap_sort(numbers: list[int]):
+    # Time complexity O(n log n), Omega(n log n).
+    # This method is unstable.
+
     number_count = len(numbers)
 
     # Convert the list into a min heap.
