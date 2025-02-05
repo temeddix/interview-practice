@@ -82,7 +82,7 @@ def do_merge_sort(numbers: list[int]):
 
         # Divide and conquer.
         if is_head:
-            # Expect range with size of at least 1.
+            # Do nothing when there's nothing to sort.
             if end - start <= 1:
                 continue
 
