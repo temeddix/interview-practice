@@ -1,4 +1,3 @@
-from statistics import median
 from sys import stdin, stdout
 from typing import NamedTuple
 
