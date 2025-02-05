@@ -40,12 +40,16 @@ def do_bubble_sort(numbers: list[int]):
     number_count = len(numbers)
 
     for i in range(number_count - 1, 0, -1):
+        swapped = False
         for j in range(0, i):
             next = numbers[j + 1]
             curr = numbers[j]
             if curr > next:
                 numbers[j + 1] = curr
                 numbers[j] = next
+                swapped = True
+        if not swapped:
+            break
 
 
 def do_merge_sort(numbers: list[int]):
