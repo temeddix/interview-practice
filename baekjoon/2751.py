@@ -1,3 +1,4 @@
+from heapq import heapify, heappop
 from sys import stdin, stdout
 from typing import NamedTuple
 
@@ -14,8 +15,8 @@ def main():
 
 
 def sort_numbers(numbers: list[int]):
-    # Change this part to use other sorting algorithm.
-    return do_quick_sort(numbers)
+    # Modify this line to use other sorting algorithm.
+    do_heap_sort(numbers)
 
 
 def do_insertion_sort(numbers: list[int]):
@@ -190,6 +191,27 @@ def do_quick_sort(numbers: list[int]):
         # Add next recursion job.
         dfs_stack.append(IndexRange(start, right_cur))
         dfs_stack.append(IndexRange(right_cur + 1, end))
+
+
+def do_heap_sort(numbers: list[int]):
+    number_count = len(numbers)
+
+    # Convert the list into a min heap.
+    heapify(numbers)
+
+    # We have to make a new list because `heappop`
+    # modifies the length of the original one.
+    temp: list[int] = []
+
+    # Extract smallest value and restore heap property.
+    for _ in range(number_count):
+        biggest = heappop(numbers)
+        temp.append(biggest)
+
+    # Move the collected numbers into the original list.
+    temp.reverse()
+    for _ in range(number_count):
+        numbers.append(temp.pop())
 
 
 main()
