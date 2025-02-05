@@ -208,8 +208,8 @@ def do_heap_sort(numbers: list[int]):
 
     # Extract smallest value and restore heap property.
     for _ in range(number_count):
-        biggest = heappop(numbers)
-        temp.append(biggest)
+        smallest = heappop(numbers)
+        temp.append(smallest)
 
     # Move the collected numbers into the original list.
     temp.reverse()
