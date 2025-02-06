@@ -186,11 +186,12 @@ def do_quick_sort(numbers: list[int]):
                 numbers[left_cur], numbers[right_cur] = previous_pair
 
         # Place pivot in the correct position.
-        numbers[start], numbers[right_cur] = numbers[right_cur], numbers[start]
+        pivot_index = right_cur
+        numbers[start], numbers[pivot_index] = numbers[pivot_index], numbers[start]
 
         # Add next recursion job.
-        dfs_stack.append(IndexRange(start, right_cur))
-        dfs_stack.append(IndexRange(right_cur + 1, end))
+        dfs_stack.append(IndexRange(start, pivot_index))
+        dfs_stack.append(IndexRange(pivot_index + 1, end))
 
 
 def do_heap_sort(numbers: list[int]):
