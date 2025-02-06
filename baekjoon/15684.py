@@ -89,7 +89,7 @@ INFINITY = 1_000_000_007
 def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | None:
     # Get the structure.
     level_count, line_count, bridges = structure
-    if not bridges:
+    if not bridges or is_sorted(precomputed.result_values):
         return 0
 
     # Create the bridge grid to check adjacency.
@@ -215,8 +215,11 @@ def are_extras_usable(extras: list[Bridge], precomputed: Precomputed) -> bool:
         modified[final_index_a], modified[final_index_b] = pair
 
     # Check if the modified result is sorted.
-    is_sorted = all(modified[i] <= modified[i + 1] for i in range(len(modified) - 1))
-    return is_sorted
+    return is_sorted(modified)
+
+
+def is_sorted(numbers: list[int]) -> bool:
+    return all(numbers[i] <= numbers[i + 1] for i in range(len(numbers) - 1))
 
 
 main()
