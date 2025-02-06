@@ -89,12 +89,13 @@ INFINITY = 1_000_000_007
 def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | None:
     # Get the structure.
     level_count, line_count, bridges = structure
+    if not bridges:
+        return 0
 
     # Prepare extra brige candidates.
     extra_candidates: list[Bridge] = []
     for level in range(level_count):
-        for left_line in range(line_count - 1):
-            extra_candidates.append(Bridge(level, left_line))
+        extra_candidates.extend(Bridge(level, n) for n in range(line_count - 1))
     candidate_count = len(extra_candidates)
 
     # Create the bridge grid to check adjacency.
@@ -105,10 +106,10 @@ def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | Non
 
     # Perform DFS.
     dfs_stack: list[Job] = []
-    dfs_stack.append(Job(False, None))
-    dfs_stack.append(Job(True, None))
     dfs_stack.append(Job(False, extra_candidates[0]))
     dfs_stack.append(Job(True, extra_candidates[0]))
+    dfs_stack.append(Job(False, None))
+    dfs_stack.append(Job(True, None))
 
     min_extras = INFINITY
     candidate_cursor = 0
@@ -124,7 +125,8 @@ def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | Non
                 bridge_grid[level][left_line] = True
                 extras.append(new_candidate)
 
-            if are_extras_usable(extras, precomputed):
+            should_check = new_candidate is not None
+            if should_check and are_extras_usable(extras, precomputed):
                 min_extras = min(min_extras, len(extras))
                 continue
 
@@ -132,13 +134,13 @@ def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | Non
             if candidate_cursor == candidate_count:
                 continue
 
-            dfs_stack.append(Job(False, None))
-            dfs_stack.append(Job(True, None))
             if len(extras) < min(MAX_EXTRAS, min_extras - 1):
                 next_extra = extra_candidates[candidate_cursor]
                 if is_extra_available(bridge_grid, next_extra):
                     dfs_stack.append(Job(False, next_extra))
                     dfs_stack.append(Job(True, next_extra))
+                dfs_stack.append(Job(False, None))
+                dfs_stack.append(Job(True, None))
 
         else:
             # After child recursion.
@@ -152,6 +154,9 @@ def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | Non
     return None if min_extras == INFINITY else min_extras
 
 
+LINE_DIFFS = (-1, 1)
+
+
 def is_extra_available(bridge_grid: list[list[bool]], extra: Bridge) -> bool:
     grid_width = len(bridge_grid[0])
 
@@ -160,7 +165,7 @@ def is_extra_available(bridge_grid: list[list[bool]], extra: Bridge) -> bool:
     if bridge_grid[level][left_line]:
         return False
 
-    for line_diff in [-1, 1]:
+    for line_diff in LINE_DIFFS:
         adjacent_left_line = left_line + line_diff
         if not 0 <= adjacent_left_line < grid_width:
             continue
@@ -176,10 +181,8 @@ def are_extras_usable(extras: list[Bridge], precomputed: Precomputed) -> bool:
     # Prepare the list to store modified values.
     modified = result_values.copy()
 
-    # Sort the extra bridges to go from the top level zero.
-    extras.sort()
-
     # Calculate the final modified values from adding extra bridges.
+    # This assumes that extra bridges are sorted.
     for extra in extras:
         level, left_line = extra
 
@@ -188,12 +191,12 @@ def are_extras_usable(extras: list[Bridge], precomputed: Precomputed) -> bool:
         left_swap_value, right_swap_value = swap_prediction
 
         # Get the swap index at the final result.
-        left_index = result_indices[left_swap_value]
-        right_index = result_indices[right_swap_value]
+        final_index_a = result_indices[left_swap_value]
+        final_index_b = result_indices[right_swap_value]
 
         # Swap the numbers in the modified values.
-        pair = modified[right_index], modified[left_index]
-        modified[left_index], modified[right_index] = pair
+        pair = modified[final_index_b], modified[final_index_a]
+        modified[final_index_a], modified[final_index_b] = pair
 
     # Check if the modified result is sorted.
     is_sorted = all(modified[i] <= modified[i + 1] for i in range(len(modified) - 1))
