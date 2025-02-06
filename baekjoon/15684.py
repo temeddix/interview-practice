@@ -125,12 +125,13 @@ def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | Non
                 bridge_grid[level][left_line] = True
                 extras.append(new_candidate)
 
+            candidate_cursor += 1
+
             should_check = new_candidate is not None
             if should_check and are_extras_usable(extras, precomputed):
                 min_extras = min(min_extras, len(extras))
                 continue
 
-            candidate_cursor += 1
             if candidate_cursor == candidate_count:
                 continue
 
