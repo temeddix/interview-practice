@@ -79,7 +79,8 @@ def precompute_result(structure: Structure) -> Precomputed:
 
 class Job(NamedTuple):
     is_head: bool
-    new_candidate: Bridge | None
+    add_extra: bool
+    cursor: Bridge
 
 
 MAX_EXTRAS = 3
@@ -89,7 +90,7 @@ INFINITY = 1_000_000_007
 def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | None:
     # Get the structure.
     level_count, line_count, bridges = structure
-    if not bridges or is_sorted(precomputed.result_values):
+    if is_sorted(precomputed.result_values):
         return 0
 
     # Create the bridge grid to check adjacency.
@@ -98,59 +99,52 @@ def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | Non
         level, left_line = bridge
         bridge_grid[level][left_line] = True
 
-    # Prepare extra brige candidates.
-    extra_candidates = create_extra_candidates(structure, bridge_grid)
-    if not extra_candidates:
-        return None
-    candidate_count = len(extra_candidates)
-
     # Perform DFS.
     dfs_stack: list[Job] = []
-    dfs_stack.append(Job(False, extra_candidates[0]))
-    dfs_stack.append(Job(True, extra_candidates[0]))
-    dfs_stack.append(Job(False, None))
-    dfs_stack.append(Job(True, None))
+    start_cursor = Bridge(0, 0)
+    if is_extra_placeable(bridge_grid, start_cursor):
+        dfs_stack.append(Job(False, True, start_cursor))
+        dfs_stack.append(Job(True, True, start_cursor))
+    dfs_stack.append(Job(False, False, start_cursor))
+    dfs_stack.append(Job(True, False, start_cursor))
 
     min_extras = INFINITY
-    candidate_cursor = 0
     extras: list[Bridge] = []
 
     while dfs_stack:
-        is_head, new_candidate = dfs_stack.pop()
+        is_head, add_extra, cursor = dfs_stack.pop()
 
         if is_head:
             # Before child recursion.
-            if new_candidate is not None:
-                level, left_line = new_candidate
+            level, left_line = cursor
+            if add_extra:
                 bridge_grid[level][left_line] = True
-                extras.append(new_candidate)
+                extras.append(cursor)
 
-            candidate_cursor += 1
-
-            should_check = new_candidate is not None
-            if should_check and are_extras_usable(extras, precomputed):
+            if add_extra and is_working(extras, precomputed):
                 min_extras = min(min_extras, len(extras))
                 continue
 
-            if candidate_cursor == candidate_count:
+            next_left_line = left_line + 2 if add_extra else left_line + 1
+            next_level = level if next_left_line < line_count - 1 else level + 1
+            next_left_line = next_left_line if next_left_line < line_count - 1 else 0
+            if next_level == level_count:
                 continue
+            next_cursor = Bridge(next_level, next_left_line)
 
             if len(extras) < min(MAX_EXTRAS, min_extras - 1):
-                next_extra = extra_candidates[candidate_cursor]
-                if is_extra_available(bridge_grid, next_extra):
-                    dfs_stack.append(Job(False, next_extra))
-                    dfs_stack.append(Job(True, next_extra))
-                dfs_stack.append(Job(False, None))
-                dfs_stack.append(Job(True, None))
+                if is_extra_placeable(bridge_grid, next_cursor):
+                    dfs_stack.append(Job(False, True, next_cursor))
+                    dfs_stack.append(Job(True, True, next_cursor))
+                dfs_stack.append(Job(False, False, next_cursor))
+                dfs_stack.append(Job(True, False, next_cursor))
 
         else:
             # After child recursion.
-            if new_candidate is not None:
-                level, left_line = new_candidate
+            level, left_line = cursor
+            if add_extra:
                 bridge_grid[level][left_line] = False
                 extras.pop()
-
-            candidate_cursor -= 1
 
     return None if min_extras == INFINITY else min_extras
 
@@ -158,24 +152,8 @@ def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | Non
 LINE_DIFFS = (-1, 1)
 
 
-def create_extra_candidates(
-    structure: Structure, bridge_grid: list[list[bool]]
-) -> list[Bridge]:
-    level_count, line_count, _ = structure
-
-    extra_candidates: list[Bridge] = []
-    for level in range(level_count):
-        level_candidates = [Bridge(level, n) for n in range(line_count - 1)]
-        extra_candidates.extend(
-            c for c in level_candidates if is_extra_available(bridge_grid, c)
-        )
-
-    return extra_candidates
-
-
-def is_extra_available(bridge_grid: list[list[bool]], extra: Bridge) -> bool:
+def is_extra_placeable(bridge_grid: list[list[bool]], extra: Bridge) -> bool:
     grid_width = len(bridge_grid[0])
-
     level, left_line = extra
 
     if bridge_grid[level][left_line]:
@@ -191,7 +169,7 @@ def is_extra_available(bridge_grid: list[list[bool]], extra: Bridge) -> bool:
     return True
 
 
-def are_extras_usable(extras: list[Bridge], precomputed: Precomputed) -> bool:
+def is_working(extras: list[Bridge], precomputed: Precomputed) -> bool:
     swap_predictions, result_values, result_indices = precomputed
 
     # Prepare the list to store modified values.
