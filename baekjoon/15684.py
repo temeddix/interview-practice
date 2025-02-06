@@ -92,17 +92,17 @@ def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | Non
     if not bridges:
         return 0
 
-    # Prepare extra brige candidates.
-    extra_candidates: list[Bridge] = []
-    for level in range(level_count):
-        extra_candidates.extend(Bridge(level, n) for n in range(line_count - 1))
-    candidate_count = len(extra_candidates)
-
     # Create the bridge grid to check adjacency.
     bridge_grid: list[list[bool]] = [[False] * line_count for _ in range(level_count)]
     for bridge in bridges:
         level, left_line = bridge
         bridge_grid[level][left_line] = True
+
+    # Prepare extra brige candidates.
+    extra_candidates = create_extra_candidates(structure, bridge_grid)
+    if not extra_candidates:
+        return None
+    candidate_count = len(extra_candidates)
 
     # Perform DFS.
     dfs_stack: list[Job] = []
@@ -155,6 +155,21 @@ def find_min_extras(structure: Structure, precomputed: Precomputed) -> int | Non
 
 
 LINE_DIFFS = (-1, 1)
+
+
+def create_extra_candidates(
+    structure: Structure, bridge_grid: list[list[bool]]
+) -> list[Bridge]:
+    level_count, line_count, _ = structure
+
+    extra_candidates: list[Bridge] = []
+    for level in range(level_count):
+        level_candidates = [Bridge(level, n) for n in range(line_count - 1)]
+        extra_candidates.extend(
+            c for c in level_candidates if is_extra_available(bridge_grid, c)
+        )
+
+    return extra_candidates
 
 
 def is_extra_available(bridge_grid: list[list[bool]], extra: Bridge) -> bool:
