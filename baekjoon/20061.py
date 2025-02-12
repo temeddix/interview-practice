@@ -7,6 +7,7 @@ def main():
     new_blocks: list[NewBlock] = []
     for _ in range(repeat_count):
         t, x, y = (int(s) for s in stdin.readline().split())
+        t -= 1
         new_blocks.append(NewBlock(t, Spot(x, y)))
     total_score, filled = add_blocks(new_blocks)
     print(total_score)
@@ -101,22 +102,22 @@ def vacate_two_rows(room: list[list[bool]]):
         room.insert(0, [False] * ROOM_WIDTH)
 
 
+NEW_BLOCK_SHAPES = [
+    [(0, 0)],
+    [(0, 0), (0, 1)],
+    [(0, 0), (1, 0)],
+]
+
+
 def get_block_spots(new_block: NewBlock) -> tuple[list[Spot], list[Spot]]:
     block_type, base_spot = new_block
     base_row, base_column = base_spot
 
     # Get spots in the common area in A coordinate system.
     raw_block_spots_a: list[Spot] = []
-    if block_type == SMALL_TYPE:
-        raw_block_spots_a.append(base_spot)
-    elif block_type == HORIZONTAL_TYPE:
-        raw_block_spots_a.append(base_spot)
-        raw_block_spots_a.append(Spot(base_row, base_column + 1))
-    elif block_type == VERTICAL_TYPE:
-        raw_block_spots_a.append(base_spot)
-        raw_block_spots_a.append(Spot(base_row + 1, base_column))
-    else:
-        raise ValueError
+    for r_diff, c_diff in NEW_BLOCK_SHAPES[block_type]:
+        raw_block_spot = Spot(base_row + r_diff, base_column + c_diff)
+        raw_block_spots_a.append(raw_block_spot)
 
     # Get spots in the common area in B coordinate system.
     raw_block_spots_b = [rotate_spot(s) for s in raw_block_spots_a]
