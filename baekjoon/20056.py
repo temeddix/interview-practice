@@ -11,7 +11,7 @@ def main():
         fire_balls[r][c].append(FireBall(m, d, s))
     block_map = BlockMap(map_size, fire_balls)
     repeat_operations(block_map, repeats)
-    total_mass = calculate_total_mass(block_map)
+    total_mass = sum(sum(sum(b[0] for b in c) for c in r) for r in block_map.fire_balls)
     print(total_mass)
 
 
@@ -58,16 +58,11 @@ def move_fire_balls(block_map: BlockMap):
                 r_unit, c_unit = DIRECTIONS[direction]
                 r_new, c_new = r + r_unit * speed, c + c_unit * speed
                 r_new, c_new = r_new % map_size, c_new % map_size
-                buffer.append(
-                    BufferItem(
-                        Spot(r_new, c_new),
-                        FireBall(mass, direction, speed),
-                    )
+                buffer_item = BufferItem(
+                    Spot(r_new, c_new),
+                    FireBall(mass, direction, speed),
                 )
-
-    for r in range(map_size):
-        for c in range(map_size):
-            cell = fire_balls[r][c]
+                buffer.append(buffer_item)
             cell.clear()
 
     for spot, fire_ball in buffer:
@@ -94,25 +89,18 @@ def make_interaction(block_map: BlockMap):
                 continue
             each_speed = sum(b[2] for b in cell) // len(cell)
 
-            all_odd = all(b[1] % 2 == 1 for b in cell)
-            all_even = all(b[1] % 2 == 0 for b in cell)
-            go_diagonally = not (all_odd or all_even)
-            new_directions = (i * 2 + int(go_diagonally) for i in range(4))
+            all_odd = True
+            all_even = True
+            for fire_ball in cell:
+                if fire_ball[1] % 2 == 0:
+                    all_odd = False
+                else:
+                    all_even = False
+            go_diagonally = int(not (all_odd or all_even))
+            new_directions = (i * 2 + go_diagonally for i in range(4))
 
             cell.clear()
             cell.extend(FireBall(each_mass, d, each_speed) for d in new_directions)
-
-
-def calculate_total_mass(block_map: BlockMap) -> int:
-    map_size, fire_balls = block_map
-
-    total_mass = 0
-    for r in range(map_size):
-        for c in range(map_size):
-            cell = fire_balls[r][c]
-            total_mass += sum(b[0] for b in cell)
-
-    return total_mass
 
 
 main()
