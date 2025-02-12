@@ -28,11 +28,6 @@ ROOM_HEIGHT = 6
 ROOM_WIDTH = 4
 
 
-SMALL_TYPE = 1
-HORIZONTAL_TYPE = 2
-VERTICAL_TYPE = 3
-
-
 class FinalStatus(NamedTuple):
     total_score: int
     filled_spots: int
