@@ -21,6 +21,16 @@ class FireBall(NamedTuple):
     speed: int
 
 
+class Spot(NamedTuple):
+    row: int
+    column: int
+
+
+class BufferItem(NamedTuple):
+    spot: Spot
+    fire_ball: FireBall
+
+
 class BlockMap(NamedTuple):
     map_size: int
     fire_balls: list[list[list[FireBall]]]
@@ -38,7 +48,7 @@ def repeat_operations(block_map: BlockMap, repeats: int):
 def move_fire_balls(block_map: BlockMap):
     map_size, fire_balls = block_map
 
-    buffer = [[list[FireBall]() for _ in range(map_size)] for _ in range(map_size)]
+    buffer: list[BufferItem] = []
 
     for r in range(map_size):
         for c in range(map_size):
@@ -48,10 +58,21 @@ def move_fire_balls(block_map: BlockMap):
                 r_unit, c_unit = DIRECTIONS[direction]
                 r_new, c_new = r + r_unit * speed, c + c_unit * speed
                 r_new, c_new = r_new % map_size, c_new % map_size
-                buffer[r_new][c_new].append(FireBall(mass, direction, speed))
+                buffer.append(
+                    BufferItem(
+                        Spot(r_new, c_new),
+                        FireBall(mass, direction, speed),
+                    )
+                )
 
-    for r, row in enumerate(buffer):
-        fire_balls[r] = row
+    for r in range(map_size):
+        for c in range(map_size):
+            cell = fire_balls[r][c]
+            cell.clear()
+
+    for spot, fire_ball in buffer:
+        r, c = spot
+        fire_balls[r][c].append(fire_ball)
 
 
 INTERACTION_THRESHOLD = 2
