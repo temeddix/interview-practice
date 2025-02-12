@@ -13,9 +13,7 @@ def main():
                 shark_spots[shark_number - 1] = Spot(r, c)
     shark_directions = [int(s) - 1 for s in stdin.readline().split()]
 
-    sharks: list[list[list[Shark]]] = [
-        [[] for _ in range(map_size)] for _ in range(map_size)
-    ]
+    sharks = [[list[Shark]() for _ in range(map_size)] for _ in range(map_size)]
     for id, spot in enumerate(shark_spots):
         r, c = spot
         direction = shark_directions[id]
@@ -76,7 +74,7 @@ def move_sharks(environment: Environment):
     map_size, scent_duration, sharks, scents = environment
 
     # Leave scent and move individual sharks.
-    moved = set[int]()
+    moved = [False] * (map_size**2)
     for r in range(map_size):
         for c in range(map_size):
             cell = sharks[r][c]
@@ -84,7 +82,7 @@ def move_sharks(environment: Environment):
                 continue
             shark = cell[0]
             shark_id, direction, direction_trait = shark
-            if shark_id in moved:
+            if moved[shark_id]:
                 continue
 
             scents[r][c] = Scent(shark_id, scent_duration)
@@ -111,7 +109,7 @@ def move_sharks(environment: Environment):
                 nr, nc = near_self_spots[0]
             new_direction = DIRECTIONS.index((nr - r, nc - c))
 
-            moved.add(shark_id)
+            moved[shark_id] = True
             cell.pop(0)
             sharks[nr][nc].append(Shark(shark_id, new_direction, direction_trait))
 
