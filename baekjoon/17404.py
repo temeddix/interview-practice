@@ -24,34 +24,26 @@ INVALID = 1_000_000_007
 
 def calculate_min_cost(color_costs: list[ColorCost]) -> int:
     houses = len(color_costs)
-    dp_array = [[[INVALID] * COLORS for _ in range(COLORS)] for _ in range(houses)]
-    for c, cost in enumerate(color_costs[0]):
-        dp_array[0][c][c] = cost
 
-    for h in range(1, houses):
-        color_cost = color_costs[h]
-        dp_current = dp_array[h]
-        dp_previous = dp_array[h - 1]
-        for c, cost in enumerate(color_cost):
-            for fc, lc_list in enumerate(dp_previous):  # First color
-                for lc, previous_cost in enumerate(lc_list):  # Last color
-                    if previous_cost == INVALID:
-                        continue
-                    if c == lc:
-                        continue
-                    recorded_cost = dp_current[fc][c]
-                    new_cost = previous_cost + cost
-                    if new_cost < recorded_cost:
-                        dp_current[fc][c] = new_cost
+    initial_r, initial_g, initial_b = color_costs[0]
+    cost_sums = [
+        [initial_r, INVALID, INVALID],  # Started from red
+        [INVALID, initial_g, INVALID],  # Started from green
+        [INVALID, INVALID, initial_b],  # Started from blue
+    ]
 
-    min_cost = INVALID
-    dp_last = dp_array[-1]
-    for fc, lc_list in enumerate(dp_last):
-        for lc, cost in enumerate(lc_list):
-            if fc != lc:
-                min_cost = min(min_cost, cost)
+    for i in range(1, houses):
+        this_r, this_g, this_b = color_costs[i]
+        for cost_sum in cost_sums:
+            prev_r, prev_g, prev_b = cost_sum
 
-    return min_cost
+            # Compute new DP values using only previous state.
+            cost_sum[0] = min(prev_g, prev_b) + this_r
+            cost_sum[1] = min(prev_r, prev_b) + this_g
+            cost_sum[2] = min(prev_r, prev_g) + this_b
+
+    from_r, from_g, from_b = cost_sums
+    return min(from_r[1], from_r[2], from_g[0], from_g[2], from_b[0], from_b[1])
 
 
 main()
