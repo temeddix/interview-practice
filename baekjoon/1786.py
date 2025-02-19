@@ -43,31 +43,29 @@ def find_occurences(text: str, pattern: str) -> list[int]:
 
 
 def get_lps_table(pattern: str) -> list[int]:
-    # LPS stands for "Longest prefix and suffix"
+    # LPS stands for "Longest Prefix which is also Suffix"
 
     pattern_len = len(pattern)
-    lps_table = [0] * pattern_len  # LPS table
-    last_lps = 0  # Length of previous longest prefix suffix
+    lps_table = [0] * pattern_len  # Array to store LPS values
+    lps_length = 0  # Length of the previous longest prefix-suffix
 
-    # Index 0 in LPS table is always 0.
-    # Therefore start iterating from index 1.
+    # The LPS value for the first character (index 0) is always 0.
+    # Start iterating from index 1.
     index_p = 1
     while index_p < pattern_len:
-        if pattern[index_p] == pattern[last_lps]:
-            # If the letter matches,
-            # lengthen the prefix-suffix pair.
-            last_lps += 1
-            lps_table[index_p] = last_lps
-            index_p += 1
-        elif last_lps != 0:
-            # If the letter doesn't match and
-            # there was a prefix-suffix pair,
-            # shorten the prefix-suffix pair length to retry matching.
-            # Stay on the current index.
-            last_lps = lps_table[last_lps - 1]
+        if pattern[index_p] == pattern[lps_length]:
+            # Characters match:
+            # Extend the current prefix-suffix length.
+            lps_length += 1
+            lps_table[index_p] = lps_length
+            index_p += 1  # Move to the next character
+        elif lps_length != 0:
+            # Characters do not match, but there was a previous prefix-suffix:
+            # Fall back to the previous LPS value (without incrementing `index_p`).
+            lps_length = lps_table[lps_length - 1]
         else:
-            # The letter doesn't match
-            # and there's no existing prefix-suffix pair.
+            # Characters do not match and no prefix-suffix exists:
+            # Set LPS value to 0 and move to the next character.
             lps_table[index_p] = 0
             index_p += 1
 
