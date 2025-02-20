@@ -1,6 +1,4 @@
-**/*.exe
 **/*.lock
 .vs
 .venv
-Debug
-Release
+build/
