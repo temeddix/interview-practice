@@ -7,14 +7,15 @@ struct MyStruct {
   int a;
   double b;
   std::string c;
-
-  // Define the < operator for sorting
-  bool operator<(const MyStruct& other) const {
-    if (a != other.a) return a < other.a;
-    if (b != other.b) return b < other.b;
-    return c < other.c;
-  }
 };
+
+// Define the < operator outside the struct.
+// Putting the function inside the struct is also possible.
+bool operator<(const MyStruct& lhs, const MyStruct& rhs) {
+  if (lhs.a != rhs.a) return lhs.a < rhs.a;
+  if (lhs.b != rhs.b) return lhs.b < rhs.b;
+  return lhs.c < rhs.c;
+}
 
 int main() {
   std::vector<MyStruct> vec = {
@@ -24,7 +25,7 @@ int main() {
   };
   std::sort(vec.begin(), vec.end());
 
-  // Output the sorted vector for verification
+  // Output the sorted vector for verification.
   for (const MyStruct& elem : vec) {
     std::cout << elem.a << ", " << elem.b << ", " << elem.c << std::endl;
   }
