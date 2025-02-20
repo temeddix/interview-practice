@@ -17,7 +17,7 @@ ostream& operator<<(ostream& os, const InnerStruct& obj) {
   return os;
 }
 
-ostream& operator<<(ostream& os, const OuterStruct obj) {
+ostream& operator<<(ostream& os, const OuterStruct& obj) {
   os << "OuterStruct(a: " << obj.a << ", b: " << obj.b << ")";
   return os;
 }
