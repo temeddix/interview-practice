@@ -58,7 +58,11 @@ int main() {
   MyClass obj1(42);
   obj1.print();  // Output: Data: 42
 
-  MyClass obj2 = std::move(obj1);  // Move obj1 into obj2
+  // Trying to copy an object produces an error
+  // because the copy constructor is deleted.
+  // We can move the value instead.
+  MyClass obj2 = std::move(obj1);
+  // MyClass obj2 = obj1;
 
   obj2.print();  // Output: Data: 42
   obj1.print();  // Output: Error: Attempt to use moved-from object.
