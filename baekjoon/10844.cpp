@@ -3,28 +3,28 @@
 
 using namespace std;
 
-int range = 10;
-int divider = 1000000000;
+const int RANGE = 10;
+const int DIVIDER = 1000000000;
 
 int count_stair_numbers(int length) {
-  vector<int> prev_count(range, 1);
+  vector<int> prev_count(RANGE, 1);
   prev_count[0] = 0;
   vector<int> curr_count;
-  curr_count.reserve(range);
+  curr_count.reserve(RANGE);
 
   for (int i = 1; i < length; i++) {
-    curr_count.push_back(prev_count[1] % divider);
-    for (int j = 1; j < range - 1; j++) {
-      curr_count.push_back((prev_count[j - 1] + prev_count[j + 1]) % divider);
+    curr_count.push_back(prev_count[1] % DIVIDER);
+    for (int j = 1; j < RANGE - 1; j++) {
+      curr_count.push_back((prev_count[j - 1] + prev_count[j + 1]) % DIVIDER);
     }
-    curr_count.push_back(prev_count[range - 2] % divider);
+    curr_count.push_back(prev_count[RANGE - 2] % DIVIDER);
     swap(prev_count, curr_count);
     curr_count.clear();
   }
 
   int final_sum = 0;
   for (int count : prev_count) {
-    final_sum = (final_sum + count) % divider;
+    final_sum = (final_sum + count) % DIVIDER;
   }
   return final_sum;
 }
