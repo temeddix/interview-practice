@@ -3,32 +3,43 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 struct MyStruct {
   int a;
   double b;
-  std::string c;
+  string c;
 };
 
 // Define the < operator outside the struct.
 // Putting the function inside the struct is also possible.
-bool operator<(const MyStruct& lhs, const MyStruct& rhs) {
-  if (lhs.a != rhs.a) return lhs.a < rhs.a;
-  if (lhs.b != rhs.b) return lhs.b < rhs.b;
+auto operator<(const MyStruct& lhs, const MyStruct& rhs) -> bool {
+  if (lhs.a != rhs.a) {
+    return lhs.a < rhs.a;
+  }
+  if (lhs.b != rhs.b) {
+    return lhs.b < rhs.b;
+  }
   return lhs.c < rhs.c;
 }
 
-int main() {
-  std::vector<MyStruct> vec = {
-      {2, 3.0, "apple"},
-      {3, 1.5, "cherry"},
-      {1, 2.5, "banana"},
-  };
-  std::sort(vec.begin(), vec.end());
+auto operator<<(ostream& out, const MyStruct& obj) -> ostream& {
+  out << obj.a << ", " << obj.b << ", " << obj.c;
+  return out;
+}
+
+const vector<MyStruct> given = {
+    {2, 3.0, "apple"},
+    {3, 1.5, "cherry"},
+    {1, 2.5, "banana"},
+};
+
+auto main() -> int {  // NOLINT
+  vector<MyStruct> vec = given;
+  sort(vec.begin(), vec.end());
 
   // Output the sorted vector for verification.
   for (const MyStruct& elem : vec) {
-    std::cout << elem.a << ", " << elem.b << ", " << elem.c << std::endl;
+    cout << elem << "\n";
   }
-
-  return 0;
 }

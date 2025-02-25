@@ -3,10 +3,11 @@
 
 using namespace std;
 
+const int INT_INIT = -1;
 const int RANGE = 10;
 const int DIVIDER = 1000000000;
 
-int count_stair_numbers(int length) {
+auto count_stair_numbers(int length) -> int {
   vector<int> prev_count(RANGE, 1);
   prev_count[0] = 0;
   vector<int> curr_count;
@@ -29,8 +30,8 @@ int count_stair_numbers(int length) {
   return final_sum;
 }
 
-int main() {
-  int length;
+auto main() -> int {  // NOLINT
+  int length = INT_INIT;
   cin >> length;
   int stair_numbers = count_stair_numbers(length);
   cout << stair_numbers;

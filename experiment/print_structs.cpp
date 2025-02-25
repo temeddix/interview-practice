@@ -12,17 +12,16 @@ struct OuterStruct {
   InnerStruct b;
 };
 
-ostream& operator<<(ostream& os, const InnerStruct& obj) {
-  os << "InnerStruct(x: " << obj.x << ", y: " << obj.y << ")";
-  return os;
+auto operator<<(ostream& out, const InnerStruct& obj) -> ostream& {
+  out << "InnerStruct(x: " << obj.x << ", y: " << obj.y << ")";
+  return out;
 }
 
-ostream& operator<<(ostream& os, const OuterStruct& obj) {
-  os << "OuterStruct(a: " << obj.a << ", b: " << obj.b << ")";
-  return os;
+auto operator<<(ostream& out, const OuterStruct& obj) -> ostream& {
+  out << "OuterStruct(a: " << obj.a << ", b: " << obj.b << ")";
+  return out;
 }
 
-int main() {
-  OuterStruct obj = {true, {3, 5.5}};
-  cout << obj << endl;
-}
+const OuterStruct obj = {true, {3, 5.5}};
+
+auto main() -> int { cout << obj << "\n"; }

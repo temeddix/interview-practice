@@ -4,8 +4,8 @@
 
 using namespace std;
 
-int get_max_sum(vector<vector<int>>& tower) {
-  int tower_size = tower.size();
+auto get_max_sum(vector<vector<int>>& tower) -> int {
+  int tower_size = static_cast<int>(tower.size());
   vector<int> prev_sum = {tower[0][0]};
   prev_sum.reserve(tower_size);
   vector<int> curr_sum;
@@ -27,12 +27,14 @@ int get_max_sum(vector<vector<int>>& tower) {
   return *max_element(prev_sum.begin(), prev_sum.end());
 }
 
-int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(NULL);
-  cout.tie(NULL);
+const int INT_INIT = -1;
 
-  int tower_size;
+auto main() -> int {  // NOLINT
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+
+  int tower_size = INT_INIT;
   cin >> tower_size;
 
   vector<vector<int>> tower;
@@ -43,7 +45,7 @@ int main() {
     row.reserve(i);
     int row_size = i + 1;
     for (int j = 0; j < row_size; j++) {
-      int number;
+      int number = INT_INIT;
       cin >> number;
       row.push_back(number);
     }
@@ -51,5 +53,5 @@ int main() {
   }
 
   int max_sum = get_max_sum(tower);
-  cout << max_sum << endl;
+  cout << max_sum << "\n";
 }

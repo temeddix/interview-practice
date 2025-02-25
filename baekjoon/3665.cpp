@@ -4,6 +4,8 @@
 
 using namespace std;
 
+const int INT_INIT = -1;
+
 struct Node {
   int incomings;
   vector<int> nexts;
@@ -15,8 +17,8 @@ struct Result {
   int code;
 };
 
-Result<vector<int>> sort_nodes(vector<Node>& nodes) {
-  int node_count = nodes.size();
+auto sort_nodes(vector<Node>& nodes) -> Result<vector<int>> {
+  int node_count = static_cast<int>(nodes.size());
   vector<int> sorted_nodes;
   sorted_nodes.reserve(node_count);
 
@@ -28,14 +30,14 @@ Result<vector<int>> sort_nodes(vector<Node>& nodes) {
   }
 
   while (!bfs_queue.empty()) {
-    int i = bfs_queue.front();
+    int idx_a = bfs_queue.front();
     bfs_queue.pop();
-    sorted_nodes.push_back(i);
-    for (int j : nodes[i].nexts) {
-      Node& next_node = nodes[j];
+    sorted_nodes.push_back(idx_a);
+    for (int idx_b : nodes[idx_a].nexts) {
+      Node& next_node = nodes[idx_b];
       next_node.incomings -= 1;
       if (next_node.incomings == 0) {
-        bfs_queue.push(j);
+        bfs_queue.push(idx_b);
       }
     }
   }
@@ -47,21 +49,21 @@ Result<vector<int>> sort_nodes(vector<Node>& nodes) {
   return {sorted_nodes, 0};
 }
 
-int main() {
+auto main() -> int {  // NOLINT
   ios::sync_with_stdio(false);
-  cin.tie(NULL);
-  cout.tie(NULL);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
 
-  int test_count;
+  int test_count = INT_INIT;
   cin >> test_count;
 
-  for (int t = 0; t < test_count; t++) {
-    int node_count;
+  for (int k = 0; k < test_count; k++) {
+    int node_count = INT_INIT;
     cin >> node_count;
 
     vector<int> last_ranks(node_count);
     for (int i = 0; i < node_count; i++) {
-      int node;
+      int node = INT_INIT;
       cin >> node;
       node -= 1;
       last_ranks[node] = i;
@@ -69,10 +71,11 @@ int main() {
 
     vector<vector<bool>> swapped(node_count,
                                  std::vector<bool>(node_count, false));
-    int swapped_pairs;
+    int swapped_pairs = INT_INIT;
     cin >> swapped_pairs;
     for (int i = 0; i < swapped_pairs; i++) {
-      int node_a, node_b;
+      int node_a = INT_INIT;
+      int node_b = INT_INIT;
       cin >> node_a >> node_b;
       node_a -= 1;
       node_b -= 1;
@@ -109,6 +112,6 @@ int main() {
         cout << (node + 1) << " ";
       }
     }
-    cout << endl;
+    cout << "\n";
   }
 }

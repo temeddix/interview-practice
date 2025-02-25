@@ -4,13 +4,15 @@
 
 using namespace std;
 
+const int INT_INIT = -1;
+
 struct Node {
   int incomings;
   vector<int> nexts;
 };
 
-vector<int> sort_nodes(vector<Node>& nodes) {
-  int node_count = nodes.size();
+auto sort_nodes(vector<Node>& nodes) -> vector<int> {
+  int node_count = static_cast<int>(nodes.size());
   vector<int> sorted_nodes;
   sorted_nodes.reserve(node_count);
 
@@ -22,14 +24,14 @@ vector<int> sort_nodes(vector<Node>& nodes) {
   }
 
   while (!bfs_queue.empty()) {
-    int i = bfs_queue.front();
+    int idx_a = bfs_queue.front();
     bfs_queue.pop();
-    sorted_nodes.push_back(i);
-    for (int j : nodes[i].nexts) {
-      Node& next_node = nodes[j];
+    sorted_nodes.push_back(idx_a);
+    for (int idx_b : nodes[idx_a].nexts) {
+      Node& next_node = nodes[idx_b];
       next_node.incomings -= 1;
       if (next_node.incomings == 0) {
-        bfs_queue.push(j);
+        bfs_queue.push(idx_b);
       }
     }
   }
@@ -37,12 +39,13 @@ vector<int> sort_nodes(vector<Node>& nodes) {
   return sorted_nodes;
 }
 
-int main() {
+auto main() -> int {  // NOLINT
   ios::sync_with_stdio(false);
-  cin.tie(NULL);
-  cout.tie(NULL);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
 
-  int node_count, edge_count;
+  int node_count = INT_INIT;
+  int edge_count = INT_INIT;
   cin >> node_count >> edge_count;
 
   vector<Node> nodes;
@@ -52,7 +55,8 @@ int main() {
   }
 
   for (int i = 0; i < edge_count; i++) {
-    int node_a, node_b;
+    int node_a = INT_INIT;
+    int node_b = INT_INIT;
     cin >> node_a >> node_b;
     node_a -= 1;
     node_b -= 1;
