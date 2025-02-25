@@ -1,5 +1,7 @@
 #include <iostream>
-#include <utility>  // for std::move
+#include <utility>  // for `move`
+
+using namespace std;
 
 class MyClass {
  private:
@@ -9,7 +11,7 @@ class MyClass {
  public:
   // Constructor
   MyClass(int value) : data(new int(value)) {
-    std::cout << "Constructor: " << *data << std::endl;
+    cout << "Constructor: " << *data << '\n';
   }
 
   // Disable copying
@@ -21,7 +23,7 @@ class MyClass {
       : data(other.data), is_owned(other.is_owned) {
     other.data = nullptr;    // Leave other in a valid but unspecified state
     other.is_owned = false;  // Mark other as moved-from
-    std::cout << "Move Constructor called." << std::endl;
+    cout << "Move Constructor called." << '\n';
   }
   auto operator=(MyClass&& other) noexcept -> MyClass& {
     if (this != &other) {
@@ -31,7 +33,7 @@ class MyClass {
 
       other.data = nullptr;    // Leave other in a valid but unspecified state
       other.is_owned = false;  // Mark other as moved-from
-      std::cout << "Move Assignment Operator called." << std::endl;
+      cout << "Move Assignment Operator called." << '\n';
     }
     return *this;
   }
@@ -40,17 +42,17 @@ class MyClass {
   ~MyClass() {
     if (is_owned) {
       delete data;  // Only delete if valid
-      std::cout << "Destructor called." << std::endl;
+      cout << "Destructor called." << '\n';
     }
   }
 
   // Function to access data safely
   void print() const {
     if (!is_owned) {
-      std::cout << "Error: Attempt to use moved-from object." << std::endl;
+      cout << "Error: Attempt to use moved-from object." << '\n';
       return;
     }
-    std::cout << "Data: " << *data << std::endl;
+    cout << "Data: " << *data << '\n';
   }
 };
 
