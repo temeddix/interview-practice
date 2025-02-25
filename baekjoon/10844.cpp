@@ -3,7 +3,6 @@
 
 using namespace std;
 
-const int INT_INIT = -1;
 const int RANGE = 10;
 const int DIVIDER = 1000000000;
 
@@ -31,7 +30,7 @@ auto count_stair_numbers(int length) -> int {
 }
 
 auto main() -> int {
-  int length = INT_INIT;
+  int length = 0;
   cin >> length;
   int stair_numbers = count_stair_numbers(length);
   cout << stair_numbers;

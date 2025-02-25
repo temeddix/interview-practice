@@ -27,14 +27,12 @@ auto get_max_sum(vector<vector<int>>& tower) -> int {
   return *max_element(prev_sum.begin(), prev_sum.end());
 }
 
-const int INT_INIT = -1;
-
 auto main() -> int {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   cout.tie(nullptr);
 
-  int tower_size = INT_INIT;
+  int tower_size = 0;
   cin >> tower_size;
 
   vector<vector<int>> tower;
@@ -45,7 +43,7 @@ auto main() -> int {
     row.reserve(i);
     int row_size = i + 1;
     for (int j = 0; j < row_size; j++) {
-      int number = INT_INIT;
+      int number = 0;
       cin >> number;
       row.push_back(number);
     }

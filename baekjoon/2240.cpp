@@ -4,7 +4,6 @@
 
 using namespace std;
 
-const int INT_INIT = -1;
 const int INVALID = -1;
 
 auto calculate_max_yield(vector<bool>& fall_sides, int move_limit) -> int {
@@ -43,14 +42,14 @@ auto main() -> int {
   cin.tie(nullptr);
   cout.tie(nullptr);
 
-  int seconds = INT_INIT;
-  int move_limit = INT_INIT;
+  int seconds = 0;
+  int move_limit = 0;
   cin >> seconds >> move_limit;
 
   vector<bool> fall_sides;
   fall_sides.reserve(seconds);
   for (int i = 0; i < seconds; i++) {
-    int fall_side = INT_INIT;
+    int fall_side = 0;
     cin >> fall_side;
     fall_sides.push_back(fall_side == 2);
   }

@@ -4,8 +4,6 @@
 
 using namespace std;
 
-const int INT_INIT = -1;
-
 struct Node {
   int incomings;
   vector<int> nexts;
@@ -44,8 +42,8 @@ auto main() -> int {
   cin.tie(nullptr);
   cout.tie(nullptr);
 
-  int node_count = INT_INIT;
-  int edge_count = INT_INIT;
+  int node_count = 0;
+  int edge_count = 0;
   cin >> node_count >> edge_count;
 
   vector<Node> nodes;
@@ -55,8 +53,8 @@ auto main() -> int {
   }
 
   for (int i = 0; i < edge_count; i++) {
-    int node_a = INT_INIT;
-    int node_b = INT_INIT;
+    int node_a = 0;
+    int node_b = 0;
     cin >> node_a >> node_b;
     node_a -= 1;
     node_b -= 1;

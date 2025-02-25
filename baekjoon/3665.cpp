@@ -3,8 +3,6 @@
 
 using namespace std;
 
-const int INT_INIT = -1;
-
 struct Node {
   int incomings;
   vector<int> nexts;
@@ -80,16 +78,16 @@ auto main() -> int {
   cin.tie(nullptr);
   cout.tie(nullptr);
 
-  int test_count = INT_INIT;
+  int test_count = 0;
   cin >> test_count;
 
   for (int k = 0; k < test_count; k++) {
-    int node_count = INT_INIT;
+    int node_count = 0;
     cin >> node_count;
 
     vector<int> last_ranks(node_count);
     for (int i = 0; i < node_count; i++) {
-      int node = INT_INIT;
+      int node = 0;
       cin >> node;
       node -= 1;
       last_ranks[node] = i;
@@ -97,11 +95,11 @@ auto main() -> int {
 
     vector<vector<bool>> swapped(node_count,
                                  std::vector<bool>(node_count, false));
-    int swapped_pairs = INT_INIT;
+    int swapped_pairs = 0;
     cin >> swapped_pairs;
     for (int i = 0; i < swapped_pairs; i++) {
-      int node_a = INT_INIT;
-      int node_b = INT_INIT;
+      int node_a = 0;
+      int node_b = 0;
       cin >> node_a >> node_b;
       node_a -= 1;
       node_b -= 1;
