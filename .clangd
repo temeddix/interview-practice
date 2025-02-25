@@ -9,3 +9,5 @@ Diagnostics:
       - cppcoreguidelines-*
       - readability-*
       - performance-*
+      - llvm-*
+      - concurrency-*

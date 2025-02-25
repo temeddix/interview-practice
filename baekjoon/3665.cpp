@@ -1,4 +1,3 @@
-#include <chrono>  // For std::chrono::seconds, milliseconds, etc.
 #include <iostream>
 #include <queue>
 
@@ -49,6 +48,33 @@ auto sort_nodes(vector<Node>& nodes) -> Result<vector<int>> {
   return {sorted_nodes, 0};
 }
 
+auto build_nodes(int node_count, vector<int>& last_ranks,
+                 vector<vector<bool>>& swapped) -> vector<Node> {
+  vector<Node> nodes;
+
+  nodes.reserve(node_count);
+  for (int i = 0; i < node_count; i++) {
+    nodes.push_back({0, {}});
+  }
+  for (int i = 0; i < node_count; i++) {
+    for (int j = i + 1; j < node_count; j++) {
+      bool is_i_higher = last_ranks[i] < last_ranks[j];
+      if (swapped[i][j]) {
+        is_i_higher = !is_i_higher;
+      }
+      if (is_i_higher) {
+        nodes[i].nexts.push_back(j);
+        nodes[j].incomings += 1;
+      } else {
+        nodes[j].nexts.push_back(i);
+        nodes[i].incomings += 1;
+      }
+    }
+  }
+
+  return nodes;
+}
+
 auto main() -> int {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
@@ -83,26 +109,7 @@ auto main() -> int {
       swapped[node_b][node_a] = true;
     }
 
-    vector<Node> nodes;
-    nodes.reserve(node_count);
-    for (int i = 0; i < node_count; i++) {
-      nodes.push_back({0, {}});
-    }
-    for (int i = 0; i < node_count; i++) {
-      for (int j = i + 1; j < node_count; j++) {
-        bool is_i_higher = last_ranks[i] < last_ranks[j];
-        if (swapped[i][j]) {
-          is_i_higher = !is_i_higher;
-        }
-        if (is_i_higher) {
-          nodes[i].nexts.push_back(j);
-          nodes[j].incomings += 1;
-        } else {
-          nodes[j].nexts.push_back(i);
-          nodes[i].incomings += 1;
-        }
-      }
-    }
+    vector<Node> nodes = build_nodes(node_count, last_ranks, swapped);
 
     Result<vector<int>> result = sort_nodes(nodes);
     if (result.code == 1) {

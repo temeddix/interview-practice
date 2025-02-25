@@ -40,6 +40,6 @@ auto main() -> int {
 
   // Output the sorted vector for verification.
   for (const MyStruct& elem : vec) {
-    cout << elem << "\n";
+    cout << elem << '\n';
   }
 }
