@@ -8,15 +8,14 @@ class IntStack {
  public:
   void add(int value) { data.push_back(value); }
 
- 
   auto pop() -> int {
     int data_size = data.size();
     if (data_size != 0) {
       int last_item = data[data_size - 1];
       data.pop_back();
       return last_item;
-    }       return -1;
-   
+    }
+    return -1;
   }
 
   auto length() -> int { return data.size(); }
@@ -27,8 +26,8 @@ class IntStack {
     int data_size = data.size();
     if (data_size != 0) {
       return data[data_size - 1];
-    }       return -1;
-   
+    }
+    return -1;
   }
 };
 

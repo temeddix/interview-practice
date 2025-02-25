@@ -5,9 +5,11 @@ auto recursion(const std::string& s, int l, int r, int& depth) -> bool {
   depth += 1;
   if (l >= r) {
     return true;
-  } if (s[l] != s[r]) {
+  }
+  if (s[l] != s[r]) {
     return false;
-  }     return recursion(s, l + 1, r - 1, depth);
+  }
+  return recursion(s, l + 1, r - 1, depth);
 }
 
 auto is_palindrome(const std::string& s, int& depth) -> bool {

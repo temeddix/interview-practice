@@ -5,7 +5,7 @@ auto main() -> int {
   int numbers[5];
 
   int sum = 0;
-  for (int & i : numbers) {
+  for (int& i : numbers) {
     int number = 0;
     std::cin >> number;
     sum += number;

@@ -4,7 +4,7 @@
 auto main() -> int {
   std::vector<std::vector<bool>> paper;
   for (int i = 0; i < 100; i++) {
-    std::vector<bool> row = std::vector(100, false);
+    std::vector<bool> row(100, false);
     paper.push_back(row);
   }
 

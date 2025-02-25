@@ -18,7 +18,8 @@ auto main() -> int {
   int last_enter = 0;
   std::vector<int> side_line;
   main_line.reserve(students);
-  while ((static_cast<unsigned int>(!main_line.empty()) != 0U) || (static_cast<unsigned int>(!side_line.empty()) != 0U)) {
+  while ((static_cast<unsigned int>(!main_line.empty()) != 0U) ||
+         (static_cast<unsigned int>(!side_line.empty()) != 0U)) {
     // Try entring from the main line
     if (static_cast<unsigned int>(!main_line.empty()) != 0U) {
       int main_back = main_line.back();

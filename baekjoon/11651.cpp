@@ -10,8 +10,8 @@ struct Point {
 auto compare_points(Point pt_a, Point pt_b) -> bool {
   if (pt_a.y != pt_b.y) {
     return pt_a.y < pt_b.y;
-  }     return pt_a.x < pt_b.x;
- 
+  }
+  return pt_a.x < pt_b.x;
 }
 
 auto main() -> int {

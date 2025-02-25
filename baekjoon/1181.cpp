@@ -3,7 +3,8 @@
 #include <string>
 #include <vector>
 
-auto compare_words(const std::string& word_a, const std::string& word_b) -> bool {
+auto compare_words(const std::string& word_a, const std::string& word_b)
+    -> bool {
   int a_length = word_a.length();
   int b_length = word_b.length();
   if (a_length != b_length) {

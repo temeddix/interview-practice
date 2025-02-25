@@ -1,6 +1,4 @@
 #include <iostream>
-#include <numeric>  // for `std::gcd`
-#include <vector>
 
 auto get_combinations(int all, int picks) -> int {
   int result = 1;

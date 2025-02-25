@@ -6,7 +6,8 @@ using u32 = unsigned long;
 auto is_prime(u32 number) -> bool {
   if (number <= 1) {
     return false;
-  } if (number <= 3) {
+  }
+  if (number <= 3) {
     return true;
   }
 
@@ -29,7 +30,8 @@ auto get_next_prime(u32 number) -> u32 {
   // Start with an odd number if even
   if (number <= 1) {
     return 2;
-  } if (number <= 3) {
+  }
+  if (number <= 3) {
     return number;
   }
 

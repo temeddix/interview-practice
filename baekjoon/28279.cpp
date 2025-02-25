@@ -57,11 +57,17 @@ auto main() -> int {
         break;
       }
       case 7: {
-        std::cout << ((static_cast<unsigned int>(!numbers.empty()) != 0U) ? numbers.front() : -1) << '\n';
+        std::cout << ((static_cast<unsigned int>(!numbers.empty()) != 0U)
+                          ? numbers.front()
+                          : -1)
+                  << '\n';
         break;
       }
       case 8: {
-        std::cout << ((static_cast<unsigned int>(!numbers.empty()) != 0U) ? numbers.back() : -1) << '\n';
+        std::cout << ((static_cast<unsigned int>(!numbers.empty()) != 0U)
+                          ? numbers.back()
+                          : -1)
+                  << '\n';
         break;
       }
       default: {

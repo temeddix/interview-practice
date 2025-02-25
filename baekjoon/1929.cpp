@@ -4,7 +4,8 @@
 auto is_prime(int number) -> bool {
   if (number <= 1) {
     return false;
-  } if (number <= 3) {
+  }
+  if (number <= 3) {
     return true;
   }
 

@@ -24,8 +24,7 @@ auto main() -> int {
   sorted.erase(iter, sorted.end());
 
   for (int coord : coords) {
-    auto iter =
-        std::lower_bound(sorted.begin(), sorted.end(), coord);
+    auto iter = std::lower_bound(sorted.begin(), sorted.end(), coord);
     int compressed = std::distance(sorted.begin(), iter);
     std::cout << compressed << ' ';
   }

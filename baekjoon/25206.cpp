@@ -1,7 +1,7 @@
-#include <cmath>
-
 #include <array>
+#include <cmath>
 #include <iostream>
+
 
 auto main() -> int {
   double weighted_grade_sum = 0.0;
