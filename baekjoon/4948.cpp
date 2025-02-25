@@ -49,6 +49,4 @@ int main() {
     }
     std::cout << prime_count << '\n';
   }
-
-  return 0;
 }

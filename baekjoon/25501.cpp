@@ -30,6 +30,4 @@ int main() {
     bool palindrome = is_palindrome(word, depth);
     std::cout << palindrome << ' ' << depth << '\n';
   }
-
-  return 0;
 }

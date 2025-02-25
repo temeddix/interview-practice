@@ -15,5 +15,4 @@ int main() {
     }
   }
   std::cout << word_count;
-  return 0;
 }

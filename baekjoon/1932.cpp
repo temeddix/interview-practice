@@ -29,7 +29,7 @@ auto get_max_sum(vector<vector<int>>& tower) -> int {
 
 const int INT_INIT = -1;
 
-auto main() -> int {  // NOLINT
+auto main() -> int {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   cout.tie(nullptr);

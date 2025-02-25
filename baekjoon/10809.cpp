@@ -17,5 +17,4 @@ int main() {
     }
     std::cout << first_index << ' ';
   }
-  return 0;
 }

@@ -68,5 +68,4 @@ int main() {
   Fraction fraction_b = Fraction::from_input();
   Fraction sum = fraction_a + fraction_b;
   std::cout << sum.numerator << ' ' << sum.denominator << std::endl;
-  return 0;
 }

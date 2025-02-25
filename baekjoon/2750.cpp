@@ -22,5 +22,4 @@ int main() {
   for (int number : numbers) {
     std::cout << number << '\n';
   }
-  return 0;
 }

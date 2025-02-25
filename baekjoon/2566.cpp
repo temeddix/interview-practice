@@ -19,6 +19,4 @@ int main() {
 
   std::cout << last_biggest;
   std::cout << '\n' << row + 1 << ' ' << column + 1 << std::endl;
-
-  return 0;
 }

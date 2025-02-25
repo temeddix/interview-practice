@@ -43,6 +43,4 @@ int main() {
     }
     std::cout << partition_count << '\n';
   }
-
-  return 0;
 }

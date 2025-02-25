@@ -38,7 +38,7 @@ auto calculate_max_yield(vector<bool>& fall_sides, int move_limit) -> int {
   return *max_element(prev_yield.begin(), prev_yield.end());
 }
 
-auto main() -> int {  // NOLINT
+auto main() -> int {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   cout.tie(nullptr);

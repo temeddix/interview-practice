@@ -36,6 +36,4 @@ int main() {
   int possibilities = 0;
   count_possibilities(0, board_size, columns, possibilities);
   std::cout << possibilities << std::endl;
-
-  return 0;
 }

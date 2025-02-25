@@ -43,5 +43,4 @@ int main() {
   }
 
   std::cout << min_mismatches << std::endl;
-  return 0;
 }

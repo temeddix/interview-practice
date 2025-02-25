@@ -97,6 +97,4 @@ int main() {
   std::cout << stats.median() << '\n';
   std::cout << stats.mode() << '\n';
   std::cout << stats.range() << '\n';
-
-  return 0;
 }

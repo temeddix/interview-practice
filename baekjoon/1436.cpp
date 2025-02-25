@@ -42,6 +42,4 @@ int main() {
   }
 
   std::cout << current << std::endl;
-
-  return 0;
 }

@@ -31,6 +31,4 @@ int main() {
   }
 
   std::cout << croatia_letters << std::endl;
-
-  return 0;
 }

@@ -17,5 +17,4 @@ int main() {
   i64 a, b;
   std::cin >> a >> b;
   std::cout << get_lcm(a, b) << std::endl;
-  return 0;
 }

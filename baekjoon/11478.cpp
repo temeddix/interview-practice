@@ -24,5 +24,4 @@ int main() {
   }
 
   std::cout << slices.size() << std::endl;
-  return 0;
 }

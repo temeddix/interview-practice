@@ -27,6 +27,4 @@ int main() {
 
   int symmetrical_diff = count_a + count_b - overlap_count * 2;
   std::cout << symmetrical_diff << std::endl;
-
-  return 0;
 }

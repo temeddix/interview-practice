@@ -23,6 +23,4 @@ int main() {
   for (const std::string& name : people_working) {
     std::cout << name << '\n';
   }
-
-  return 0;
 }

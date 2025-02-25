@@ -20,5 +20,4 @@ int main() {
   int cutline = scores[rewarded - 1];
 
   std::cout << cutline << std::endl;
-  return 0;
 }

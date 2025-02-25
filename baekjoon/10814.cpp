@@ -43,6 +43,4 @@ int main() {
   for (Person& person : people) {
     std::cout << person.age << ' ' << person.name << '\n';
   }
-
-  return 0;
 }

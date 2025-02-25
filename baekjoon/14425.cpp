@@ -28,5 +28,4 @@ int main() {
   }
 
   std::cout << checked << std::endl;
-  return 0;
 }

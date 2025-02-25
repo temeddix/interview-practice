@@ -29,6 +29,4 @@ int main() {
     int possibilities = get_combinations(m, n);
     std::cout << possibilities << '\n';
   }
-
-  return 0;
 }

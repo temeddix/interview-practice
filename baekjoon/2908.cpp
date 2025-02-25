@@ -16,6 +16,4 @@ int main() {
   int number_b = std::stoi(reversed_b);
 
   std::cout << std::max(number_a, number_b) << std::endl;
-
-  return 0;
 }

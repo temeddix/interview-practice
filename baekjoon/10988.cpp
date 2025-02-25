@@ -19,6 +19,4 @@ int main() {
   }
 
   std::cout << static_cast<int>(is_palindrome) << std::endl;
-
-  return 0;
 }

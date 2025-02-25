@@ -30,7 +30,7 @@ auto count_stair_numbers(int length) -> int {
   return final_sum;
 }
 
-auto main() -> int {  // NOLINT
+auto main() -> int {
   int length = INT_INIT;
   cin >> length;
   int stair_numbers = count_stair_numbers(length);

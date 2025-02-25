@@ -39,7 +39,7 @@ auto sort_nodes(vector<Node>& nodes) -> vector<int> {
   return sorted_nodes;
 }
 
-auto main() -> int {  // NOLINT
+auto main() -> int {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   cout.tie(nullptr);

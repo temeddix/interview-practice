@@ -34,5 +34,4 @@ int main() {
   }
 
   std::cout << grouped_words << std::endl;
-  return 0;
 }

@@ -29,6 +29,4 @@ int main() {
   for (int i = 0; i < repeat; i++) {
     get_result();
   }
-
-  return 0;
 }

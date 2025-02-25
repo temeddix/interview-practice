@@ -34,7 +34,7 @@ const vector<MyStruct> given = {
     {1, 2.5, "banana"},
 };
 
-auto main() -> int {  // NOLINT
+auto main() -> int {
   vector<MyStruct> vec = given;
   sort(vec.begin(), vec.end());
 

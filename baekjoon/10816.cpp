@@ -25,6 +25,4 @@ int main() {
     std::cin >> number;
     std::cout << occurences[number] << ' ';
   }
-
-  return 0;
 }

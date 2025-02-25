@@ -12,5 +12,4 @@ int main() {
     sum += number;
   }
   std::cout << sum << std::endl;
-  return 0;
 }

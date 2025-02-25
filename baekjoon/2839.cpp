@@ -15,5 +15,4 @@ int main() {
   }
 
   std::cout << least_bags << std::endl;
-  return 0;
 }

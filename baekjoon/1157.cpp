@@ -37,6 +37,4 @@ int main() {
   } else {
     std::cout << max_letter << std::endl;
   }
-
-  return 0;
 }

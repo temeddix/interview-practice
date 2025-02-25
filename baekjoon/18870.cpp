@@ -29,6 +29,4 @@ int main() {
     int compressed = std::distance(sorted.begin(), iter);
     std::cout << compressed << ' ';
   }
-
-  return 0;
 }

@@ -49,6 +49,4 @@ int main() {
       std::cout << number << '\n';
     }
   }
-
-  return 0;
 }

@@ -23,6 +23,4 @@ int main() {
   }
 
   std::cout << biggest_sum << std::endl;
-
-  return 0;
 }

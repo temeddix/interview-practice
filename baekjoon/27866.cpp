@@ -7,5 +7,4 @@ int main() {
   int index;
   std::cin >> index;
   std::cout << word[index - 1] << std::endl;
-  return 0;
 }

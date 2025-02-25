@@ -22,6 +22,4 @@ int main() {
       std::cout << i + 1 << '\n';
     }
   }
-
-  return 0;
 }

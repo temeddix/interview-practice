@@ -7,6 +7,4 @@ int main() {
 
   int open = std::sqrt(count);
   std::cout << open << std::endl;
-
-  return 0;
 }

@@ -31,5 +31,4 @@ int main() {
   find_x_y(x, y);
 
   std::cout << x << ' ' << y << std::endl;
-  return 0;
 }

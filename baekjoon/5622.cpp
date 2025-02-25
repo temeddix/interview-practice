@@ -40,6 +40,4 @@ int main() {
 
   // Print the output
   std::cout << min_time << std::endl;
-
-  return 0;
 }

@@ -44,6 +44,4 @@ int main() {
     std::cout << word << '\n';
     last_word = word;
   }
-
-  return 0;
 }

@@ -31,6 +31,4 @@ int main() {
   }
 
   std::cout << area << std::endl;
-
-  return 0;
 }

@@ -17,5 +17,4 @@ int main() {
   int average = sum / 5;
 
   std::cout << average << '\n' << middle << std::endl;
-  return 0;
 }

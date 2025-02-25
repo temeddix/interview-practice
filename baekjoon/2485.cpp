@@ -38,5 +38,4 @@ int main() {
   int total_distance = last_position - first_position;
   int extra_trees = total_distance / distance_gcd + 1 - count;
   std::cout << extra_trees << std::endl;
-  return 0;
 }

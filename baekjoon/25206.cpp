@@ -35,6 +35,4 @@ int main() {
 
   double average_grade = weighted_grade_sum / weight_sum;
   std::cout << average_grade << std::endl;
-
-  return 0;
 }

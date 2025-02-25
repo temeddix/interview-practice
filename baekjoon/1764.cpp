@@ -31,6 +31,4 @@ int main() {
   for (const std::string& overlap : overlaps) {
     std::cout << overlap << '\n';
   }
-
-  return 0;
 }

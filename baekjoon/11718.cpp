@@ -11,6 +11,4 @@ int main() {
     }
     std::cout << line << std::endl;  // Output the line as it is
   }
-
-  return 0;
 }

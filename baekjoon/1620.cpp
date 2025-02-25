@@ -32,5 +32,4 @@ int main() {
       std::cout << indexes[question] + 1 << '\n';
     }
   }
-  return 0;
 }

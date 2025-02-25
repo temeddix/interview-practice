@@ -35,6 +35,4 @@ int main() {
   for (Point pt : points) {
     std::cout << pt.x << ' ' << pt.y << '\n';
   }
-
-  return 0;
 }

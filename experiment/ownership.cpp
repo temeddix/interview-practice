@@ -3,18 +3,18 @@
 
 class MyClass {
  private:
-  int* data;      // Pointer to dynamically allocated resource
-  bool is_owned;  // Indicates if the instance is valid (not moved-from)
+  int* data;        // Pointer to dynamically allocated resource
+  bool is_owned{};  // Indicates if the instance is valid (not moved-from)
 
  public:
   // Constructor
-  MyClass(int value) : data(new int(value)), is_owned(true) {
+  MyClass(int value) : data(new int(value)) {
     std::cout << "Constructor: " << *data << std::endl;
   }
 
   // Disable copying
-  MyClass(const MyClass&) = delete;             // Copy constructor
-  MyClass& operator=(const MyClass&) = delete;  // Copy assignment operator
+  MyClass(const MyClass&) = delete;         // Copy constructor
+  auto operator=(const MyClass&) = delete;  // Copy assignment operator
 
   // Enable moving
   MyClass(MyClass&& other) noexcept
@@ -23,7 +23,7 @@ class MyClass {
     other.is_owned = false;  // Mark other as moved-from
     std::cout << "Move Constructor called." << std::endl;
   }
-  MyClass& operator=(MyClass&& other) noexcept {
+  auto operator=(MyClass&& other) noexcept -> MyClass& {
     if (this != &other) {
       delete data;        // Free existing resource
       data = other.data;  // Transfer ownership
@@ -54,8 +54,10 @@ class MyClass {
   }
 };
 
-int main() {
-  MyClass obj1(42);
+const int INITIAL_VALUE = 42;
+
+auto main() -> int {
+  MyClass obj1(INITIAL_VALUE);
   obj1.print();  // Output: Data: 42
 
   // Trying to copy an object produces an error
@@ -66,6 +68,4 @@ int main() {
 
   obj2.print();  // Output: Data: 42
   obj1.print();  // Output: Error: Attempt to use moved-from object.
-
-  return 0;
 }

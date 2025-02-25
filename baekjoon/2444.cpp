@@ -24,6 +24,4 @@ int main() {
     print_chars('*', stars);
     std::cout << '\n';
   }
-
-  return 0;
 }

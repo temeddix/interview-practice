@@ -59,6 +59,4 @@ int main() {
     std::cin >> number;
     std::cout << get_next_prime(number) << '\n';
   }
-
-  return 0;
 }

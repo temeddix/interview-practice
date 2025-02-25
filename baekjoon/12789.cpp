@@ -48,5 +48,4 @@ int main() {
 
   bool possible = !side_line.size() && !main_line.size();
   std::cout << (possible ? "Nice" : "Sad") << std::endl;
-  return 0;
 }

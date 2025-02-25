@@ -9,5 +9,4 @@ int main() {
     int word_len = word.length();
     std::cout << word[0] << word[word_len - 1] << std::endl;
   }
-  return 0;
 }

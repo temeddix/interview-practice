@@ -22,5 +22,4 @@ int main() {
   }
 
   std::cout << creator << std::endl;
-  return 0;
 }
