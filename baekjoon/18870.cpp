@@ -2,29 +2,29 @@
 #include <iostream>
 #include <vector>
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int count;
+  int count = 0;
   std::cin >> count;
   std::vector<int> coords;
   coords.reserve(count);
 
   for (int i = 0; i < count; i++) {
-    int coord;
+    int coord = 0;
     std::cin >> coord;
     coords.push_back(coord);
   }
 
   std::vector<int> sorted = coords;
   std::sort(sorted.begin(), sorted.end());
-  std::vector<int>::iterator iter = std::unique(sorted.begin(), sorted.end());
+  auto iter = std::unique(sorted.begin(), sorted.end());
   sorted.erase(iter, sorted.end());
 
   for (int coord : coords) {
-    std::vector<int>::iterator iter =
+    auto iter =
         std::lower_bound(sorted.begin(), sorted.end(), coord);
     int compressed = std::distance(sorted.begin(), iter);
     std::cout << compressed << ' ';

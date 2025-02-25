@@ -1,6 +1,6 @@
 #include <iostream>
 
-int get_gcd(int a, int b) {
+auto get_gcd(int a, int b) -> int {
   while (b != 0) {
     int temp = b;
     b = a % b;
@@ -9,22 +9,23 @@ int get_gcd(int a, int b) {
   return a;
 }
 
-int get_lcm(int a, int b) { return (a * b) / get_gcd(a, b); }
+auto get_lcm(int a, int b) -> int { return (a * b) / get_gcd(a, b); }
 
 void get_result() {
-  int number_a, number_b;
+  int number_a = 0;
+  int number_b = 0;
   std::cin >> number_a >> number_b;
 
   int lcm = get_lcm(number_a, number_b);
-  std::cout << lcm << std::endl;
+  std::cout << lcm << '\n';
 }
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int repeat;
+  int repeat = 0;
   std::cin >> repeat;
   for (int i = 0; i < repeat; i++) {
     get_result();

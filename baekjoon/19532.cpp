@@ -1,7 +1,12 @@
 #include <iostream>
 
 void find_x_y(int& x, int& y) {
-  int a, b, c, d, e, f;
+  int a = 0;
+  int b = 0;
+  int c = 0;
+  int d = 0;
+  int e = 0;
+  int f = 0;
   std::cin >> a >> b >> c >> d >> e >> f;
   const int signs[2] = {-1, 1};
 
@@ -26,9 +31,10 @@ void find_x_y(int& x, int& y) {
   }
 }
 
-int main() {
-  int x, y;
+auto main() -> int {
+  int x = 0;
+  int y = 0;
   find_x_y(x, y);
 
-  std::cout << x << ' ' << y << std::endl;
+  std::cout << x << ' ' << y << '\n';
 }

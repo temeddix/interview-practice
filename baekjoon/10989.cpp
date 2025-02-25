@@ -1,17 +1,17 @@
 #include <array>
 #include <iostream>
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(0);
+  std::cin.tie(nullptr);
 
-  int count;
+  int count = 0;
   std::cin >> count;
 
-  std::array<int, 10000> occurrences;
+  std::array<int, 10000> occurrences{};
   occurrences.fill(0);
   for (int i = 0; i < count; i++) {
-    int number;
+    int number = 0;
     std::cin >> number;
     occurrences[number - 1] += 1;
   }

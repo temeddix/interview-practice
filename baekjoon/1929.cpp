@@ -1,10 +1,10 @@
 #include <cmath>
 #include <iostream>
 
-bool is_prime(int number) {
+auto is_prime(int number) -> bool {
   if (number <= 1) {
     return false;
-  } else if (number <= 3) {
+  } if (number <= 3) {
     return true;
   }
 
@@ -23,12 +23,13 @@ bool is_prime(int number) {
   return true;
 }
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int start, end;
+  int start = 0;
+  int end = 0;
   std::cin >> start >> end;
 
   for (int i = start; i <= end; i++) {

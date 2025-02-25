@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-int main() {
+auto main() -> int {
   std::string all_words;
   std::getline(std::cin, all_words);
   bool finding = true;

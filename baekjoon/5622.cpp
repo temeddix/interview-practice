@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-int main() {
+auto main() -> int {
   // Get the input
   std::string alphabets;
   std::cin >> alphabets;
@@ -10,7 +10,7 @@ int main() {
 
   // Collect numbers
   // Each number would be one of 2~9
-  std::array<char, 15> numbers;
+  std::array<char, 15> numbers{};
   for (int i = 0; i < length; i++) {
     char alphabet = alphabets[i];
     char number = 2;
@@ -39,5 +39,5 @@ int main() {
   }
 
   // Print the output
-  std::cout << min_time << std::endl;
+  std::cout << min_time << '\n';
 }

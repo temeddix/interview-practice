@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 
-int main() {
-  int number;
+auto main() -> int {
+  int number = 0;
   std::cin >> number;
 
   std::string text = std::to_string(number);

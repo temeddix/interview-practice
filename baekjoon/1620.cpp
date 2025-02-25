@@ -3,12 +3,13 @@
 #include <unordered_map>
 #include <vector>
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int pokemon_count, question_count;
+  int pokemon_count = 0;
+  int question_count = 0;
   std::cin >> pokemon_count >> question_count;
 
   std::vector<std::string> pokemons;

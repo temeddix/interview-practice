@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
 
-int main() {
+auto main() -> int {
   std::string line;  // To store each line of input
 
   // Continuously read lines until EOF or an error occurs
   while (std::getline(std::cin, line)) {
-    if (line.size() == 0) {
+    if (line.empty()) {
       break;
     }
-    std::cout << line << std::endl;  // Output the line as it is
+    std::cout << line << '\n';  // Output the line as it is
   }
 }

@@ -1,34 +1,34 @@
 #include <deque>
 #include <iostream>
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int operations;
+  int operations = 0;
   std::cin >> operations;
 
   std::deque<int> numbers;
   for (int i = 0; i < operations; i++) {
-    int operation;
+    int operation = 0;
     std::cin >> operation;
     switch (operation) {
       case 1: {
-        int number;
+        int number = 0;
         std::cin >> number;
         numbers.push_front(number);
         break;
       }
       case 2: {
-        int number;
+        int number = 0;
         std::cin >> number;
         numbers.push_back(number);
         break;
       }
       case 3: {
-        int number;
-        if (numbers.size()) {
+        int number = 0;
+        if (static_cast<unsigned int>(!numbers.empty()) != 0U) {
           number = numbers.front();
           numbers.pop_front();
         } else {
@@ -38,8 +38,8 @@ int main() {
         break;
       }
       case 4: {
-        int number;
-        if (numbers.size()) {
+        int number = 0;
+        if (static_cast<unsigned int>(!numbers.empty()) != 0U) {
           number = numbers.back();
           numbers.pop_back();
         } else {
@@ -53,15 +53,15 @@ int main() {
         break;
       }
       case 6: {
-        std::cout << (numbers.size() == 0 ? 1 : 0) << '\n';
+        std::cout << (numbers.empty() ? 1 : 0) << '\n';
         break;
       }
       case 7: {
-        std::cout << (numbers.size() ? numbers.front() : -1) << '\n';
+        std::cout << ((static_cast<unsigned int>(!numbers.empty()) != 0U) ? numbers.front() : -1) << '\n';
         break;
       }
       case 8: {
-        std::cout << (numbers.size() ? numbers.back() : -1) << '\n';
+        std::cout << ((static_cast<unsigned int>(!numbers.empty()) != 0U) ? numbers.back() : -1) << '\n';
         break;
       }
       default: {

@@ -3,7 +3,7 @@
 
 using Array2d = std::array<std::array<int, 100>, 100>;
 
-Array2d create_array(int rows, int columns) {
+auto create_array(int rows, int columns) -> Array2d {
   Array2d array;
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < columns; j++) {
@@ -13,8 +13,9 @@ Array2d create_array(int rows, int columns) {
   return array;
 }
 
-int main() {
-  int rows, columns;
+auto main() -> int {
+  int rows = 0;
+  int columns = 0;
   std::cin >> rows >> columns;
 
   Array2d array_a = create_array(rows, columns);

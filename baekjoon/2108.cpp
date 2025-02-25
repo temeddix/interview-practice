@@ -19,7 +19,7 @@ class Stats {
     count += 1;
   }
 
-  int average() {
+  auto average() -> int {
     int sum = 0;
     for (int i = 0; i < 8001; i++) {
       sum += occurences[i] * (i - 4000);
@@ -27,7 +27,7 @@ class Stats {
     return std::round(double(sum) / double(count));
   }
 
-  int median() {
+  auto median() -> int {
     int previous = 0;
     int until = count / 2;
     int number = -4000;
@@ -41,7 +41,7 @@ class Stats {
     return number;
   }
 
-  int mode() {
+  auto mode() -> int {
     int previous_max = 0;
     std::vector<int> numbers;
     numbers.push_back(-4000);
@@ -59,7 +59,7 @@ class Stats {
     return numbers.back();
   }
 
-  int range() {
+  auto range() -> int {
     int min = -4000;
     int max = 4000;
     for (int i = 0; i < 8001; i++) {
@@ -78,17 +78,17 @@ class Stats {
   }
 };
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int count;
+  int count = 0;
   std::cin >> count;
 
   Stats stats = Stats();
   for (int i = 0; i < count; i++) {
-    int number;
+    int number = 0;
     std::cin >> number;
     stats.write(number);
   }

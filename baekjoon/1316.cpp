@@ -1,16 +1,16 @@
 #include <array>
 #include <iostream>
 
-int main() {
-  int count;
+auto main() -> int {
+  int count = 0;
   std::cin >> count;
 
   int grouped_words = 0;
   for (int i = 0; i < count; i++) {
-    std::array<char, 101> word;
+    std::array<char, 101> word{};
     std::cin >> word.data();
 
-    std::array<bool, 26> seen_chars;
+    std::array<bool, 26> seen_chars{};
     seen_chars.fill(false);
     char last_char = '.';
 
@@ -33,5 +33,5 @@ int main() {
     }
   }
 
-  std::cout << grouped_words << std::endl;
+  std::cout << grouped_words << '\n';
 }

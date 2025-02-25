@@ -2,14 +2,14 @@
 #include <iostream>
 #include <vector>
 
-int main() {
-  int students;
+auto main() -> int {
+  int students = 0;
   std::cin >> students;
 
   std::vector<int> main_line;
   main_line.reserve(students);
   for (int i = 0; i < students; i++) {
-    int number;
+    int number = 0;
     std::cin >> number;
     main_line.push_back(number);
   }
@@ -18,9 +18,9 @@ int main() {
   int last_enter = 0;
   std::vector<int> side_line;
   main_line.reserve(students);
-  while (main_line.size() || side_line.size()) {
+  while ((static_cast<unsigned int>(!main_line.empty()) != 0U) || (static_cast<unsigned int>(!side_line.empty()) != 0U)) {
     // Try entring from the main line
-    if (main_line.size()) {
+    if (static_cast<unsigned int>(!main_line.empty()) != 0U) {
       int main_back = main_line.back();
       if (main_back == last_enter + 1) {
         last_enter += 1;
@@ -29,7 +29,7 @@ int main() {
       }
     }
     // Try entring from the side line
-    if (side_line.size()) {
+    if (static_cast<unsigned int>(!side_line.empty()) != 0U) {
       int side_back = side_line.back();
       if (side_back == last_enter + 1) {
         last_enter += 1;
@@ -38,7 +38,7 @@ int main() {
       }
     }
     // Move one student from main line to side line
-    if (main_line.size()) {
+    if (static_cast<unsigned int>(!main_line.empty()) != 0U) {
       side_line.push_back(main_line.back());
       main_line.pop_back();
     } else {
@@ -46,6 +46,6 @@ int main() {
     }
   }
 
-  bool possible = !side_line.size() && !main_line.size();
-  std::cout << (possible ? "Nice" : "Sad") << std::endl;
+  bool possible = side_line.empty() && main_line.empty();
+  std::cout << (possible ? "Nice" : "Sad") << '\n';
 }

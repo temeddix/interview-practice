@@ -1,7 +1,7 @@
 #include <iostream>
 
-int main() {
-  int n;
+auto main() -> int {
+  int n = 0;
   std::cin >> n;
-  std::cout << n * n - n << std::endl;
+  std::cout << (n * n) - n << '\n';
 }

@@ -2,16 +2,17 @@
 #include <set>
 #include <string>
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int log_count;
+  int log_count = 0;
   std::cin >> log_count;
   std::set<std::string, std::greater<>> people_working;
   for (int i = 0; i < log_count; i++) {
-    std::string name, action;
+    std::string name;
+    std::string action;
     std::cin >> name >> action;
     if (action == "enter") {
       people_working.insert(name);

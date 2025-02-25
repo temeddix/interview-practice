@@ -1,26 +1,25 @@
 #include <iostream>
 #include <string>
 
-bool recursion(const std::string& s, int l, int r, int& depth) {
+auto recursion(const std::string& s, int l, int r, int& depth) -> bool {
   depth += 1;
-  if (l >= r)
+  if (l >= r) {
     return true;
-  else if (s[l] != s[r])
+  } if (s[l] != s[r]) {
     return false;
-  else
-    return recursion(s, l + 1, r - 1, depth);
+  }     return recursion(s, l + 1, r - 1, depth);
 }
 
-bool is_palindrome(const std::string& s, int& depth) {
+auto is_palindrome(const std::string& s, int& depth) -> bool {
   return recursion(s, 0, s.length() - 1, depth);
 }
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int word_count;
+  int word_count = 0;
   std::cin >> word_count;
 
   for (int i = 0; i < word_count; i++) {

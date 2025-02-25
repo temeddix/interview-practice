@@ -1,12 +1,12 @@
 #include <cmath>
 #include <iostream>
 
-typedef unsigned long int u32;
+using u32 = unsigned long;
 
-bool is_prime(u32 number) {
+auto is_prime(u32 number) -> bool {
   if (number <= 1) {
     return false;
-  } else if (number <= 3) {
+  } if (number <= 3) {
     return true;
   }
 
@@ -25,11 +25,11 @@ bool is_prime(u32 number) {
   return true;
 }
 
-u32 get_next_prime(u32 number) {
+auto get_next_prime(u32 number) -> u32 {
   // Start with an odd number if even
   if (number <= 1) {
     return 2;
-  } else if (number <= 3) {
+  } if (number <= 3) {
     return number;
   }
 
@@ -46,16 +46,16 @@ u32 get_next_prime(u32 number) {
   }
 }
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int count;
+  int count = 0;
   std::cin >> count;
 
   for (int i = 0; i < count; i++) {
-    u32 number;
+    u32 number = 0;
     std::cin >> number;
     std::cout << get_next_prime(number) << '\n';
   }

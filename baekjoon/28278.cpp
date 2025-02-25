@@ -8,47 +8,45 @@ class IntStack {
  public:
   void add(int value) { data.push_back(value); }
 
- public:
-  int pop() {
+ 
+  auto pop() -> int {
     int data_size = data.size();
-    if (data_size) {
+    if (data_size != 0) {
       int last_item = data[data_size - 1];
       data.pop_back();
       return last_item;
-    } else {
-      return -1;
-    }
+    }       return -1;
+   
   }
 
-  int length() { return data.size(); }
+  auto length() -> int { return data.size(); }
 
-  bool is_empty() { return data.size() == 0; }
+  auto is_empty() -> bool { return data.empty(); }
 
-  int get_last() {
+  auto get_last() -> int {
     int data_size = data.size();
-    if (data_size) {
+    if (data_size != 0) {
       return data[data_size - 1];
-    } else {
-      return -1;
-    }
+    }       return -1;
+   
   }
 };
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
   int count = 0;
   std::cin >> count;
 
   IntStack int_stack = IntStack();
   for (int i = 0; i < count; i++) {
-    int command;
+    int command = 0;
     std::cin >> command;
     switch (command) {
       case 1: {
-        int value;
+        int value = 0;
         std::cin >> value;
         int_stack.add(value);
         break;

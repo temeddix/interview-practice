@@ -1,20 +1,20 @@
 #include <algorithm>
 #include <iostream>
 
-int main() {
+auto main() -> int {
   int numbers[5];
 
   int sum = 0;
-  for (int i = 0; i < 5; i++) {
-    int number;
+  for (int & i : numbers) {
+    int number = 0;
     std::cin >> number;
     sum += number;
-    numbers[i] = number;
+    i = number;
   }
 
   std::sort(numbers, numbers + 5);
   int middle = numbers[2];
   int average = sum / 5;
 
-  std::cout << average << '\n' << middle << std::endl;
+  std::cout << average << '\n' << middle << '\n';
 }

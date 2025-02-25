@@ -9,7 +9,7 @@ struct Person {
   std::string name;
 };
 
-bool compare_people(Person& person_a, Person& person_b) {
+auto compare_people(Person& person_a, Person& person_b) -> bool {
   int age_a = person_a.age;
   int age_b = person_b.age;
   if (age_a != age_b) {
@@ -18,18 +18,18 @@ bool compare_people(Person& person_a, Person& person_b) {
   return person_a.turn < person_b.turn;
 }
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int count;
+  int count = 0;
   std::cin >> count;
   std::vector<Person> people;
   people.reserve(count);
 
   for (int i = 0; i < count; i++) {
-    int age;
+    int age = 0;
     std::string name;
     std::cin >> age >> name;
     people.push_back(Person{

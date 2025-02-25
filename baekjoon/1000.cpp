@@ -1,8 +1,9 @@
 #include <iostream>
 
-int main() {
-  int a, b;
+auto main() -> int {
+  int a = 0;
+  int b = 0;
   std::cin >> a >> b;
   int sum = a + b;
-  std::cout << sum << std::endl;
+  std::cout << sum << '\n';
 }

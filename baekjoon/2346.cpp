@@ -6,9 +6,9 @@ class Ring : public std::vector<int> {
   int cursor = 0;
 
  public:
-  int current_index() { return cursor; }
+  [[nodiscard]] auto current_index() const -> int const { return cursor; }
 
-  int pop_written() {
+  auto pop_written() -> int {
     int written = (*this)[cursor];
     (*this)[cursor] = 0;
     return written;
@@ -33,17 +33,17 @@ class Ring : public std::vector<int> {
   }
 };
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int count;
+  int count = 0;
   std::cin >> count;
   Ring ring;
   ring.reserve(count);
   for (int i = 0; i < count; i++) {
-    int written;
+    int written = 0;
     std::cin >> written;
     ring.push_back(written);
   }

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-int main() {
+auto main() -> int {
   std::string word_s;
   std::cin >> word_s;
   for (int i = 'a'; i <= 'z'; i++) {

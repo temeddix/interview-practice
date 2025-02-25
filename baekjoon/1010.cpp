@@ -2,7 +2,7 @@
 #include <numeric>  // for `std::gcd`
 #include <vector>
 
-int get_combinations(int all, int picks) {
+auto get_combinations(int all, int picks) -> int {
   int result = 1;
   int high_side = all;
   int low_side = 1;
@@ -15,16 +15,17 @@ int get_combinations(int all, int picks) {
   return result;
 }
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int count;
+  int count = 0;
   std::cin >> count;
 
   for (int i = 0; i < count; i++) {
-    int n, m;
+    int n = 0;
+    int m = 0;
     std::cin >> n >> m;
     int possibilities = get_combinations(m, n);
     std::cout << possibilities << '\n';

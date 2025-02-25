@@ -1,17 +1,19 @@
+#include <cmath>
+
 #include <array>
 #include <iostream>
 
-int main() {
+auto main() -> int {
   double weighted_grade_sum = 0.0;
   double weight_sum = 0.0;
 
   for (int i = 0; i < 20; i++) {
-    std::array<char, 51> lecture;
-    double weight;
-    std::array<char, 3> human_grade;
+    std::array<char, 51> lecture{};
+    double weight = NAN;
+    std::array<char, 3> human_grade{};
     std::cin >> lecture.data() >> weight >> human_grade.data();
 
-    double grade;
+    double grade = NAN;
     if (human_grade[0] == 'A') {
       grade = 4.0;
     } else if (human_grade[0] == 'B') {
@@ -34,5 +36,5 @@ int main() {
   }
 
   double average_grade = weighted_grade_sum / weight_sum;
-  std::cout << average_grade << std::endl;
+  std::cout << average_grade << '\n';
 }

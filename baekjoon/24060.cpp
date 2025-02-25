@@ -53,23 +53,24 @@ void merge_sort(std::vector<int>& numbers, int from, int to,
   }
 }
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int size, turn_goal;
+  int size = 0;
+  int turn_goal = 0;
   std::cin >> size >> turn_goal;
 
   std::vector<int> numbers;
   numbers.reserve(size);
   for (int i = 0; i < size; i++) {
-    int number;
+    int number = 0;
     std::cin >> number;
     numbers.push_back(number);
   }
-  TurnInfo turn_info = TurnInfo{0, turn_goal, -1};
+  auto turn_info = TurnInfo{0, turn_goal, -1};
   merge_sort(numbers, 0, size, turn_info);
 
-  std::cout << turn_info.number << std::endl;
+  std::cout << turn_info.number << '\n';
 }

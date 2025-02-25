@@ -2,12 +2,13 @@
 #include <string>
 #include <unordered_set>
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int data_count, check_count;
+  int data_count = 0;
+  int check_count = 0;
   std::cin >> data_count >> check_count;
 
   std::unordered_set<std::string> data;
@@ -27,5 +28,5 @@ int main() {
     }
   }
 
-  std::cout << checked << std::endl;
+  std::cout << checked << '\n';
 }

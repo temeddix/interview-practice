@@ -1,10 +1,10 @@
 #include <cmath>
 #include <iostream>
 
-int main() {
-  int count;
+auto main() -> int {
+  int count = 0;
   std::cin >> count;
 
   int open = std::sqrt(count);
-  std::cout << open << std::endl;
+  std::cout << open << '\n';
 }

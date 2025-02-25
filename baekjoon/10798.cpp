@@ -1,8 +1,8 @@
 #include <array>
 #include <iostream>
 
-int main() {
-  std::array<std::array<char, 15>, 5> arrays;
+auto main() -> int {
+  std::array<std::array<char, 15>, 5> arrays{};
   for (auto& array : arrays) {
     array.fill('.');
   }

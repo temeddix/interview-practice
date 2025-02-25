@@ -23,17 +23,17 @@ void count_possibilities(int row, int board_size, std::vector<int>& columns,
   }
 }
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int board_size;
+  int board_size = 0;
   std::cin >> board_size;
 
   std::vector<int> columns;
   columns.reserve(board_size);
   int possibilities = 0;
   count_possibilities(0, board_size, columns, possibilities);
-  std::cout << possibilities << std::endl;
+  std::cout << possibilities << '\n';
 }

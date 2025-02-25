@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-int main() {
+auto main() -> int {
   std::string word;
   std::cin >> word;
 
@@ -18,5 +18,5 @@ int main() {
     }
   }
 
-  std::cout << static_cast<int>(is_palindrome) << std::endl;
+  std::cout << static_cast<int>(is_palindrome) << '\n';
 }

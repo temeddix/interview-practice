@@ -1,11 +1,12 @@
 #include <array>
 #include <iostream>
 
-int main() {
-  int n, m;
+auto main() -> int {
+  int n = 0;
+  int m = 0;
   std::cin >> n >> m;
 
-  std::array<int, 100> cards;
+  std::array<int, 100> cards{};
   for (int i = 0; i < n; i++) {
     std::cin >> cards[i];
   }
@@ -22,5 +23,5 @@ int main() {
     }
   }
 
-  std::cout << biggest_sum << std::endl;
+  std::cout << biggest_sum << '\n';
 }

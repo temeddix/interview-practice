@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main() {
+auto main() -> int {
   std::cout << "         ,r'\"7"
             << "\n";
   std::cout << "r`-_   ,'  ,/"

@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main() {
+auto main() -> int {
   std::string word;
   std::cin >> word;
   std::cout << word.length();

@@ -1,17 +1,18 @@
 #include <iostream>
 #include <vector>
 
-int main() {
+auto main() -> int {
   std::vector<std::vector<bool>> paper;
   for (int i = 0; i < 100; i++) {
     std::vector<bool> row = std::vector(100, false);
     paper.push_back(row);
   }
 
-  int repeat;
+  int repeat = 0;
   std::cin >> repeat;
   for (int i = 0; i < repeat; i++) {
-    int left, bottom;
+    int left = 0;
+    int bottom = 0;
     std::cin >> left >> bottom;
     for (int j = 0; j < 10; j++) {
       for (int k = 0; k < 10; k++) {
@@ -30,5 +31,5 @@ int main() {
     }
   }
 
-  std::cout << area << std::endl;
+  std::cout << area << '\n';
 }

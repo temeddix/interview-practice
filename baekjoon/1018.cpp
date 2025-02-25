@@ -2,8 +2,9 @@
 #include <array>
 #include <iostream>
 
-int main() {
-  int n, m;
+auto main() -> int {
+  int n = 0;
+  int m = 0;
   std::cin >> n >> m;
 
   std::array<std::array<bool, 50>, 50> board = {};
@@ -36,11 +37,9 @@ int main() {
         }
       }
       mismatches = std::min(mismatches, 64 - mismatches);
-      if (mismatches < min_mismatches) {
-        min_mismatches = mismatches;
-      }
+      min_mismatches = std::min(mismatches, min_mismatches);
     }
   }
 
-  std::cout << min_mismatches << std::endl;
+  std::cout << min_mismatches << '\n';
 }

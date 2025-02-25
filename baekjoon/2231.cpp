@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 
-int main() {
-  int n;
+auto main() -> int {
+  int n = 0;
   std::cin >> n;
 
   int creator = 0;
@@ -21,5 +21,5 @@ int main() {
     }
   }
 
-  std::cout << creator << std::endl;
+  std::cout << creator << '\n';
 }

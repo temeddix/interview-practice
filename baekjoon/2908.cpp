@@ -3,8 +3,9 @@
 #include <iostream>
 #include <string>
 
-int main() {
-  std::string input_a, input_b;
+auto main() -> int {
+  std::string input_a;
+  std::string input_b;
   std::cin >> input_a >> input_b;
 
   std::string reversed_a = input_a;
@@ -15,5 +16,5 @@ int main() {
   int number_a = std::stoi(reversed_a);
   int number_b = std::stoi(reversed_b);
 
-  std::cout << std::max(number_a, number_b) << std::endl;
+  std::cout << std::max(number_a, number_b) << '\n';
 }

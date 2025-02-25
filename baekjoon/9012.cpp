@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 
-int main() {
-  int count;
+auto main() -> int {
+  int count = 0;
   std::cin >> count;
 
   for (int i = 0; i < count; i++) {

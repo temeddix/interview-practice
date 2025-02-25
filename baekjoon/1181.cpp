@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-bool compare_words(const std::string& word_a, const std::string& word_b) {
+auto compare_words(const std::string& word_a, const std::string& word_b) -> bool {
   int a_length = word_a.length();
   int b_length = word_b.length();
   if (a_length != b_length) {
@@ -19,12 +19,12 @@ bool compare_words(const std::string& word_a, const std::string& word_b) {
   return false;
 }
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int count;
+  int count = 0;
   std::cin >> count;
   std::vector<std::string> words;
   words.reserve(count);
@@ -36,7 +36,7 @@ int main() {
   }
 
   std::sort(words.begin(), words.end(), compare_words);
-  std::string last_word = "";
+  std::string last_word;
   for (const std::string& word : words) {
     if (word == last_word) {
       continue;

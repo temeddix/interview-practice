@@ -1,15 +1,15 @@
 #include <array>
 #include <iostream>
 
-int main() {
-  std::array<int, 26> counts;
+auto main() -> int {
+  std::array<int, 26> counts{};
   counts.fill(0);
 
   std::string word;
   std::cin >> word;
 
   for (auto letter : word) {
-    int letter_number;
+    int letter_number = 0;
     if (letter <= 'Z') {
       letter_number = letter - 'A';
     } else {
@@ -18,7 +18,7 @@ int main() {
     counts[letter_number] += 1;
   }
 
-  char max_letter;
+  char max_letter = 0;
   int max_count = 0;
   bool is_duplicated = false;
   for (int i = 0; i < counts.size(); i++) {
@@ -33,8 +33,8 @@ int main() {
   }
 
   if (is_duplicated) {
-    std::cout << '?' << std::endl;
+    std::cout << '?' << '\n';
   } else {
-    std::cout << max_letter << std::endl;
+    std::cout << max_letter << '\n';
   }
 }

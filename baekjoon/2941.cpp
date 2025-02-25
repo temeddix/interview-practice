@@ -1,8 +1,8 @@
 #include <array>
 #include <iostream>
 
-int main() {
-  std::array<char, 101> word;
+auto main() -> int {
+  std::array<char, 101> word{};
   std::cin >> word.data();
 
   int croatia_letters = 0;
@@ -30,5 +30,5 @@ int main() {
     croatia_letters += 1;
   }
 
-  std::cout << croatia_letters << std::endl;
+  std::cout << croatia_letters << '\n';
 }

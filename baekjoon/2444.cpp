@@ -6,19 +6,19 @@ void print_chars(const char letter, short repeat) {
   }
 }
 
-int main() {
-  short number;
+auto main() -> int {
+  short number = 0;
   std::cin >> number;
 
-  short rows = number * 2 - 1;
+  short rows = (number * 2) - 1;
   for (short i = 0; i < rows; i++) {
-    short level;
+    short level = 0;
     if (i < number) {
       level = i;
     } else {
       level = number * 2 - 2 - i;
     }
-    short stars = level * 2 + 1;
+    short stars = (level * 2) + 1;
     short spacing = number - level - 1;
     print_chars(' ', spacing);
     print_chars('*', stars);

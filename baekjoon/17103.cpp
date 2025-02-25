@@ -2,10 +2,10 @@
 #include <iostream>
 #include <vector>
 
-bool is_prime(int number) {
+auto is_prime(int number) -> bool {
   if (number <= 1) {
     return false;
-  } else if (number <= 3) {
+  } if (number <= 3) {
     return true;
   }
 
@@ -22,17 +22,17 @@ bool is_prime(int number) {
   return true;
 }
 
-int main() {
+auto main() -> int {
   std::vector<bool> are_prime;
   are_prime.reserve(1000000);
   for (int i = 0; i < 1000000; i++) {
     are_prime.push_back(is_prime(i));
   }
 
-  int count;
+  int count = 0;
   std::cin >> count;
   for (int i = 0; i < count; i++) {
-    int number;
+    int number = 0;
     std::cin >> number;
     int partition_count = 0;
     for (int j = 2; j <= number / 2; j++) {

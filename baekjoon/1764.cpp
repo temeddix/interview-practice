@@ -2,12 +2,13 @@
 #include <set>
 #include <unordered_set>
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-  int not_heard_count, not_seen_count;
+  int not_heard_count = 0;
+  int not_seen_count = 0;
   std::cin >> not_heard_count >> not_seen_count;
 
   std::unordered_set<std::string> not_heard;
@@ -22,7 +23,7 @@ int main() {
   for (int i = 0; i < not_seen_count; i++) {
     std::string name;
     std::cin >> name;
-    if (not_heard.count(name)) {
+    if (not_heard.count(name) != 0U) {
       overlaps.insert(name);
     }
   }

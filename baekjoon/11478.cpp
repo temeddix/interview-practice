@@ -2,10 +2,10 @@
 #include <string>
 #include <unordered_set>
 
-int main() {
+auto main() -> int {
   std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
   std::string text;
   std::cin >> text;
@@ -23,5 +23,5 @@ int main() {
     }
   }
 
-  std::cout << slices.size() << std::endl;
+  std::cout << slices.size() << '\n';
 }
