@@ -24,4 +24,4 @@ auto operator<<(ostream& out, const OuterStruct& obj) -> ostream& {
 
 const OuterStruct obj = {true, {3, 5.5}};
 
-auto main() -> int { cout << obj << "\n"; }
+auto main() -> int { cout << obj << '\n'; }

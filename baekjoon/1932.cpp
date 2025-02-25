@@ -53,5 +53,5 @@ auto main() -> int {
   }
 
   int max_sum = get_max_sum(tower);
-  cout << max_sum << "\n";
+  cout << max_sum << '\n';
 }

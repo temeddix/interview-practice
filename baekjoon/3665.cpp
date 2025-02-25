@@ -119,6 +119,6 @@ auto main() -> int {
         cout << (node + 1) << " ";
       }
     }
-    cout << "\n";
+    cout << '\n';
   }
 }

@@ -10,6 +10,6 @@ auto main() -> int {
     for (auto letter : word_s) {
       std::cout << std::string(repeat_count, letter);
     }
-    std::cout << "\n";
+    std::cout << '\n';
   }
 }
