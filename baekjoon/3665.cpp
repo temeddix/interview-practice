@@ -8,13 +8,12 @@ struct Node {
   vector<int> nexts;
 };
 
-template <typename T>
-struct Result {
-  T data;
+struct SortResult {
+  vector<int> data;
   int code;
 };
 
-auto sort_nodes(vector<Node>& nodes) -> Result<vector<int>> {
+auto sort_nodes(vector<Node>& nodes) -> SortResult {
   int node_count = static_cast<int>(nodes.size());
   vector<int> sorted_nodes;
   sorted_nodes.reserve(node_count);
@@ -109,7 +108,7 @@ auto main() -> int {
 
     vector<Node> nodes = build_nodes(node_count, last_ranks, swapped);
 
-    Result<vector<int>> result = sort_nodes(nodes);
+    SortResult result = sort_nodes(nodes);
     if (result.code == 1) {
       cout << "IMPOSSIBLE";
     } else {
