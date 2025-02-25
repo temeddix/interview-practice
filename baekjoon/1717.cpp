@@ -2,21 +2,23 @@
 #include <iostream>
 #include <vector>
 
-int UNION_OP = 0;
+using namespace std;
+
+const int UNION_OP = 0;
 
 struct ItemPair {
   int item_a;
   int item_b;
 };
 
-int get_root(int item, std::vector<int>& items) {
+auto get_root(int item, vector<int>& items) -> int {
   if (items[item] != item) {
     items[item] = get_root(items[item], items);
   }
   return items[item];
 }
 
-void union_groups(ItemPair item_pair, std::vector<int>& items) {
+void union_groups(ItemPair item_pair, vector<int>& items) {
   if (item_pair.item_a == item_pair.item_b) {
     return;
   }
@@ -29,22 +31,23 @@ void union_groups(ItemPair item_pair, std::vector<int>& items) {
   }
 }
 
-bool is_grouped(ItemPair item_pair, std::vector<int>& items) {
+auto is_grouped(ItemPair item_pair, vector<int>& items) -> bool {
   return get_root(item_pair.item_a, items) == get_root(item_pair.item_b, items);
 }
 
-int main() {
-  std::ios::sync_with_stdio(false);
-  std::cin.tie(NULL);
-  std::cout.tie(NULL);
+auto main() -> int {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
 
   // Get the basic input.
-  int item_count, operation_count;
-  std::cin >> item_count >> operation_count;
+  int item_count = 0;
+  int operation_count = 0;
+  cin >> item_count >> operation_count;
   item_count += 1;
 
   // Initialize items.
-  std::vector<int> items(item_count);
+  vector<int> items(item_count);
   items.resize(item_count);
   for (int i = 0; i < item_count; i++) {
     items[i] = i;
@@ -52,13 +55,15 @@ int main() {
 
   // Do operations.
   for (int i = 0; i < operation_count; i++) {
-    int m, a, b;
-    std::cin >> m >> a >> b;
-    if (m == UNION_OP) {
-      union_groups({a, b}, items);
+    int m_in = 0;
+    int a_in = 0;
+    int b_in = 0;
+    cin >> m_in >> a_in >> b_in;
+    if (m_in == UNION_OP) {
+      union_groups({a_in, b_in}, items);
     } else {
-      bool result = is_grouped({a, b}, items);
-      std::cout << (result ? "YES\n" : "NO\n");
+      bool result = is_grouped({a_in, b_in}, items);
+      cout << (result ? "YES\n" : "NO\n");
     }
   }
 }
