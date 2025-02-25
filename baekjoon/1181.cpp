@@ -5,8 +5,8 @@
 
 auto compare_words(const std::string& word_a, const std::string& word_b)
     -> bool {
-  int a_length = word_a.length();
-  int b_length = word_b.length();
+  int a_length = static_cast<int>(word_a.length());
+  int b_length = static_cast<int>(word_b.length());
   if (a_length != b_length) {
     return a_length < b_length;
   }
