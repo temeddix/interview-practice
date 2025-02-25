@@ -2,8 +2,8 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "C/C++: clang++ build active file",
-      "type": "cppbuild",
+      "label": "Build C++ file (Unix)",
+      "type": "process",
       "command": "clang++",
       "args": [
         "-std=c++14",
@@ -17,12 +17,18 @@
       "options": {
         "cwd": "${workspaceFolder}"
       },
-      "problemMatcher": ["$gcc"],
       "group": "build"
     },
     {
-      "label": "C/C++: clang++.exe build active file",
-      "type": "cppbuild",
+      "label": "Run executable (Unix)",
+      "type": "shell",
+      "command": "${workspaceFolder}/build/${fileBasenameNoExtension}",
+      "dependsOn": ["Build C++ file (Unix)"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build C++ file (Windows)",
+      "type": "process",
       "command": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe",
       "args": [
         "-std=c++14",
@@ -36,8 +42,14 @@
       "options": {
         "cwd": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\Llvm\\x64\\bin"
       },
-      "problemMatcher": ["$gcc"],
       "group": "build"
+    },
+    {
+      "label": "Run executable (Windows)",
+      "type": "shell",
+      "command": "${workspaceFolder}/build/${fileBasenameNoExtension}.exe",
+      "dependsOn": ["Build C++ file (Windows)"],
+      "problemMatcher": []
     }
   ]
 }

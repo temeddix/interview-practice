@@ -10,7 +10,6 @@ uv sync
 
 ## C++
 
-- https://code.visualstudio.com/docs/cpp/config-clang-mac
 - https://learn.microsoft.com/en-us/cpp/build/clang-support-cmake?view=msvc-170
 
-This repository is configured to use the Clang C++ compiler.
+This repository is configured to use the Clang C++ compiler. On VScode, `clangd` extension from LLVM is used for linting and formatting.
