@@ -8,14 +8,10 @@ struct Question {
   int end;
 };
 
-struct Symmetry {
-  int checked_size;  // Ceiling value of the one-way distance
-  bool reached_limit;
-};
-
 auto give_answers(vector<int>& numbers, vector<Question>& questions)
     -> vector<bool> {
-  vector<Symmetry> symmetries((numbers.size() * 2) - 1, {0, false});
+  vector<int> checked_sizes((numbers.size() * 2) - 1, 0);
+
   vector<bool> answers;
   answers.reserve(questions.size());
 
@@ -23,30 +19,29 @@ auto give_answers(vector<int>& numbers, vector<Question>& questions)
     // Check the recorded symmetry.
     int doubled_mid = question.start + question.end;
     int doubled_size = (question.end - question.start);
-    Symmetry& symmetry = symmetries[doubled_mid];
 
     // Update the symmetry.
-    if (!symmetry.reached_limit) {
-      bool is_mid_integer = doubled_mid % 2 == 0;  // Mid can be `N.0` or `N.5`
+    bool is_mid_integer = doubled_mid % 2 == 0;  // Mid can be `N.0` or `N.5`
 
-      int size = symmetry.checked_size + 1;
-      int end = (doubled_mid / 2) + size;
-      int start = (doubled_mid / 2) - size + (is_mid_integer ? 0 : 1);
-      while (end - start <= doubled_size) {
-        if (numbers[start] != numbers[end]) {
-          symmetry.reached_limit = true;
-          break;
-        }
-        start -= 1;
-        end += 1;
+    int size = checked_sizes[doubled_mid] + 1;
+    int end = (doubled_mid / 2) + size;
+    int start = (doubled_mid / 2) - size + (is_mid_integer ? 0 : 1);
+    while (end - start <= doubled_size) {
+      if (numbers[start] != numbers[end]) {
+        break;
       }
-      start += 1;
-      end -= 1;
-      symmetry.checked_size = (end - start + 1) / 2;
+      start -= 1;
+      end += 1;
     }
+    start += 1;
+    end -= 1;
+
+    // Remember.
+    int checked_size = (end - start + 1) / 2;
+    checked_sizes[doubled_mid] = checked_size;
 
     // Give an answer.
-    answers.push_back(symmetry.checked_size >= (doubled_size + 1) / 2);
+    answers.push_back(checked_size >= (doubled_size + 1) / 2);
   }
 
   return answers;
