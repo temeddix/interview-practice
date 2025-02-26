@@ -18,7 +18,7 @@ auto find_min_term_count(int number) -> int {
       previous = min(previous, record[i - (behind * behind)]);
       behind += 1;
     }
-    record[i] = previous + 1;
+    record.push_back(previous + 1);
   }
 
   return record[number];
