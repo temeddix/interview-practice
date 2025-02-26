@@ -6,11 +6,11 @@ CompileFlags:
 
 Diagnostics:
   ClangTidy:
+    FastCheckFilter: None
     Add:
-      - bugprone-*
-      - modernize-*
-      - cppcoreguidelines-*
-      - readability-*
-      - performance-*
-      - llvm-*
-      - concurrency-*
+      - bugprone*
+      - modernize*
+      - cppcoreguidelines*
+      - readability*
+      - performance*
+      - concurrency*
