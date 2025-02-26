@@ -40,7 +40,7 @@
         "${workspaceFolder}/build/${fileBasenameNoExtension}.exe"
       ],
       "options": {
-        "cwd": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\Llvm\\x64\\bin"
+        "cwd": "${workspaceFolder}"
       },
       "group": "build"
     },
