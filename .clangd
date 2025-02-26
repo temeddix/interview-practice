@@ -8,9 +8,9 @@ Diagnostics:
   ClangTidy:
     FastCheckFilter: None
     Add:
-      - bugprone*
-      - modernize*
-      - cppcoreguidelines*
-      - readability*
-      - performance*
-      - concurrency*
+      - bugprone-*
+      - modernize-*
+      - cppcoreguidelines-*
+      - readability-*
+      - performance-*
+      - concurrency-*
