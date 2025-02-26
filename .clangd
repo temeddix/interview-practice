@@ -6,7 +6,6 @@ CompileFlags:
 
 Diagnostics:
   ClangTidy:
-    FastCheckFilter: None
     Add:
       - bugprone-*
       - modernize-*
