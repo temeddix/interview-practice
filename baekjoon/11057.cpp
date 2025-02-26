@@ -23,7 +23,7 @@ auto cound_ascending_numbers(int digits) -> int {
     swap(prev_record, curr_record);
   }
 
-  return std::accumulate(prev_record.begin(), prev_record.end(), 0) % DIVIDER;
+  return accumulate(prev_record.begin(), prev_record.end(), 0) % DIVIDER;
 }
 
 auto main() -> int {
