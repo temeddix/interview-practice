@@ -1,4 +1,5 @@
 #include <iostream>
+#include <optional>
 #include <queue>
 
 using namespace std;
@@ -8,12 +9,7 @@ struct Node {
   vector<int> nexts;
 };
 
-struct SortResult {
-  vector<int> data;
-  int code;
-};
-
-auto sort_nodes(vector<Node>& nodes) -> SortResult {
+auto sort_nodes(vector<Node>& nodes) -> optional<vector<int>> {
   int node_count = static_cast<int>(nodes.size());
   vector<int> sorted_nodes;
   sorted_nodes.reserve(node_count);
@@ -38,11 +34,11 @@ auto sort_nodes(vector<Node>& nodes) -> SortResult {
     }
   }
 
-  if (sorted_nodes.size() != node_count) {
-    return {{}, 1};
+  if (static_cast<int>(sorted_nodes.size()) != node_count) {
+    return nullopt;
   }
 
-  return {sorted_nodes, 0};
+  return sorted_nodes;
 }
 
 auto build_nodes(int node_count, vector<int>& last_ranks,
@@ -108,13 +104,13 @@ auto main() -> int {
 
     vector<Node> nodes = build_nodes(node_count, last_ranks, swapped);
 
-    SortResult result = sort_nodes(nodes);
-    if (result.code == 1) {
-      cout << "IMPOSSIBLE";
-    } else {
-      for (int node : result.data) {
+    optional<vector<int>> option = sort_nodes(nodes);
+    if (option) {
+      for (int node : *option) {
         cout << (node + 1) << " ";
       }
+    } else {
+      cout << "IMPOSSIBLE";
     }
     cout << '\n';
   }
