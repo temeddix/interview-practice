@@ -39,6 +39,4 @@ auto main() -> int {
   } else {
     cout << "Variant holds a string: " << get<string>(var) << '\n';
   }
-
-  return 0;
 }
