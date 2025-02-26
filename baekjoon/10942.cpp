@@ -10,7 +10,7 @@ struct Question {
 
 auto give_answers(vector<int>& numbers, vector<Question>& questions)
     -> vector<bool> {
-  vector<int> checked_sizes((numbers.size() * 2) - 1, 0);
+  vector<int> symmetries((numbers.size() * 2) - 1, 0);  // Symmetry size infos
 
   vector<bool> answers;
   answers.reserve(questions.size());
@@ -22,8 +22,7 @@ auto give_answers(vector<int>& numbers, vector<Question>& questions)
 
     // Update the symmetry.
     bool is_mid_integer = doubled_mid % 2 == 0;  // Mid can be `N.0` or `N.5`
-
-    int size = checked_sizes[doubled_mid] + 1;
+    int size = symmetries[doubled_mid] + 1;
     int end = (doubled_mid / 2) + size;
     int start = (doubled_mid / 2) - size + (is_mid_integer ? 0 : 1);
     while (end - start <= doubled_size) {
@@ -38,7 +37,7 @@ auto give_answers(vector<int>& numbers, vector<Question>& questions)
 
     // Remember.
     int checked_size = (end - start + 1) / 2;
-    checked_sizes[doubled_mid] = checked_size;
+    symmetries[doubled_mid] = checked_size;
 
     // Give an answer.
     answers.push_back(checked_size >= (doubled_size + 1) / 2);
