@@ -27,22 +27,22 @@ auto give_answers(vector<int>& numbers, vector<Question>& questions)
 
     // Update the symmetry.
     if (!symmetry.reached_limit) {
-      int size = symmetry.checked_size + 1;
       bool is_mid_integer = doubled_mid % 2 == 0;  // Mid can be `N.0` or `N.5`
 
-      int end_index = (doubled_mid / 2) + size;
-      int start_index = (doubled_mid / 2) - size + (is_mid_integer ? 0 : 1);
-      while (end_index - start_index <= doubled_size) {
-        if (numbers[start_index] != numbers[end_index]) {
+      int size = symmetry.checked_size + 1;
+      int end = (doubled_mid / 2) + size;
+      int start = (doubled_mid / 2) - size + (is_mid_integer ? 0 : 1);
+      while (end - start <= doubled_size) {
+        if (numbers[start] != numbers[end]) {
           symmetry.reached_limit = true;
           break;
         }
-        start_index -= 1;
-        end_index += 1;
+        start -= 1;
+        end += 1;
       }
-      start_index += 1;
-      end_index -= 1;
-      symmetry.checked_size = (end_index - start_index + 1) / 2;
+      start += 1;
+      end -= 1;
+      symmetry.checked_size = (end - start + 1) / 2;
     }
 
     // Give an answer.
