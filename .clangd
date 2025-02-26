@@ -1,5 +1,8 @@
 CompileFlags:
-  Add: [-std=c++14]
+  Add:
+    - -std=c++14
+    - -Wall
+    - -Wextra
 
 Diagnostics:
   ClangTidy:
