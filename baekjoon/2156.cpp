@@ -14,7 +14,6 @@ struct Streak {
 const int INVALID = -1;
 
 auto drink(vector<int>& glasses) -> int {
-  int glass_count = static_cast<int>(glasses.size());
   Streak previous = {0, INVALID, INVALID};
   Streak current = {INVALID, INVALID, INVALID};
 
