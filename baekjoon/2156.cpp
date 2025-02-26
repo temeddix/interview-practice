@@ -31,6 +31,10 @@ auto drink(vector<int>& glasses) -> int {
 }
 
 auto main() -> int {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+
   int glass_count = 0;
   cin >> glass_count;
   vector<int> glasses;
@@ -40,6 +44,7 @@ auto main() -> int {
     cin >> glass;
     glasses.push_back(glass);
   }
+
   int drunk = drink(glasses);
   cout << drunk << '\n';
 }
