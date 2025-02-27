@@ -46,6 +46,10 @@ auto get_min_cycle_cost(int node_count, vector<vector<int>>& costs) -> int {
 }
 
 auto main() -> int {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+
   int node_count = 0;
   cin >> node_count;
 
