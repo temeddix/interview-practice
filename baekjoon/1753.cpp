@@ -19,13 +19,6 @@ struct Cursor {
 
 const int INF = 1000000007;
 
-auto operator<(const Cursor& obj_a, const Cursor& obj_b) -> bool {
-  if (obj_a.cost != obj_b.cost) {
-    return obj_a.cost < obj_b.cost;
-  }
-  return obj_a.destination < obj_b.destination;
-}
-
 auto operator>(const Cursor& obj_a, const Cursor& obj_b) -> bool {
   if (obj_a.cost != obj_b.cost) {
     return obj_a.cost > obj_b.cost;
