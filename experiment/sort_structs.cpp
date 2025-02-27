@@ -24,7 +24,7 @@ auto operator<(const MyStruct& lhs, const MyStruct& rhs) -> bool {
 }
 
 auto operator<<(ostream& out, const MyStruct& obj) -> ostream& {
-  out << obj.a << ", " << obj.b << ", " << obj.c;
+  out << "{" << obj.a << ", " << obj.b << ", " << obj.c << "}";
   return out;
 }
 
