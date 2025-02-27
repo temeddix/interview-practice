@@ -58,6 +58,10 @@ auto get_costs(vector<Node>& nodes, int start_node) -> vector<int> {
 }
 
 auto main() -> int {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+
   int node_count = 0;
   int edge_count = 0;
   cin >> node_count >> edge_count;
