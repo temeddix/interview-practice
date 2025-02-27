@@ -2,48 +2,41 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build C++ file (Unix)",
+      "label": "Build C++ file",
       "type": "process",
-      "group": "build",
+      "group": { "kind": "build", "isDefault": true },
       "command": "clang++",
       "args": [
         "-std=c++17",
         "-fcolor-diagnostics",
         "-fansi-escape-codes",
-        "-g",
+        "--debug",
         "${file}",
-        "-o",
+        "--output",
         "${workspaceFolder}/build/${fileBasenameNoExtension}"
-      ]
+      ],
+      "windows": {
+        "command": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/Llvm/x64/bin/clang++.exe",
+        "args": [
+          "-std=c++17",
+          "-fcolor-diagnostics",
+          "-fansi-escape-codes",
+          "--debug",
+          "${file}",
+          "--output",
+          "${workspaceFolder}/build/${fileBasenameNoExtension}.exe"
+        ]
+      }
     },
     {
-      "label": "Run C++ file (Unix)",
+      "label": "Run C++ file",
       "type": "shell",
-      "group": "test",
+      "group": { "kind": "test", "isDefault": true },
+      "dependsOn": ["Build C++ file"],
       "command": "${workspaceFolder}/build/${fileBasenameNoExtension}",
-      "dependsOn": ["Build C++ file (Unix)"]
-    },
-    {
-      "label": "Build C++ file (Windows)",
-      "type": "process",
-      "group": "build",
-      "command": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/Llvm/x64/bin/clang++.exe",
-      "args": [
-        "-std=c++17",
-        "-fcolor-diagnostics",
-        "-fansi-escape-codes",
-        "-g",
-        "${file}",
-        "-o",
-        "${workspaceFolder}/build/${fileBasenameNoExtension}.exe"
-      ]
-    },
-    {
-      "label": "Run C++ file (Windows)",
-      "type": "shell",
-      "group": "test",
-      "command": "${workspaceFolder}/build/${fileBasenameNoExtension}.exe",
-      "dependsOn": ["Build C++ file (Windows)"]
+      "windows": {
+        "command": "${workspaceFolder}/build/${fileBasenameNoExtension}.exe"
+      }
     }
   ]
 }
