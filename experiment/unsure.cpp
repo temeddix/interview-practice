@@ -1,6 +1,6 @@
 #include <iostream>
 #include <optional>
-#include <string>
+#include <stdexcept>
 #include <variant>
 
 using namespace std;
@@ -15,28 +15,28 @@ auto get_number(bool give_value) -> optional<int> {
 }
 
 // Function returning variant
-auto process_data(bool use_string) -> variant<int, string> {
+auto process_data(bool use_string) -> variant<int, invalid_argument> {
   const int number = 123;
   if (use_string) {
-    return string("Hello, Variant!");
+    return invalid_argument("Something went wrong!");
   }
   return number;
 }
 
 auto main() -> int {
   // Using optional
-  optional<int> opt = get_number(true);
-  if (opt) {
-    cout << "Optional has value: " << *opt << '\n';
+  optional<int> option = get_number(true);
+  if (option) {
+    cout << "Optional has value: " << *option << '\n';
   } else {
     cout << "Optional is empty\n";
   }
 
   // Using variant
-  variant<int, string> var = process_data(false);
-  if (holds_alternative<int>(var)) {
-    cout << "Variant holds an int: " << get<int>(var) << '\n';
+  variant<int, invalid_argument> result = process_data(true);
+  if (holds_alternative<int>(result)) {
+    cout << "Variant holds an int: " << get<int>(result) << '\n';
   } else {
-    cout << "Variant holds a string: " << get<string>(var) << '\n';
+    cout << "Exception: " << get<invalid_argument>(result).what() << '\n';
   }
 }
