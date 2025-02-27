@@ -4,6 +4,7 @@
     {
       "label": "Build C++ file (Unix)",
       "type": "process",
+      "group": "build",
       "command": "clang++",
       "args": [
         "-std=c++17",
@@ -13,23 +14,20 @@
         "${file}",
         "-o",
         "${workspaceFolder}/build/${fileBasenameNoExtension}"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "group": "build"
+      ]
     },
     {
       "label": "Run C++ file (Unix)",
       "type": "shell",
+      "group": "test",
       "command": "${workspaceFolder}/build/${fileBasenameNoExtension}",
-      "dependsOn": ["Build C++ file (Unix)"],
-      "problemMatcher": []
+      "dependsOn": ["Build C++ file (Unix)"]
     },
     {
       "label": "Build C++ file (Windows)",
       "type": "process",
-      "command": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe",
+      "group": "build",
+      "command": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/Llvm/x64/bin/clang++.exe",
       "args": [
         "-std=c++17",
         "-fcolor-diagnostics",
@@ -38,18 +36,14 @@
         "${file}",
         "-o",
         "${workspaceFolder}/build/${fileBasenameNoExtension}.exe"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "group": "build"
+      ]
     },
     {
       "label": "Run C++ file (Windows)",
       "type": "shell",
+      "group": "test",
       "command": "${workspaceFolder}/build/${fileBasenameNoExtension}.exe",
-      "dependsOn": ["Build C++ file (Windows)"],
-      "problemMatcher": []
+      "dependsOn": ["Build C++ file (Windows)"]
     }
   ]
 }
