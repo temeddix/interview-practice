@@ -64,6 +64,6 @@ auto main() -> int {
 
   vector<int> sorted_nodes = sort_nodes(nodes);
   for (int node : sorted_nodes) {
-    cout << (node + 1) << " ";
+    cout << (node + 1) << ' ';
   }
 }

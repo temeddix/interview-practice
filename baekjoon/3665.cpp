@@ -107,7 +107,7 @@ auto main() -> int {
     optional<vector<int>> option = sort_nodes(nodes);
     if (option) {
       for (int node : *option) {
-        cout << (node + 1) << " ";
+        cout << (node + 1) << ' ';
       }
     } else {
       cout << "IMPOSSIBLE";
