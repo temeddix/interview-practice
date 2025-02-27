@@ -20,7 +20,7 @@
       "group": "build"
     },
     {
-      "label": "Run executable (Unix)",
+      "label": "Run C++ file (Unix)",
       "type": "shell",
       "command": "${workspaceFolder}/build/${fileBasenameNoExtension}",
       "dependsOn": ["Build C++ file (Unix)"],
@@ -45,7 +45,7 @@
       "group": "build"
     },
     {
-      "label": "Run executable (Windows)",
+      "label": "Run C++ file (Windows)",
       "type": "shell",
       "command": "${workspaceFolder}/build/${fileBasenameNoExtension}.exe",
       "dependsOn": ["Build C++ file (Windows)"],
