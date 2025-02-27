@@ -50,7 +50,6 @@ auto main() -> int {
   cin >> node_count;
 
   vector<vector<int>> costs(node_count, vector<int>(node_count, INVALID_COST));
-  costs.reserve(node_count);
   for (int i = 0; i < node_count; i++) {
     for (int j = 0; j < node_count; j++) {
       int cost = 0;
