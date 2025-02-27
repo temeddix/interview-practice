@@ -13,3 +13,4 @@ Diagnostics:
       - readability-*
       - performance-*
       - concurrency-*
+      - clang-analyzer-*
