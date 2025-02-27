@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -28,14 +29,14 @@ auto operator<<(ostream& out, const MyStruct& obj) -> ostream& {
   return out;
 }
 
-const vector<MyStruct> given = {
+const array<MyStruct, 3> given = {{
     {2, 3.0, "apple"},
     {3, 1.5, "cherry"},
     {1, 2.5, "banana"},
-};
+}};
 
 auto main() -> int {
-  vector<MyStruct> vec = given;
+  vector<MyStruct> vec(given.begin(), given.end());
   sort(vec.begin(), vec.end());
 
   // Output the sorted vector for verification.
