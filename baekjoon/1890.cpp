@@ -1,4 +1,5 @@
 #include <array>
+#include <cstdint>
 #include <iostream>
 #include <vector>
 
@@ -14,10 +15,15 @@ struct Diff {
   int col;
 };
 
+template <typename T>
+using D2Vec = vector<vector<T>>;
+template <typename T>
+using D1Vec = vector<T>;
+
 const array<Diff, 2> DIFFS = {{{1, 0}, {0, 1}}};
 
 auto count_paths(Board& board) -> int64_t {
-  vector<vector<int64_t>> paths(board.size, vector<int64_t>(board.size, 0));
+  D2Vec<int64_t> paths(board.size, D1Vec<int64_t>(board.size, 0));
   paths[0][0] = 1;
 
   for (int row = 0; row < board.size; row++) {
@@ -49,7 +55,7 @@ auto main() -> int {
   int board_size = 0;
   cin >> board_size;
 
-  vector<vector<int>> numbers(board_size, vector<int>(board_size, 0));
+  D2Vec<int> numbers(board_size, D1Vec<int>(board_size, 0));
   for (int row = 0; row < board_size; row++) {
     for (int col = 0; col < board_size; col++) {
       int number = 0;
