@@ -8,7 +8,7 @@ using namespace std;
 const int DIVIDER = 10007;
 const int BASE = 10;
 
-auto cound_ascending_numbers(int digits) -> int {
+auto count_ascending_numbers(int digits) -> int {
   vector<int> prev_record(BASE, 1);
   vector<int> curr_record(BASE, 0);
 
@@ -29,6 +29,6 @@ auto cound_ascending_numbers(int digits) -> int {
 auto main() -> int {
   int digits = 0;
   cin >> digits;
-  int ascending_numbers = cound_ascending_numbers(digits);
+  int ascending_numbers = count_ascending_numbers(digits);
   cout << ascending_numbers << '\n';
 }
