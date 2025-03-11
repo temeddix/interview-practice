@@ -1,22 +1,22 @@
 #include <algorithm>
+#include <array>
 #include <iostream>
 #include <utility>
-#include <vector>
 
 using namespace std;
 
 constexpr int COLUMN_COUNT = 3;
 
 struct Records {
-  vector<int> prev_min;
-  vector<int> curr_min;
-  vector<int> prev_max;
-  vector<int> curr_max;
+  array<int, COLUMN_COUNT> prev_min;
+  array<int, COLUMN_COUNT> curr_min;
+  array<int, COLUMN_COUNT> prev_max;
+  array<int, COLUMN_COUNT> curr_max;
 };
 
-void update_min_score(vector<int>& row, Records& records) {
-  vector<int>& prev_record = records.prev_min;
-  vector<int>& curr_record = records.curr_min;
+void update_min_score(array<int, COLUMN_COUNT>& row, Records& records) {
+  array<int, COLUMN_COUNT>& prev_record = records.prev_min;
+  array<int, COLUMN_COUNT>& curr_record = records.curr_min;
   curr_record[0] = min(prev_record[0], prev_record[1]) + row[0];
   curr_record[1] =
       *min_element(prev_record.begin(), prev_record.end()) + row[1];
@@ -24,9 +24,9 @@ void update_min_score(vector<int>& row, Records& records) {
   swap(prev_record, curr_record);
 }
 
-void update_max_score(vector<int>& row, Records& records) {
-  vector<int>& prev_record = records.prev_max;
-  vector<int>& curr_record = records.curr_max;
+void update_max_score(array<int, COLUMN_COUNT>& row, Records& records) {
+  array<int, COLUMN_COUNT>& prev_record = records.prev_max;
+  array<int, COLUMN_COUNT>& curr_record = records.curr_max;
   curr_record[0] = max(prev_record[0], prev_record[1]) + row[0];
   curr_record[1] =
       *max_element(prev_record.begin(), prev_record.end()) + row[1];
@@ -39,21 +39,14 @@ auto main() -> int {
   cin.tie(nullptr);
   cout.tie(nullptr);
 
-  Records records = {
-      vector<int>(COLUMN_COUNT, 0),
-      vector<int>(COLUMN_COUNT, 0),
-      vector<int>(COLUMN_COUNT, 0),
-      vector<int>(COLUMN_COUNT, 0),
-  };
+  Records records{};
 
   int row_count = 0;
   cin >> row_count;
-  vector<int> row(COLUMN_COUNT, 0);
+  array<int, COLUMN_COUNT> row{};
   for (int i = 0; i < row_count; i++) {
-    for (int j = 0; j < COLUMN_COUNT; j++) {
-      int number = 0;
+    for (int& number : row) {
       cin >> number;
-      row[j] = number;
     }
     update_min_score(row, records);
     update_max_score(row, records);
