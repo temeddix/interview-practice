@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
-#include <utility>
 
 using namespace std;
 
@@ -21,7 +20,7 @@ void update_min_score(array<int, COLUMN_COUNT>& row, Records& records) {
   curr_record[1] =
       min({prev_record[0], prev_record[1], prev_record[2]}) + row[1];
   curr_record[2] = min(prev_record[1], prev_record[2]) + row[2];
-  swap(prev_record, curr_record);
+  prev_record = curr_record;
 }
 
 void update_max_score(array<int, COLUMN_COUNT>& row, Records& records) {
@@ -31,7 +30,7 @@ void update_max_score(array<int, COLUMN_COUNT>& row, Records& records) {
   curr_record[1] =
       max({prev_record[0], prev_record[1], prev_record[2]}) + row[1];
   curr_record[2] = max(prev_record[1], prev_record[2]) + row[2];
-  swap(prev_record, curr_record);
+  prev_record = curr_record;
 }
 
 auto main() -> int {
