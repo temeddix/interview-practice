@@ -4,14 +4,6 @@
 
 using namespace std;
 
-auto operator<<(ostream& out, vector<int>& obj) -> ostream& {
-  out << "vector ";
-  for (int num : obj) {
-    out << num << ' ';
-  }
-  return out;
-}
-
 auto find_longest_increasing_sequence(vector<int>& children) -> int {
   int children_count = static_cast<int>(children.size());
   vector<int> lis_record;
