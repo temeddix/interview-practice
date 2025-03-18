@@ -32,6 +32,10 @@ void fill_scores(vector<City>& cities, int stop_count) {
 }
 
 auto main() -> int {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+
   int city_count = 0;
   int stop_count = 0;
   int flight_count = 0;
