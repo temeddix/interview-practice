@@ -25,12 +25,12 @@ async function main() {
   /** @type {string[]} */
   const maxChars = [];
   for (let i = 0; i < LETTERS; i++) {
-    if (counts[i] == maxValue) {
+    if (counts[i] === maxValue) {
       maxChars.push(String.fromCharCode(BASE_CODE + i));
     }
   }
 
-  console.log(maxChars.length == 1 ? maxChars[0] : "?");
+  console.log(maxChars.length === 1 ? maxChars[0] : "?");
 }
 
 main();
