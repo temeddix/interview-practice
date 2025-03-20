@@ -24,7 +24,7 @@ function isGroupWord(word) {
     if (groupFinished[code]) {
       return false;
     }
-    if (code != prevCode) {
+    if (code !== prevCode) {
       groupFinished[prevCode] = true;
     }
     prevCode = code;
