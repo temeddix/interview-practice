@@ -3,9 +3,8 @@ const readline = require("node:readline");
 
 async function* createInput() {
   const reader = readline.createInterface({ input: process.stdin });
-  for await (const line of reader) {
-    yield line;
-  }
+  for await (const line of reader) yield line;
+  return "";
 }
 
 /**
@@ -19,8 +18,7 @@ async function main() {
   const numCount = Number((await input.next()).value);
 
   for (let i = 0; i < numCount; i++) {
-    const line = (await input.next()).value;
-    const num = Number(line);
+    const num = Number((await input.next()).value);
 
     /** @type {Pair} */
     const pair = { smaller: 1, bigger: num - 1 };
