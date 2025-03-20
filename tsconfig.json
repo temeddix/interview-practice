@@ -4,6 +4,5 @@
     "allowJs": true,
     "noEmit": true,
     "strict": true
-  },
-  "include": ["**/*.js"]
+  }
 }
