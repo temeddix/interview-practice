@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "deno.ns"],
     "checkJs": true,
     "allowJs": true,
     "strict": true
