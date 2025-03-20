@@ -12,8 +12,8 @@ async function main() {
   const cases = Number((await input.next()).value);
   for (let i = 0; i < cases; i++) {
     const line = (await input.next()).value;
-    const reversed = line.split(" ").map((w) => [...w].reverse());
-    const joined = reversed.map((l) => l.join("")).join(" ");
+    const reversed = line.split(" ").map((w) => w.split("").reverse().join(""));
+    const joined = reversed.join(" ");
     console.log(joined);
   }
 }
