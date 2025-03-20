@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "lib": ["ES6", "DOM"],
+    "lib": ["dom", "deno.ns"],
     "checkJs": true,
     "allowJs": true,
-    "noEmit": true,
     "strict": true
   }
 }
