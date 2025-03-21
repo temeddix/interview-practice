@@ -639,3 +639,66 @@ B 트리 혹은 B+ 트리와 같은 B 트리의 변형은 대용량 데이터에
 ## INNER 조인과 OUTER 조인의 차이점을 설명명해 보세요.
 
 INNER 조인은 조인 조건을 만족하는 행들만 결과에 포함되며, 공통된 데이터가 있는 경우에만 데이터를 추출합니다. OUTER 조인은 공통된 값이 없는 행도 포함하여 반환합니다. 가령 OUTER 조인의 일종인 LEFT OUTER 조인은 왼쪽 테이블의 모든 행과 오른쪽 테이블의 일치하는 값을 반환하고, 일치하지 않는 경우 NULL을 반환합니다. 또 다른 OUTER 조인의 일종인 RIGHT OUTER 조인은 오른쪽 테이블의 모든 행과 왼쪽 테이블의 일치하는 값을 반환하고, 일치하지 않는 경우 NULL을 반환합니다. FULL OUTER 조인은 양쪽 테이블의 모든 행을 반환하고, 어느 한 쪽에서 일치하는 값이 없는 경우 NULL을 반환합니다.
+
+## 아래 테이블을 토대로 답변하는 질문입니다.
+
+다음은 어떤 기업의 사업부서 및 직원에 대한 정보를 나타내는 테이블입니다. Employees 테이블에는 직원의 ID(EmployeeID)와 이름(FirstName), 성(LastName), 사업부서 ID(DepartmentID), 연봉(Salary)이 저장되어 있고, Departments 테이블에는 사업부서의 ID(DepartmentID)와 부서명(DepartmentName)이 저장되어 있습니다. 두 테이블을 기반으로 관련 질문에 답변해 보세요.
+
+Employees 테이블:
+
+| EmployeeID | FirstName | LastName | DepartmentID | Salary |
+| ---------- | --------- | -------- | ------------ | ------ |
+| 1          | John      | Doe      | 1            | 50000  |
+| 2          | Jane      | Smith    | 2            | 60000  |
+| 3          | Bob       | Brown    | 1            | 45000  |
+| 4          | Alice     | Davis    | 3            | 70000  |
+| 5          | Charlie   | Miller   | 2            | 55000  |
+
+Departments 테이블:
+
+| DepartmentID | DepartmentName |
+| ------------ | -------------- |
+| 1            | HR             |
+| 2            | Finance        |
+| 3            | Engineering    |
+
+### 모든 직원의 이름을 조회하는 SQL문을 작성해 보세요.
+
+```sql
+SELECT FirstName, LastName
+    FROM Employees;
+```
+
+### 전 직원의 급여를 10% 인상하는 SQL문을 작성해 보세요.
+
+```sql
+UPDATE Employees
+    SET Salary = Salary * 1.10;
+```
+
+### Employees 테이블의 DepartmentID가 Departments 테이블의 DepartmentID를 참조하는 외래 키를 추가해 보세요. 참조하는 테이블의 레코드가 삭제될 경우에는 참조한 테이블의 레코드가 함께 삭제되어야 하며, 참조하는 테이블의 레코드가 수정될 경우에는 참조한 테이블의 레코드를 NULL로 설정해야 합니다.
+
+```sql
+ALTER TABLE Employees
+    ADD FOREIGN KEY (DepartementID)
+    REFERENCES Departments(DepartmentID)
+    ON DELETE CASCADE
+    ON UPDATE SET NULL;
+```
+
+### Employees 테이블과 Departments 테이블을 INNER 조인하여 모든 직원의 이름과 부서 이름을 조회하는 SQL문을 작성해 보세요.
+
+```sql
+SELECT Employees.FirstName, Employees.LastName, Departments.DepartmentName
+    FROM Employees
+    INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+```
+
+### Employees 테이블과 Departments 테이블을 INNER 조인하여 Finance 부서의 직원 이름과 급여를 조회하는 SQL문을 작성해 보세요.
+
+```sql
+SELECT Employees.FirstName, Employees.LastName, Employees.Salary
+    FROM Employees
+    INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID
+    WHERE Departments.DepartmentName = 'Finance';
+```
