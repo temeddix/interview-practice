@@ -88,3 +88,94 @@ PCIe란 대표적인 입출력 버스의 일종으로, 버전에 따라 지원�
 여러 국가의 언어나 이모티콘 등을 표현할 수 있는 통일된 문자 집합을 말합니다. 유니코드마다 부여되어 있는 고유한 수, 코드 포인트를 어떻게 코드로 표현하는지에 따라 `utf-8`, `utf-16`, `utf-32` 등 다양한 인코딩 방법으로 구분할 수 있습니다.
 
 # CHAPTER 03 - 운영체제
+
+## 다음 코드에는 문제가 있습니다. 어떤 문제가 있는지 설명해 보세요.
+
+```c
+#include <stdio.h>
+#include <pthread.h>
+
+int shared_data = 0;  // 공유 데이터
+
+void* increment(void* arg) {
+    int i;
+    for (i = 0; i < 100000; i++) {
+        shared_data++;  // 공유 데이터 증가
+    }
+    return NULL;
+}
+
+void* decrement(void* arg) {
+    int i;
+    for (i = 0; i < 100000; i++) {
+        shared_data--;  // 공유 데이터 감소
+    }
+    return NULL;
+}
+
+int main() {
+    pthread_t thread1, thread2;
+
+    pthread_create(&thread1, NULL, increment, NULL);
+    pthread_create(&thread2, NULL, decrement, NULL);
+
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+
+    printf("Final value of shared_data: %d\n", shared_data);
+
+    return 0;
+}
+```
+
+공유 데이터인 `shared_data`가 두 스레드에서 동시에 수정되는 과정에서 발생할 수 있는 레이스 컨디션 문제가 있습니다. `shared_data++`와 `shared_data--`라는 임계 구역에서의 연산이 하나씩만 수행되지 않기 때문에 데이터의 일관성이 보장되지 않을 수 있습니다.
+
+## 직전 문제에서 제시한 코드의 문제를 해결해 보세요.
+
+문제를 해결하려면 mutex 등을 활용해 공유 자원에 대한 접근을 동기화해야 합니다. 다음과 같은 코드를 추가하면 이계 구역을 보호할 수 있습니다.
+
+```c
+#include <stdio.h>
+#include <pthread.h>
+
+int shared_data = 0;  // 공유 데이터
+pthread_mutex_t mutex;  // 뮤텍스 선언
+
+void* increment(void* arg) {
+    int i;
+    for (i = 0; i < 100000; i++) {
+        pthread_mutex_lock(&mutex);  // 뮤텍스 락 획득
+        shared_data++;  // 공유 데이터 증가
+        pthread_mutex_unlock(&mutex);  // 뮤텍스 언락
+    }
+    return NULL;
+}
+
+void* decrement(void* arg) {
+    int i;
+    for (i = 0; i < 100000; i++) {
+        pthread_mutex_lock(&mutex);  // 뮤텍스 락 획득
+        shared_data--;  // 공유 데이터 감소
+        pthread_mutex_unlock(&mutex);  // 뮤텍스 언락
+    }
+    return NULL;
+}
+
+int main() {
+    pthread_t thread1, thread2;
+
+    pthread_mutex_init(&mutex, NULL);  // 뮤텍스 초기화
+
+    pthread_create(&thread1, NULL, increment, NULL);
+    pthread_create(&thread2, NULL, decrement, NULL);
+
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+
+    printf("Final value of shared_data: %d\n", shared_data);
+
+    pthread_mutex_destroy(&mutex);  // 뮤텍스 해제
+
+    return 0;
+}
+```
