@@ -113,7 +113,7 @@ async function main() {
     .map(Number);
   startNode -= 1;
 
-  const nodes = new Array(nodeCount).fill(undefined).map((_) => new Node());
+  const nodes = Array.from({ length: nodeCount }, (_) => new Node());
   for (let i = 0; i < edgeCount; i++) {
     const [nodeA, nodeB] = (await input.next()).value
       .split(" ")

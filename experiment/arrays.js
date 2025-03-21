@@ -4,7 +4,7 @@ function solution() {
   console.log(arrA);
 
   /** @type {number[][]} */
-  const arrB = new Array(5).fill(undefined).map((_) => new Array(5).fill(7));
+  const arrB = Array.from({ length: 5 }, () => new Array(5).fill(7));
   console.log(arrB);
 }
 
