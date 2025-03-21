@@ -19,14 +19,6 @@ class Person {
   }
 }
 
-/**
- * @param {Person[]} people
- * @returns {Person[]}
- */
-function sortPeopleByAge(people) {
-  return people.sort((a, b) => a.compare(b));
-}
-
 function solution() {
   const people = [
     new Person("Alice", 30),
@@ -34,8 +26,8 @@ function solution() {
     new Person("Charlie", 35),
   ];
 
-  const sortedPeople = sortPeopleByAge(people);
-  console.log(sortedPeople);
+  people.sort((a, b) => a.compare(b));
+  console.log(people);
 }
 
 solution();
