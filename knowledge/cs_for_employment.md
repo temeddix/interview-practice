@@ -320,7 +320,7 @@ def second(arr: list[int]) -> list[int]:
 
 따라서 인코딩된 값은 주로 데이터를 다양하게 표현하기 위해 사용하고, 해시 값은 주로 데이터의 무결성을 검증하거나 데이터를 빠르게 검색하기 위해 사용합니다.
 
-## 스택을 배열로 구현해 보세요(push와 pop 연산은 반드시 구현해야 합니다.)
+## 스택을 배열로 구현해 보세요(push와 pop 연산은 반드시 구현해야 합니다).
 
 다음과 같은 파이썬 소스 코드를 작성해 제출합니다.
 
@@ -352,4 +352,64 @@ def usage():
     print(my_stack.pop())  # c
     print(my_stack.pop())  # b
     print(my_stack.pop())  # a
+```
+
+## 큐를 배열로 구현해 보세요(인큐와 디큐 연산은 반드시 구현해야 합니다).
+
+다음과 같은 파이썬 소스 코드를 작성해 제출합니다.
+
+```python
+class MyQueue[T]:
+    def __init__(self):
+        self._items: list[T] = []
+
+    def enqueue(self, item: T):
+        self._items.append(item)
+
+    def dequeue(self) -> T | None:
+        if self.is_empty():
+            return None
+        item = self._items[0]
+        del self._items[0]
+        return item
+
+    def is_empty(self) -> bool:
+        return len(self.items) == 0
+
+
+def usage():
+    my_queue = MyQueue()
+    my_queue.push("a")
+    my_queue.push("b")
+    my_queue.push("c")
+
+    print(my_queue.pop())  # a
+    print(my_queue.pop())  # b
+    print(my_queue.pop())  # c
+```
+
+## 다음 그림의 자료구조가 무엇인지 설명하고, 간단한 코드로 구현해 보세요.
+
+```
+    a
+   / \
+  b   c
+```
+
+제시된 자료구조는 트리이며, 그 중에서도 이진 트리에 해당합니다. 이진 트리는 각각의 노드가 최대 2개의 자식을 가질 수 있는 트리의 일종입니다. 따라서 다음과 같이 값, 왼쪽 자식 노드, 오른쪽 자식 노드를 표현하는 트리 노드로 구현할 수 있습니다.
+
+```python
+class TreeNode[T]:
+    def __init__(self, value: T):
+        self.value = value
+        self.left: TreeNode | None = None
+        self.right: TreeNode | None = None
+
+
+def usage():
+    # 루트 노드 생성
+    root = TreeNode("a")
+    # 왼쪽, 오른쪽 자식 노드 생성
+    root.left = TreeNode("b")
+    root.right = TreeNode("c")
 ```
