@@ -344,7 +344,7 @@ class MyStack[T]:
 
 
 def usage():
-    my_stack = MyStack()
+    my_stack = MyStack[str]()
     my_stack.push("a")
     my_stack.push("b")
     my_stack.push("c")
@@ -378,7 +378,7 @@ class MyQueue[T]:
 
 
 def usage():
-    my_queue = MyQueue()
+    my_queue = MyQueue[str]()
     my_queue.push("a")
     my_queue.push("b")
     my_queue.push("c")
