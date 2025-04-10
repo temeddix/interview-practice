@@ -573,7 +573,7 @@ HTTP 2.0은 HTTP 1.1의 데이터 송수신 방식과 성능을 개선한 버전
 
 ## HTTP 캐시가 오래될 경우 원본 데이터와의 차이가 발생할 수 있습니다. 이 문제를 해결하는 방법을 설명해 보세요.
 
-캐시된 데이터와 원본 데이터가 불일치할 경우, 클라이언트는 `If-Modified-Since` 헤더나 `If-None-Match` 헤더를 사용해 서버에 원본 데이터의 변경 여부를 확인할 수 있습니다. 이 때 `If-Modified-Since` 헤더는 특정 날짜 이후의 변경 여부를 확인하고, `If-None-Match` 헤더는 자원의 버전 식별자인 `Etag` 값을 사용해 변경 여부를 확인합니다. 서버는 버전 변경이 없으면 304 상태 코드로 알리고, 변경이 있으면 새로운 자원을 반환합니다.
+캐시된 데이터와 원본 데이터가 불일치할 경우, 클라이언트는 `If-Modified-Since` 헤더나 `If-None-Match` 헤더를 사용해 서버에 원본 데이터의 변경 여부를 확인할 수 있습니다. 이때 `If-Modified-Since` 헤더는 특정 날짜 이후의 변경 여부를 확인하고, `If-None-Match` 헤더는 자원의 버전 식별자인 `Etag` 값을 사용해 변경 여부를 확인합니다. 서버는 버전 변경이 없으면 304 상태 코드로 알리고, 변경이 있으면 새로운 자원을 반환합니다.
 
 ## HTTPS의 동작에 대해 HTTP와 비교하여 설명해 보세요.
 
@@ -589,7 +589,7 @@ HTTP와 HTTPS의 차이는 HTTPS가 TLS를 통해 보안을 추가한 프로토�
 
 ## 웹 서버와 웹 애플리케이션의 차이점이 무엇인지, 이 둘을 함께 사용하는 이유가 무엇인지 설명해 보세요.
 
-웹 서버는 정적인 콘텐츠를 응답하고, 웹 애플리케이션 서버는 정적인 콘텐츠와 더불어 동적인 컨텐츠도 응답할 수 있습니다. 웹 서버와 웹 애플리케이션을 함께 사용할 경우 정적인 정보는 웹 서버가 응답하고, 동적인 정보는 웹 애플리케이션 서버가 응답함으로써 부하를 분산할 수 있고, 여러 웹 서버 및 웹 애플리케이션을 확장하는 데에 유리합니다.
+웹 서버는 정적인 콘텐츠를 응답하고, 웹 애플리케이션 서버는 정적인 콘텐츠와 더불어 동적인 콘텐츠도 응답할 수 있습니다. 웹 서버와 웹 애플리케이션을 함께 사용할 경우 정적인 정보는 웹 서버가 응답하고, 동적인 정보는 웹 애플리케이션 서버가 응답함으로써 부하를 분산할 수 있고, 여러 웹 서버 및 웹 애플리케이션을 확장하는 데 유리합니다.
 
 # CHAPTER 06 - 데이터베이스
 
@@ -599,7 +599,7 @@ HTTP와 HTTPS의 차이는 HTTPS가 TLS를 통해 보안을 추가한 프로토�
 
 ## 트랜잭션과 ACID가 무엇인지 설명해 보세요.
 
-트랜잭션은 커밋이 발생하는 논리적 단위이며, ACID는 안전한 트랜잭션이 지켜야 할 4가지 특성인 원자성, 일관성, 격리성, 지속성을 의미합니다. 원자성은 트랜잭션의 모든 작업이 성공하거나 실패함을 보장하는 성질을 말하며, 일관성은 트랜잭션 전후에 데이터베이스의 일관된 상태를 유지하는 성질, 격리성은 동시에 수행되는 트랙잭션 간의 간섭이 불가능하도록 보장하는 성질, 지속성은 완료된 트랜잭션의 결과가 영구적으로 반영되는 성질을 말합니다.
+트랜잭션은 커밋이 발생하는 논리적 단위이며, ACID는 안전한 트랜잭션이 지켜야 할 4가지 특성인 원자성, 일관성, 격리성, 지속성을 의미합니다. 원자성은 트랜잭션의 모든 작업이 성공하거나 실패함을 보장하는 성질을 말하며, 일관성은 트랜잭션 전후에 데이터베이스의 일관된 상태를 유지하는 성질, 격리성은 동시에 수행되는 트랜잭션 간의 간섭이 불가능하도록 보장하는 성질, 지속성은 완료된 트랜잭션의 결과가 영구적으로 반영되는 성질을 말합니다.
 
 ## 기본 키가 무엇이며, 어떤 조건을 만족해야 하는지 설명해 보세요.
 
@@ -666,41 +666,41 @@ Departments 테이블:
 
 ```sql
 SELECT FirstName, LastName
-    FROM Employees;
+FROM Employees;
 ```
 
 ### 전 직원의 급여를 10% 인상하는 SQL문을 작성해 보세요.
 
 ```sql
 UPDATE Employees
-    SET Salary = Salary * 1.10;
+SET Salary = Salary * 1.10;
 ```
 
 ### Employees 테이블의 DepartmentID가 Departments 테이블의 DepartmentID를 참조하는 외래 키를 추가해 보세요. 참조하는 테이블의 레코드가 삭제될 경우에는 참조한 테이블의 레코드가 함께 삭제되어야 하며, 참조하는 테이블의 레코드가 수정될 경우에는 참조한 테이블의 레코드를 NULL로 설정해야 합니다.
 
 ```sql
 ALTER TABLE Employees
-    ADD FOREIGN KEY (DepartementID)
-    REFERENCES Departments(DepartmentID)
-    ON DELETE CASCADE
-    ON UPDATE SET NULL;
+ADD FOREIGN KEY (DepartementID)
+REFERENCES Departments(DepartmentID)
+ON DELETE CASCADE
+ON UPDATE SET NULL;
 ```
 
 ### Employees 테이블과 Departments 테이블을 INNER 조인하여 모든 직원의 이름과 부서 이름을 조회하는 SQL문을 작성해 보세요.
 
 ```sql
 SELECT Employees.FirstName, Employees.LastName, Departments.DepartmentName
-    FROM Employees
-    INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+FROM Employees
+INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
 ```
 
 ### Employees 테이블과 Departments 테이블을 INNER 조인하여 Finance 부서의 직원 이름과 급여를 조회하는 SQL문을 작성해 보세요.
 
 ```sql
 SELECT Employees.FirstName, Employees.LastName, Employees.Salary
-    FROM Employees
-    INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID
-    WHERE Departments.DepartmentName = 'Finance';
+FROM Employees
+INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID
+WHERE Departments.DepartmentName = 'Finance';
 ```
 
 ## SQL에서 뷰를 사용하는 목적을 설명해 보세요.
