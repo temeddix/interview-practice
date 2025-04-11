@@ -9,8 +9,6 @@ Diagnostics:
     Add:
       - bugprone-*
       - modernize-*
-      - cppcoreguidelines-*
-      - readability-*
       - performance-*
       - concurrency-*
       - clang-analyzer-*
