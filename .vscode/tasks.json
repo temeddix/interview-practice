@@ -7,7 +7,7 @@
       "group": { "kind": "build", "isDefault": true },
       "command": "clang++",
       "args": [
-        "-std=c++17",
+        "-std=c++14",
         "-fcolor-diagnostics",
         "-fansi-escape-codes",
         "--debug",
@@ -18,7 +18,7 @@
       "windows": {
         "command": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/Llvm/x64/bin/clang++.exe",
         "args": [
-          "-std=c++17",
+          "-std=c++14",
           "-fcolor-diagnostics",
           "-fansi-escape-codes",
           "--debug",
