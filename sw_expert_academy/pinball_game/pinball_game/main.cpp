@@ -30,20 +30,12 @@ constexpr array<Move, 4> MOVES = {{{-1, 0}, {0, 1}, {1, 0}, {0, -1}}};
 // 움직임 벡터의 종류 개수.
 constexpr int MOVE_TYPES = 4;
 
-// 맵을 구성하는 각 칸.
-struct Cell {
-  // 입력으로 주어진 칸의 모양.
-  int shape;
-  // 현재 게임이 이 지점에서 출발했는지의 여부.
-  bool is_start;
-};
-
 // 전체 맵의 정보.
 struct BlockMap {
   // 맵의 크기.
   int map_size;
   // 맵을 구성하는 칸들.
-  vector<vector<Cell>> cells;
+  vector<vector<int>> cells;
   // 웜홀들을 의미하며 인덱스 0은 6번에, 인덱스 4는 10번에 대응됨.
   array<pair<Spot, Spot>, 5> worms;
 };
@@ -103,7 +95,7 @@ auto simulate(BlockMap& block_map, int start_r, int start_c, int m) -> int {
     }
 
     // 모양에 따라 공의 방향을 바꾸고 점수를 추가한다.
-    int shape = block_map.cells[r][c].shape;
+    int shape = block_map.cells[r][c];
     switch (shape) {
       case -1:
         finished = true;
@@ -142,20 +134,20 @@ auto simulate(BlockMap& block_map, int start_r, int start_c, int m) -> int {
 // 해당 핀볼 맵에서 나올 수 있는 최대 점수를 구한다.
 auto find_max_score(BlockMap& block_map) -> int {
   // 기본 정보를 꺼낸다.
-  vector<vector<Cell>>& cells = block_map.cells;
+  vector<vector<int>>& cells = block_map.cells;
   int map_size = block_map.map_size;
 
   // 모든 지점과 방향을 출발 상태로 삼아 점수를 기록한다.
   int max_score = 0;
   for (int r = 0; r < map_size; r++) {
     for (int c = 0; c < map_size; c++) {
-      if (cells[r][c].shape != 0) {
+      if (cells[r][c] != 0) {
         continue;
       }
       for (int m = 0; m < MOVE_TYPES; m++) {
         int score = simulate(block_map, r, c, m);
         max_score = max(max_score, score);
-        cells[r][c].is_start = false;
+        cells[r][c] = false;
       }
     }
   }
@@ -170,14 +162,14 @@ auto test(int test_number) -> void {
   cin >> map_size;
 
   // 맵의 세부적인 정보를 입력받는다.
-  vector<vector<Cell>> cells(map_size, vector<Cell>(map_size));
+  vector<vector<int>> cells(map_size, vector<int>(map_size));
   unordered_set<int> found_worms;
   array<pair<Spot, Spot>, 5> worms;
   for (int r = 0; r < map_size; r++) {
     for (int c = 0; c < map_size; c++) {
       int shape;
       cin >> shape;
-      cells[r][c].shape = shape;
+      cells[r][c] = shape;
       if (shape >= BASE_WORM) {
         int worm_index = shape - BASE_WORM;
         if (found_worms.find(shape) == found_worms.end()) {
