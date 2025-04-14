@@ -1,5 +1,6 @@
-**/*.lock
-**/Debug
+*.lock
+*.class
+Debug
 .vs
 .venv
 build/
