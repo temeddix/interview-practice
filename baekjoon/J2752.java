@@ -9,7 +9,7 @@ public class J2752 {
   public static void main(String[] args) throws IOException {
     var reader = new BufferedReader(new InputStreamReader(System.in));
     var writer = new BufferedWriter(new OutputStreamWriter(System.out));
-    int[] numbers = Arrays.stream(reader.readLine().split(" "))
+    var numbers = Arrays.stream(reader.readLine().split(" "))
         .mapToInt(Integer::parseInt).sorted().toArray();
     for (int number : numbers) {
       writer.write(Integer.toString(number) + " ");
